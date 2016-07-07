@@ -1,3 +1,9 @@
+apt-get -y install \
+  clang \
+  libicu-dev \
+  libpython2.7-dev \
+  libxml2
+
 mkdir -p /usr/local/swift/
 cd /usr/local/swift
 curl https://swift.org/builds/swift-2.2.1-release/ubuntu1510/swift-2.2.1-RELEASE/swift-2.2.1-RELEASE-ubuntu15.10.tar.gz | tar xz

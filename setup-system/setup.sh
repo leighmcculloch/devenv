@@ -12,5 +12,10 @@ apt-get -y install \
   direnv
 
 # Install optionals
-./optionals/install-go-sudo.sh
-./optionals/install-swift-sudo.sh
+./install-go.sh
+./install-swift.sh
+./install-ruby.sh
+./install-rust.sh
+
+# Set the script that will be executed when new users are added
+cp ./adduser-local.sh /usr/local/sbin/adduser.local

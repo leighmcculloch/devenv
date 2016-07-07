@@ -12,9 +12,7 @@ export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
 # go path
-mkdir -p $HOME/go
+mkdir -p $HOME/go/src/github.com/"$USER"
 
-# autostart pairing
-if [[ ! $TERM =~ screen ]]; then
-  tmux new-session -s pair || tmux attach-session -t pair
-fi
+# aliases
+alias tmux-pair="tmux -S /tmp/tmux-pair new-session -s pair || tmux -S /tmp/tmux-pair attach-session -t pair"
