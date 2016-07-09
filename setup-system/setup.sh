@@ -13,9 +13,11 @@ apt-get -y install \
 
 # Install optionals
 ./install-go.sh
-./install-swift.sh
-./install-ruby.sh
-./install-rust.sh
+# ./install-swift.sh
+# ./install-ruby.sh
+# ./install-rust.sh
 
 # Set the script that will be executed when new users are added
+cp -R ./adduser /usr/local/sbin/
 cp ./adduser-local.sh /usr/local/sbin/adduser.local
+cp ./adduser-github.sh /usr/bin/adduser-github
