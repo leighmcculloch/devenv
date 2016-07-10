@@ -10,7 +10,8 @@ This repository contains scripts to setup Ubuntu for golang, ruby, swift and rus
 4. `adduser-github [github-username]` for everyone who will be pairing.
 5. `logout` to exit the ssh session.
 6. `ssh -A [github-username]@[ip-address]`
-7. `tmux-pair`
+7. You: `tmux-start`, and then `tmux-share`
+8. Them: `tmux-join [you]`
 
 ## Usage
 
@@ -52,7 +53,9 @@ This repository contains scripts to setup Ubuntu for golang, ruby, swift and rus
   ssh -A [github-username]@[ip-address]
   ```
 
-7. Once you are at a terminal on the instance, run `tmux-pair` and you'll be in a shared tmux session that any other user can join by running the same command.
+7. Once you are at a terminal on the instance, run `tmux-start` and you'll create at mux session. To share it with everyone else on the box, run `tmux-share`. To hide it from everyone `tmux-hide`. Additionally you can create named sessions `tmux-start [name]`.
+
+8. Others can join by running `tmux-join [your-username]`. Others can join named sessions by running `tmux-join [your-username] [name]`.
 
 ## Deleting Users
 
