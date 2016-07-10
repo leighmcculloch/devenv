@@ -25,14 +25,6 @@ This repository contains scripts to setup Ubuntu for golang, ruby, swift and rus
   wget -qO - https://github.com/leighmcculloch/devenv/raw/master/setup.sh | sh
   ```
 
-  You can alternatively specify the setup script as a `cloud-config` when deploying if you are using Digital Ocean.
-
-  ```yaml
-  #cloud-config
-  runcmd:
-    - wget -qO - https://github.com/leighmcculloch/devenv/raw/master/setup-system.sh | sh
-  ```
-
 4. Add users using their github username, which will setup a user, development environment, a pair programming tmux, and pull in their github SSH keys so that they can ssh into the box immediately without a password:
 
   ```
