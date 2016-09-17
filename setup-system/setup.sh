@@ -18,6 +18,6 @@ apt-get -y install \
 # ./install-rust.sh
 
 # Set the script that will be executed when new users are added
-cp -R ./adduser /usr/local/sbin/
+cp -R ../setup-user /usr/local/sbin/adduser
 cp ./adduser-local.sh /usr/local/sbin/adduser.local
 cp ./adduser-github.sh /usr/bin/adduser-github

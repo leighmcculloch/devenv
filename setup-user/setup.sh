@@ -35,8 +35,8 @@ go get github.com/josharian/impl
 go get github.com/mailgun/godebug
 
 # dot files
-cp /usr/local/sbin/adduser/bash_profile ~/.bash_profile
-cp /usr/local/sbin/adduser/gitconfig ~/.gitconfig
-cp /usr/local/sbin/adduser/gitignore_global ~/.gitignore_global
-cp /usr/local/sbin/adduser/gitmessage ~/.gitmessage
-cp /usr/local/sbin/adduser/zshrc ~/.zshrc
+cp $(dirname $0)/bash_profile ~/.bash_profile
+cp $(dirname $0)/gitconfig ~/.gitconfig
+cp $(dirname $0)/gitignore_global ~/.gitignore_global
+cp $(dirname $0)/gitmessage ~/.gitmessage
+cp $(dirname $0)/zshrc ~/.zshrc

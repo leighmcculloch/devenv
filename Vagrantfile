@@ -10,6 +10,6 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/setup"
   # config.vm.synced_folder "~/dev", "/dev"
 
-  config.vm.provision :shell, privileged: true, inline: "cd /setup-system && ./setup.sh"
-  config.vm.provision :shell, privileged: false, inline: "cd /setup-user && ./setup.sh"
+  config.vm.provision :shell, privileged: true, inline: "cd /setup/setup-system && ./setup.sh"
+  config.vm.provision :shell, privileged: false, inline: "cd /setup/setup-user && ./setup.sh"
 end
