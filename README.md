@@ -2,55 +2,28 @@
 
 This repository contains scripts to setup Ubuntu for golang, ruby, swift and rust development, with tmux and vim.
 
-## Usage TL;DR
+## Usage
+
+### System Setup
 
 1. Create a instance with Ubuntu 16.04.
 2. `ssh root@[ip-address]`
 3. `wget -qO - https://github.com/leighmcculloch/devenv/raw/master/setup.sh | sh`
-4. `adduser-github [github-username]` for everyone who will be pairing.
-5. `logout` to exit the ssh session.
-6. `ssh -A [github-username]@[ip-address]`
-7. You: `tmux-start`, and then `tmux-share`
-8. Them: `tmux-join [you]`
 
-## Usage
+### Creating Users
 
-1. Create a instance with Ubuntu 16.04.
+1. `adduser-github [github-username]` for everyone who will be pairing.
 
-2. Ssh to the instance as root. e.g. `ssh root@[ip-address]`
+### User login and pairing using Tmux
 
-3. Run the system setup script.
+1. `ssh -A [github-username]@[ip-address]`
+2. You: `tmux-start`, and then `tmux-share`
+3. Them: `tmux-join [you]`
 
-  ```
-  wget -qO - https://github.com/leighmcculloch/devenv/raw/master/setup.sh | sh
-  ```
+### Deleting Users
 
-4. Add users using their github username, which will setup a user, development environment, a pair programming tmux, and pull in their github SSH keys so that they can ssh into the box immediately without a password:
+1. `deluser --remove-home [username]`
 
-  ```
-  $ adduser-github [github-username]
-  ```
+## Usage with Vagrant
 
-5. Exit the session. e.g. `logout`
-
-6. You can now ssh into the instance as your github username.
-
-  ```
-  ssh [github-username]@[ip-address]
-  ```
-
-  To push to Github or pull private repos add `-A` to which will forward your local SSH agent so that the instance can talk to Github using that key.
-
-  ```
-  ssh -A [github-username]@[ip-address]
-  ```
-
-7. Once you are at a terminal on the instance, run `tmux-start` and you'll create at mux session. To share it with everyone else on the box, run `tmux-share`. To hide it from everyone `tmux-hide`. Additionally you can create named sessions `tmux-start [name]`.
-
-8. Others can join by running `tmux-join [your-username]`. Others can join named sessions by running `tmux-join [your-username] [name]`.
-
-## Deleting Users
-
-```
-$ deluser --remove-home [username]
-```
+The repository contains a Vagrantfile that will setup a development environment for the single vagrant user. Just run `vagrant up` in the repository directory, and the directory above the repository will be mapped to `/workspace` on the instance.
