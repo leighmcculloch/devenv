@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.network :private_network, ip: "192.168.50.50"
   config.vm.synced_folder ".", "/setup"
-  # config.vm.synced_folder "~/dev", "/dev"
+  config.vm.synced_folder "..", "/workspace"
 
   config.vm.provision :shell, privileged: true, inline: "cd /setup/setup-system && ./setup.sh"
   config.vm.provision :shell, privileged: false, inline: "cd /setup/setup-user && ./setup.sh"
