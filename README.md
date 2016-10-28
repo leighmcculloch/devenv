@@ -2,17 +2,6 @@
 
 This repository contains scripts to setup Ubuntu for golang, ruby, swift and rust development, with tmux and vim.
 
-## Usage (Cloud Info)
-
-Specify the setup script as a `cloud-config` when deploying if you are using Digital Ocean.
-
-```yaml
-#cloud-config
-runcmd:
-  - wget -qO - https://github.com/leighmcculloch/devenv/raw/master/setup.sh | sh
-  - adduser-github leighmcculloch
-```
-
 ## Usage (Manual)
 
 ### System Setup
