@@ -29,3 +29,6 @@ cp etc/update-motd.d/* /etc/update-motd.d/
 cp -R ../setup-user /usr/local/sbin/adduser
 cp ./adduser-local.sh /usr/local/sbin/adduser.local
 cp ./adduser-github.sh /usr/bin/adduser-github
+
+# Disable root login
+passwd -l root
