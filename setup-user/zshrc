@@ -4,12 +4,5 @@ ZSH_THEME="tiny"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
-# direnv
+# enable direnv
 eval "$(direnv hook zsh)"
-
-# exports
-export GOPATH="$HOME/go"
-export PATH="$PATH:$GOPATH/bin"
-
-# go path
-mkdir -p $HOME/go/src/github.com/"$USER"

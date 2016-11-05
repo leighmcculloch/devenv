@@ -17,8 +17,10 @@ cd ~/.vim_dotfiles
 make install
 cd -
 
+# setup common github directory in go path
+mkdir -p $GOPATH/src/github.com/"$USER"
+
 # install go tools
-export GOPATH="$HOME/go"
 go get github.com/nsf/gocode
 go get github.com/alecthomas/gometalinter
 go get golang.org/x/tools/cmd/goimports

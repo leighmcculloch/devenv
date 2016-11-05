@@ -1,5 +1,4 @@
-# Additional repositories
-add-apt-repository -y ppa:ubuntu-lxc/lxd-stable # For: Golang
+# Update local package directory
 apt-get -y update
 
 # Update to the latest of all packages
@@ -18,6 +17,9 @@ apt-get -y install \
 
 # Install any custom motds
 cp etc/update-motd.d/* /etc/update-motd.d/
+
+# Install any custom profiles
+cp etc/profile.d/* /etc/profile.d/
 
 # Install optionals
 ./install-go.sh
