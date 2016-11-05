@@ -15,6 +15,9 @@ apt-get -y install \
   direnv \
   tig
 
+# Setup the MOTD pairing instructions
+cp etc/update-motd.d/* /etc/update-motd.d/
+
 # Install optionals
 ./install-go.sh
 # ./install-swift.sh
