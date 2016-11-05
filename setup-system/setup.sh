@@ -12,6 +12,7 @@ apt-get -y install \
   tmux \
   git \
   vim \
+  make \
   direnv \
   tig
 
