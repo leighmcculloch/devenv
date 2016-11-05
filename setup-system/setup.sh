@@ -2,6 +2,9 @@
 add-apt-repository -y ppa:ubuntu-lxc/lxd-stable # For: Golang
 apt-get -y update
 
+# Update to the latest of all packages
+apt-get -y dist-upgrade
+
 # Install packages for general use and dev
 apt-get -y install \
   curl \
