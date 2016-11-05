@@ -9,7 +9,8 @@ apt-get -y install \
   tmux \
   git \
   vim \
-  direnv
+  direnv \
+  tig
 
 # Install optionals
 ./install-go.sh
