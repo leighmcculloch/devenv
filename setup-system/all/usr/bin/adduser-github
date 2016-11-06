@@ -1,3 +1,4 @@
+#!/bin/sh
 username="$1"
 adduser --disabled-password --gecos "" "$username"
 mkdir -p /home/"$username"/.ssh

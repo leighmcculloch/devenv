@@ -25,7 +25,7 @@ cp $(dirname $0)/gitmessage ~/.gitmessage
 cp $(dirname $0)/zshrc ~/.zshrc
 
 # Setup go path if go is installed
-if [ command -v go >/dev/null 2>&1 ]; then
+if [ -z "$GOPATH" ]; then :; else
   # setup common github directory in go path
   mkdir -p $GOPATH/src/github.com/"$USER"
 
