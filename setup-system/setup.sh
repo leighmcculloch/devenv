@@ -13,7 +13,8 @@ apt-get -y install \
   vim \
   make \
   direnv \
-  tig
+  tig \
+  jq
 
 # Install any custom files
 cp -R all/* /
