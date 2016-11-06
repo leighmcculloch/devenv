@@ -16,7 +16,7 @@ apt-get -y install \
   direnv \
   tig
 
-# Setup the MOTD pairing instructions
+# Install any custom motds
 cp etc/update-motd.d/* /etc/update-motd.d/
 
 # Install optionals
