@@ -2,13 +2,15 @@
 
 This repository contains scripts to setup Ubuntu for golang, ruby, swift and rust development, with tmux and vim.
 
-## Usage (Manual)
+## Usage
 
 ### System Setup
 
-1. Create a instance with Ubuntu 16.04.
+1. Create a instance with Ubuntu 16.04. (e.g. DigitalOcean, AWS, etc)
 2. `ssh root@[ip-address]`
-3. `wget -qO - https://github.com/leighmcculloch/devenv/raw/master/setup.sh | sh`
+3. `wget -qO - https://github.com/leighmcculloch/devenv/raw/master/setup.sh | LANGS=go,ruby,rust,swift sh`
+
+To only install the languages you need, change the `LANGS` environment variable in step three.
 
 ### Creating Users
 

@@ -17,28 +17,32 @@ cd ~/.vim_dotfiles
 make install
 cd -
 
-# setup common github directory in go path
-mkdir -p $GOPATH/src/github.com/"$USER"
-
-# install go tools
-go get github.com/nsf/gocode
-go get github.com/alecthomas/gometalinter
-go get golang.org/x/tools/cmd/goimports
-go get golang.org/x/tools/cmd/guru
-go get golang.org/x/tools/cmd/gorename
-go get github.com/golang/lint/golint
-go get github.com/rogpeppe/godef
-go get github.com/kisielk/errcheck
-go get github.com/jstemmer/gotags
-go get github.com/klauspost/asmfmt/cmd/asmfmt
-go get github.com/fatih/motion
-go get github.com/zmb3/gogetdoc
-go get github.com/josharian/impl
-go get github.com/mailgun/godebug
-
 # dot files
 cp $(dirname $0)/bash_profile ~/.bash_profile
 cp $(dirname $0)/gitconfig ~/.gitconfig
 cp $(dirname $0)/gitignore_global ~/.gitignore_global
 cp $(dirname $0)/gitmessage ~/.gitmessage
 cp $(dirname $0)/zshrc ~/.zshrc
+
+# Setup go path if go is installed
+if [ command -v go >/dev/null 2>&1 ]; then
+  # setup common github directory in go path
+  mkdir -p $GOPATH/src/github.com/"$USER"
+
+  # install go tools
+  go get github.com/nsf/gocode
+  go get github.com/alecthomas/gometalinter
+  go get golang.org/x/tools/cmd/goimports
+  go get golang.org/x/tools/cmd/guru
+  go get golang.org/x/tools/cmd/gorename
+  go get github.com/golang/lint/golint
+  go get github.com/rogpeppe/godef
+  go get github.com/kisielk/errcheck
+  go get github.com/jstemmer/gotags
+  go get github.com/klauspost/asmfmt/cmd/asmfmt
+  go get github.com/fatih/motion
+  go get github.com/zmb3/gogetdoc
+  go get github.com/josharian/impl
+  go get github.com/mailgun/godebug
+fi
+

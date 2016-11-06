@@ -22,10 +22,22 @@ cp etc/update-motd.d/* /etc/update-motd.d/
 cp etc/profile.d/* /etc/profile.d/
 
 # Install optionals
-./install-go.sh
-# ./install-swift.sh
-# ./install-ruby.sh
-# ./install-rust.sh
+if test "${LANGS#*go}" != "$LANGS"
+then
+  ./install-go.sh
+fi
+if test "${LANGS#*swift}" != "$LANGS"
+then
+  ./install-swift.sh
+fi
+if test "${LANGS#*ruby}" != "$LANGS"
+then
+  ./install-ruby.sh
+fi
+if test "${LANGS#*rust}" != "$LANGS"
+then
+  ./install-rust.sh
+fi
 
 # Set the script that will be executed when new users are added
 cp -R ../setup-user /usr/local/sbin/adduser
