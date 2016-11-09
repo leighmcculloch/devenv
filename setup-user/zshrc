@@ -6,3 +6,6 @@ source $ZSH/oh-my-zsh.sh
 
 # enable direnv
 eval "$(direnv hook zsh)"
+
+# aliases
+alias sshenv="eval \$(tmux show-env -s | grep '^SSH_')"
