@@ -14,12 +14,19 @@ apt-get -y install \
   zsh \
   tmux \
   git \
-  vim \
   make \
+  python3.5 \
   direnv \
   tig \
   jq \
-  google-cloud-sdk
+  vim-nox \
+  google-cloud-sdk \
+
+# Install PIP (used by AWS CLI)
+curl -s https://bootstrap.pypa.io/get-pip.py | python
+
+# Install AWS CLI
+pip install awscli
 
 # Install any custom files
 cp -R all/* /
