@@ -6,9 +6,11 @@ This repository contains scripts to setup Ubuntu for golang, ruby, swift and rus
 
 ### System Setup
 
-1. Create a instance with Ubuntu 16.04. (e.g. DigitalOcean, AWS, etc)
+1. Create a instance with Ubuntu 16.04 or 16.10. (e.g. DigitalOcean, AWS, etc)
 2. `ssh root@[ip-address]`
-3. `wget -qO - https://git.io/devenv | LANGS=go,ruby,rust,swift sh`
+3. Execute the script, by using one of these methods:
+  * `wget -qO - https://git.io/devenv | LANGS=go,ruby,rust,swift sh`
+  * `curl -sSL https://git.io/devenv | LANGS=go,ruby,rust,swift sh`
 
 To only install the languages you need, change the `LANGS` environment variable in step three.
 
