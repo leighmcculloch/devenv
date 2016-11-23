@@ -10,6 +10,7 @@ apt-get -y dist-upgrade
 
 # Install packages for general use and dev
 apt-get -y install \
+  xauth \
   mosh \
   curl \
   zsh \
