@@ -1,9 +1,9 @@
 # oh-my-zsh
 git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
-# zsh theme: tiny
+# zsh theme: enormous
 mkdir -p ~/.oh-my-zsh/custom/themes
-\curl https://raw.githubusercontent.com/leighmcculloch/zsh-theme-tiny/master/tiny.zsh-theme > ~/.oh-my-zsh/custom/themes/tiny.zsh-theme
+\curl https://raw.githubusercontent.com/leighmcculloch/zsh-theme-enormous/master/enormous.zsh-theme > ~/.oh-my-zsh/custom/themes/enormous.zsh-theme
 
 # tmux dot files
 git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles.git ~/.tmux_dotfiles
