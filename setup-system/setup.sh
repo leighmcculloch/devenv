@@ -10,6 +10,8 @@ apt-get -y dist-upgrade
 
 # Install packages for general use and dev
 apt-get -y install \
+  build-essential \
+  ncurses-dev \
   xauth \
   mosh \
   curl \
@@ -21,8 +23,22 @@ apt-get -y install \
   direnv \
   tig \
   jq \
-  vim-nox \
   google-cloud-sdk \
+
+# Install Vim Latest
+apt-get remove \
+  vim \
+  vim-runtime \
+  gvim \
+  vim-tiny \
+  vim-common \
+  vim-gui-common \
+  vim-nox
+git clone https://github.com/vim/vim.git
+cd vim
+make && make install
+cd -
+rm -fR vim
 
 # Install PIP (used by AWS CLI)
 curl -s https://bootstrap.pypa.io/get-pip.py | python
