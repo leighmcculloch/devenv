@@ -37,7 +37,7 @@ cd vim
   --enable-cscope \
   --enable-luainterp \
   --with-luajit \
-  --enable-fail-if-missing
+  --with-lua-prefix=/usr/include/lua5.2
 make
 make install
 cd -
