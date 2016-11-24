@@ -17,27 +17,17 @@ apt-get -y install \
   make \
   direnv \
   tig \
-  jq \
-  liblua5.1-dev \
-  libluajit-5.1
+  jq
 
 # Install Vim Latest
 apt-get remove \
   vim \
   vim-runtime \
-  gvim \
   vim-tiny \
-  vim-common \
-  vim-gui-common \
-  vim-nox
+  vim-common
 git clone https://github.com/vim/vim.git
 cd vim
-./configure \
-  --with-features=huge \
-  --enable-cscope \
-  --enable-luainterp \
-  --with-luajit \
-  --with-lua-prefix=/usr/include/lua5.1
+./configure --with-features=huge
 make
 make install
 cd -
