@@ -1,7 +1,3 @@
-# apt-get source for google-cloud-sdk
-echo "deb http://packages.cloud.google.com/apt cloud-sdk-$(lsb_release -c -s) main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-
 # Update local package directory
 apt-get -y update
 
@@ -19,11 +15,9 @@ apt-get -y install \
   tmux \
   git \
   make \
-  python3.5 \
   direnv \
   tig \
   jq \
-  google-cloud-sdk \
 
 # Install Vim Latest
 apt-get remove \
@@ -40,31 +34,33 @@ make && make install
 cd -
 rm -fR vim
 
-# Install PIP (used by AWS CLI)
-curl -s https://bootstrap.pypa.io/get-pip.py | python
-
-# Install AWS CLI
-pip install awscli
-
 # Install any custom files
 cp -R all/* /
 
 # Install optionals
-if test "${LANGS#*go}" != "$LANGS"
+if test "${FEATURES#*go}" != "$FEATURES"
 then
   ./install-go.sh
 fi
-if test "${LANGS#*swift}" != "$LANGS"
+if test "${FEATURES#*swift}" != "$FEATURES"
 then
   ./install-swift.sh
 fi
-if test "${LANGS#*ruby}" != "$LANGS"
+if test "${FEATURES#*ruby}" != "$FEATURES"
 then
   ./install-ruby.sh
 fi
-if test "${LANGS#*rust}" != "$LANGS"
+if test "${FEATURES#*rust}" != "$FEATURES"
 then
   ./install-rust.sh
+fi
+if test "${FEATURES#*gcloud}" != "$FEATURES"
+then
+  ./install-gcloud.sh
+fi
+if test "${FEATURES#*awscli}" != "$FEATURES"
+then
+  ./install-awscli.sh
 fi
 
 # Set the script that will be executed when new users are added
