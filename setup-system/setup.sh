@@ -18,7 +18,8 @@ apt-get -y install \
   direnv \
   tig \
   jq \
-  liblua5.2-dev
+  liblua5.2-dev \
+  libluajit-5.2
 
 # Install Vim Latest
 apt-get remove \
