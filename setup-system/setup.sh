@@ -31,7 +31,7 @@ apt-get remove \
   vim-gui-common \
   vim-nox
 git clone https://github.com/vim/vim.git
-cd vim/src
+cd vim
 ./configure \
   --with-features=huge \
   --enable-cscope \
