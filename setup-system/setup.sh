@@ -7,7 +7,7 @@ apt-get -y dist-upgrade
 # Install packages for general use and dev
 apt-get -y install \
   build-essential \
-  ncurses-dev \
+  libncurses5-dev \
   xauth \
   mosh \
   curl \
@@ -18,8 +18,8 @@ apt-get -y install \
   direnv \
   tig \
   jq \
-  liblua5.2-dev \
-  libluajit-5.2
+  liblua5.1-dev \
+  libluajit-5.1
 
 # Install Vim Latest
 apt-get remove \
@@ -37,7 +37,7 @@ cd vim
   --enable-cscope \
   --enable-luainterp \
   --with-luajit \
-  --with-lua-prefix=/usr/include/lua5.2
+  --with-lua-prefix=/usr/include/lua5.1
 make
 make install
 cd -
