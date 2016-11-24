@@ -30,8 +30,10 @@ apt-get remove \
   vim-gui-common \
   vim-nox
 git clone https://github.com/vim/vim.git
-cd vim
+cd vim/src
 ./configure \
+  --with-features=huge \
+  --enable-cscope \
   --enable-luainterp \
   --with-luajit \
   --enable-fail-if-missing
