@@ -18,6 +18,7 @@ apt-get -y install \
   direnv \
   tig \
   jq \
+  liblua5.2-dev
 
 # Install Vim Latest
 apt-get remove \
@@ -30,7 +31,12 @@ apt-get remove \
   vim-nox
 git clone https://github.com/vim/vim.git
 cd vim
-make && make install
+./configure \
+  --enable-luainterp \
+  --with-luajit \
+  --enable-fail-if-missing
+make
+make install
 cd -
 rm -fR vim
 
