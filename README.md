@@ -11,39 +11,37 @@ After clicking the button, make sure to change the GitHub username in the cloud-
 ## Features
 
 Features that can be specified in the `FEATURES` environment variable:
-  * `go`
-  * `ruby`
-  * `rust`
-  * `swift`
-  * `gcloud`
-  * `awscli`
+
+`go`, `ruby`, `rust`, `swift`, `gcloud`, `awscli`
 
 ## Usage
 
-### System Setup
+### Setup
 
-#### With cloud-init
-
-```
+1. Create a instance with Ubuntu 16.04 or 16.10. (e.g. DigitalOcean, AWS, etc)
+2. Run the setup
+  1. With cloud-init
+  ```
 #!/bin/sh
 wget -qO - https://git.io/devenv | FEATURES=go,ruby,rust,swift sh
 adduser-github leighmcculloch
 reboot
 ```
+  2. Manually
+    1. `ssh root@[ip-address]`
+    2. Execute the script, by using one of these methods:
+      * `wget -qO - https://git.io/devenv | FEATURES=go,ruby,rust,swift sh`
+      * `curl -sSL https://git.io/devenv | FEATURES=go,ruby,rust,swift sh`
+    3. `adduser-github [your-github-username]`
+    4. `reboot`
 
-#### Without cloud-init
+To only install the languages you need, change the `FEATURES` environment variable.
 
-1. Create a instance with Ubuntu 16.04 or 16.10. (e.g. DigitalOcean, AWS, etc)
-2. `ssh root@[ip-address]`
-3. Execute the script, by using one of these methods:
-  * `wget -qO - https://git.io/devenv | FEATURES=go,ruby,rust,swift sh`
-  * `curl -sSL https://git.io/devenv | FEATURES=go,ruby,rust,swift sh`
+### Adding Users
 
-To only install the languages you need, change the `FEATURES` environment variable in step three.
+Add additional users for anyone you plan to pair or share the instance with:
 
-### Creating Users
-
-1. `adduser-github [github-username]` for everyone who will be pairing.
+1. `adduser-github [github-username]`
 
 ### User login and pairing using Tmux
 
