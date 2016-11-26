@@ -2,6 +2,12 @@
 
 This repository contains scripts to setup Ubuntu for golang, ruby, swift and rust development, with tmux and vim.
 
+## Try it out
+
+Try it out on a free 2 hour instance at [dply.co](https://dply.co/b/y5xzjP4e). After clicking the button below, change the GitHub username in the script to your own before proceeding.
+
+[][![Dply](https://dply.co/b.svg)](https://dply.co/b/y5xzjP4e)
+
 ## Usage
 
 ### System Setup
