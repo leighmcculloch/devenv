@@ -22,6 +22,17 @@ Features that can be specified in the `FEATURES` environment variable:
 
 ### System Setup
 
+#### With cloud-init
+
+```
+#!/bin/sh
+wget -qO - https://git.io/devenv | FEATURES=go,ruby,rust,swift sh
+adduser-github leighmcculloch
+reboot
+```
+
+#### Without cloud-init
+
 1. Create a instance with Ubuntu 16.04 or 16.10. (e.g. DigitalOcean, AWS, etc)
 2. `ssh root@[ip-address]`
 3. Execute the script, by using one of these methods:
