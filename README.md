@@ -4,9 +4,19 @@ This repository contains scripts to setup Ubuntu for golang, ruby, swift and rus
 
 ## Try it out
 
-Try it out on a free 2 hour instance at [dply.co](https://dply.co/b/y5xzjP4e). After clicking the button below, change the GitHub username in the script to your own before proceeding.
-
 [![Dply](https://dply.co/b.svg)](https://dply.co/b/CnKOnaNm)
+
+After clicking the button, make sure to change the GitHub username in the cloud-init script box to your own before proceeding, and change the features list to what you want.
+
+## Features
+
+Features that can be specified in the `FEATURES` environment variable:
+  * `go`
+  * `ruby`
+  * `rust`
+  * `swift`
+  * `gcloud`
+  * `awscli`
 
 ## Usage
 
@@ -18,9 +28,7 @@ Try it out on a free 2 hour instance at [dply.co](https://dply.co/b/y5xzjP4e). A
   * `wget -qO - https://git.io/devenv | FEATURES=go,ruby,rust,swift sh`
   * `curl -sSL https://git.io/devenv | FEATURES=go,ruby,rust,swift sh`
 
-To only install the languages you need, change the `LANGS` environment variable in step three.
-
-Features that can be specified: `go`, `ruby`, `rust`, `swift`, `gcloud`, `awscli`.
+To only install the languages you need, change the `FEATURES` environment variable in step three.
 
 ### Creating Users
 
