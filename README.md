@@ -6,7 +6,7 @@ This repository contains scripts to setup Ubuntu for golang, ruby, swift and rus
 
 Try it out on a free 2 hour instance at [dply.co](https://dply.co/b/y5xzjP4e). After clicking the button below, change the GitHub username in the script to your own before proceeding.
 
-[![Dply](https://dply.co/b.svg)](https://dply.co/b/y5xzjP4e)
+[![Dply](https://dply.co/b.svg)](https://dply.co/b/CnKOnaNm)
 
 ## Usage
 
