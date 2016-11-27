@@ -24,7 +24,7 @@ apt-get -y remove \
   vim-runtime \
   vim-tiny \
   vim-common
-git clone https://github.com/vim/vim.git
+git clone https://github.com/vim/vim
 cd vim
 ./configure --with-features=huge
 make
