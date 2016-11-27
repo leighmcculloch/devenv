@@ -63,6 +63,3 @@ fi
 
 # Set the script that will be executed when new users are added
 cp -R ../setup-user /usr/local/sbin/adduser
-
-# Disable root login
-passwd -l root
