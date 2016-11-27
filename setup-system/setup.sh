@@ -15,7 +15,6 @@ apt-get -y install \
   tmux \
   git \
   make \
-  direnv \
   tig \
   jq
 
