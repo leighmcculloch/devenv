@@ -19,7 +19,7 @@ apt-get -y install \
   jq
 
 # Install Vim Latest
-apt-get remove \
+apt-get -y remove \
   vim \
   vim-runtime \
   vim-tiny \
