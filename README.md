@@ -2,11 +2,9 @@
 
 This repository contains scripts to setup Ubuntu for golang, ruby, swift and rust development, with tmux and vim.
 
-## Try it out
+[![Dply](https://dply.co/dply-135.svg)](https://dply.co/b/EHCJjF00)
 
-[![Dply](https://dply.co/b.svg)](https://dply.co/b/CnKOnaNm)
-
-After clicking the button, make sure to change the GitHub username in the cloud-init script box to your own before proceeding, and change the features list to what you want.
+After clicking the dply.co button, make sure to change the GitHub username in the cloud-init script box to your own before proceeding, and change the features list to what you want.
 
 ## Features
 
@@ -25,6 +23,7 @@ Features that can be specified in the `FEATURES` environment variable:
 #!/bin/sh
 wget -qO - https://git.io/devenv | FEATURES=go,ruby,rust,swift sh
 adduser-github leighmcculloch
+adduser leighmcculloch sudo
 reboot
 ```
   2. Manually
@@ -33,7 +32,8 @@ reboot
       * `wget -qO - https://git.io/devenv | FEATURES=go,ruby,rust,swift sh`
       * `curl -sSL https://git.io/devenv | FEATURES=go,ruby,rust,swift sh`
     3. `adduser-github [your-github-username]`
-    4. `reboot`
+    4. `adduser [your-github-username] sudo`
+    5. `reboot`
 
 To only install the languages you need, change the `FEATURES` environment variable.
 
@@ -42,6 +42,7 @@ To only install the languages you need, change the `FEATURES` environment variab
 Add additional users for anyone you plan to pair or share the instance with:
 
 1. `adduser-github [github-username]`
+2. `adduser [github-username] sudo` if sudo access is desired.
 
 ### User login and pairing using Tmux
 
