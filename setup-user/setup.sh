@@ -23,6 +23,9 @@ cp $(dirname $0)/gitconfig ~/.gitconfig
 cp $(dirname $0)/gitignore_global ~/.gitignore_global
 cp $(dirname $0)/gitmessage ~/.gitmessage
 cp $(dirname $0)/zshrc ~/.zshrc
+mkdir -p ~/.ssh
+cp $(dirname $0)/ssh_config ~/.ssh/config
+cp $(dirname $0)/ssh_known_hosts ~/.ssh/known_hosts
 
 # Setup go path if go is installed
 if [ -z "$GOPATH" ]; then :; else
