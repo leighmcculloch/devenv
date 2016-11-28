@@ -2,7 +2,10 @@
 apt-get -y update
 
 # Update to the latest of all packages
-apt-get -y dist-upgrade
+if test "${FEATURES#*upgrade}" != "$FEATURES"
+then
+  apt-get -y dist-upgrade
+fi
 
 # Install packages for general use and dev
 apt-get -y install \
