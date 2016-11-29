@@ -10,7 +10,7 @@ After clicking the dply.co button, make sure to change the GitHub username in th
 
 Features that can be specified in the `FEATURES` environment variable:
 
-`go`, `ruby`, `rust`, `swift`, `gcloud`, `awscli`, `upgrade` (system dist-upgrade)
+`go`, `ruby`, `rust`, `swift`, `gcloud`, `awscli`, `atom`, `upgrade` (system dist-upgrade)
 
 ## Usage
 
