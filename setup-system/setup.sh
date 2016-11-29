@@ -11,7 +11,6 @@ fi
 apt-get -y install \
   build-essential \
   libncurses5-dev \
-  xauth \
   mosh \
   curl \
   zsh \
