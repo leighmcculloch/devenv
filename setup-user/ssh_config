@@ -1,2 +1,10 @@
 Host *
     HashKnownHosts no
+
+Host github
+    HostName github.com
+    User git
+
+Host bitbucket
+    Hostname bitbucket.org
+    User git
