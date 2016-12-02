@@ -1,21 +1,17 @@
 # oh-my-zsh
-git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+git clone github:robbyrussell/oh-my-zsh ~/.oh-my-zsh
 
 # zsh theme: enormous
 mkdir -p ~/.oh-my-zsh/custom/themes
 \curl https://raw.githubusercontent.com/leighmcculloch/zsh-theme-enormous/master/enormous.zsh-theme > ~/.oh-my-zsh/custom/themes/enormous.zsh-theme
 
 # tmux dot files
-git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles.git ~/.tmux_dotfiles
-cd ~/.tmux_dotfiles
-make install
-cd -
+git clone --recursive github:leighmcculloch/tmux_dotfiles ~/.tmux_dotfiles \
+  && make -C ~/.tmux_dotfiles install
 
 # vim dot files
-git clone https://github.com/leighmcculloch/vim_dotfiles.git ~/.vim_dotfiles
-cd ~/.vim_dotfiles
-make install
-cd -
+git clone github:leighmcculloch/vim_dotfiles ~/.vim_dotfiles \
+  && make -C ~/.vim_dotfiles install
 
 # dot files
 cp $(dirname $0)/bash_profile ~/.bash_profile
