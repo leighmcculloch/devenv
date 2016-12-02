@@ -4,6 +4,7 @@ cp $(dirname $0)/gitconfig ~/.gitconfig
 cp $(dirname $0)/gitignore_global ~/.gitignore_global
 cp $(dirname $0)/gitmessage ~/.gitmessage
 cp $(dirname $0)/zshrc ~/.zshrc
+mkdir -p ~/.ssh
 cp $(dirname $0)/ssh_config ~/.ssh/config
 cp $(dirname $0)/ssh_known_hosts ~/.ssh/known_hosts
 
@@ -12,7 +13,7 @@ git config --global user.name "$(curl -s https://api.github.com/users/"$username
 git config --global user.email "$( \
   (curl -s https://api.github.com/users/"$username" | jq -M -r -e '.email // empty') \
   || (curl -s https://api.github.com/users/"$username"/events | jq -M -r -e '[.[] | select(.type == "PushEvent") | .payload.commits | .[-1] | .author.email] | .[0] // empty') \
-  || "$username"@users.noreply.github.com
+  || printf "$username"@users.noreply.github.com
   )"
 
 # oh-my-zsh
