@@ -1,3 +1,20 @@
+# dot files
+cp $(dirname $0)/bash_profile ~/.bash_profile
+cp $(dirname $0)/gitconfig ~/.gitconfig
+cp $(dirname $0)/gitignore_global ~/.gitignore_global
+cp $(dirname $0)/gitmessage ~/.gitmessage
+cp $(dirname $0)/zshrc ~/.zshrc
+cp $(dirname $0)/ssh_config ~/.ssh/config
+cp $(dirname $0)/ssh_known_hosts ~/.ssh/known_hosts
+
+# default user and email in global gitconfig
+git config --global user.name "$(curl -s https://api.github.com/users/"$username" | jq -M -r '.name')"
+git config --global user.email "$( \
+  (curl -s https://api.github.com/users/"$username" | jq -M -r -e '.email // empty') \
+  || (curl -s https://api.github.com/users/"$username"/events | jq -M -r -e '[.[] | select(.type == "PushEvent") | .payload.commits | .[-1] | .author.email] | .[0] // empty') \
+  || "$username"@users.noreply.github.com
+  )"
+
 # oh-my-zsh
 git clone github:robbyrussell/oh-my-zsh ~/.oh-my-zsh
 
@@ -13,17 +30,7 @@ git clone --recursive github:leighmcculloch/tmux_dotfiles ~/.tmux_dotfiles \
 git clone github:leighmcculloch/vim_dotfiles ~/.vim_dotfiles \
   && make -C ~/.vim_dotfiles install
 
-# dot files
-cp $(dirname $0)/bash_profile ~/.bash_profile
-cp $(dirname $0)/gitconfig ~/.gitconfig
-cp $(dirname $0)/gitignore_global ~/.gitignore_global
-cp $(dirname $0)/gitmessage ~/.gitmessage
-cp $(dirname $0)/zshrc ~/.zshrc
-mkdir -p ~/.ssh
-cp $(dirname $0)/ssh_config ~/.ssh/config
-cp $(dirname $0)/ssh_known_hosts ~/.ssh/known_hosts
-
-# dot files
+# user defined dot files
 git clone github:"$USER"/dotfiles ~/.dotfiles || git clone bitbucket:"$USER"/dotfiles ~/.dotfiles \
   && make -C ~/.dotfiles
 git clone github:"$USER"/dotfiles-private ~/.dotfiles-private || git clone bitbucket:"$USER"/dotfiles-private ~/.dotfiles-private \

@@ -6,9 +6,3 @@ chmod 700 /home/"$username"/.ssh
 curl https://github.com/"$username".keys > /home/"$username"/.ssh/authorized_keys
 chmod 600 /home/"$username"/.ssh/authorized_keys
 chown -R "$username":"$username" /home/"$username"/.ssh/
-git config --global user.name "$(curl -s https://api.github.com/users/"$username" | jq -M -r '.name')"
-git config --global user.email "$( \
-  (curl -s https://api.github.com/users/"$username" | jq -M -r -e '.email // empty') \
-  || (curl -s https://api.github.com/users/"$username"/events | jq -M -r -e '[.[] | select(.type == "PushEvent") | .payload.commits | .[-1] | .author.email] | .[0] // empty') \
-  || "$username"@users.noreply.github.com
-  )"
