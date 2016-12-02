@@ -23,6 +23,12 @@ mkdir -p ~/.ssh
 cp $(dirname $0)/ssh_config ~/.ssh/config
 cp $(dirname $0)/ssh_known_hosts ~/.ssh/known_hosts
 
+# dot files
+git clone github:"$USER"/dotfiles ~/.dotfiles || git clone bitbucket:"$USER"/dotfiles ~/.dotfiles \
+  && make -C ~/.dotfiles
+git clone github:"$USER"/dotfiles-private ~/.dotfiles-private || git clone bitbucket:"$USER"/dotfiles-private ~/.dotfiles-private \
+  && make -C ~/.dotfiles-private
+
 # Setup go path if go is installed
 if [ -z "$GOPATH" ]; then :; else
   mkdir -p $GOPATH_USER/src/github.com/"$USER"
