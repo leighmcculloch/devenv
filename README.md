@@ -2,7 +2,7 @@
 
 This repository contains scripts to setup Ubuntu for golang, ruby, swift and rust development, with tmux and vim.
 
-[![Dply](https://dply.co/dply-135.svg)](https://dply.co/b/EHCJjF00)
+[![Dply](https://dply.co/dply-135.svg)](https://dply.co/b/nrjCuUwD)
 
 After clicking the dply.co button, make sure to change the GitHub username in the cloud-init script box to your own before proceeding, and change the features list to what you want.
 
