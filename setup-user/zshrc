@@ -6,3 +6,12 @@ source $ZSH/oh-my-zsh.sh
 
 # aliases
 alias sshenv="eval \$(tmux show-env -s | grep '^SSH_')"
+
+# user defined dot files
+if [ ! -d ~/.dotfiles.loaded ]; then
+  touch ~/.dotfiles.loaded
+  git clone github:"$USER"/dotfiles ~/.dotfiles || git clone bitbucket:"$USER"/dotfiles ~/.dotfiles \
+    && make -C ~/.dotfiles
+  git clone github:"$USER"/dotfiles-private ~/.dotfiles-private || git clone bitbucket:"$USER"/dotfiles-private ~/.dotfiles-private \
+    && make -C ~/.dotfiles-private
+fi

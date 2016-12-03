@@ -17,25 +17,19 @@ git config --global user.email "$( \
   )"
 
 # oh-my-zsh
-git clone github:robbyrussell/oh-my-zsh ~/.oh-my-zsh
+git clone https://github.com/robbyrussell/oh-my-zsh ~/.oh-my-zsh
 
 # zsh theme: enormous
 mkdir -p ~/.oh-my-zsh/custom/themes
 \curl https://raw.githubusercontent.com/leighmcculloch/zsh-theme-enormous/master/enormous.zsh-theme > ~/.oh-my-zsh/custom/themes/enormous.zsh-theme
 
 # tmux dot files
-git clone --recursive github:leighmcculloch/tmux_dotfiles ~/.tmux_dotfiles \
+git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles ~/.tmux_dotfiles \
   && make -C ~/.tmux_dotfiles install
 
 # vim dot files
-git clone github:leighmcculloch/vim_dotfiles ~/.vim_dotfiles \
+git clone https://github.com/leighmcculloch/vim_dotfiles ~/.vim_dotfiles \
   && make -C ~/.vim_dotfiles install
-
-# user defined dot files
-git clone github:"$USER"/dotfiles ~/.dotfiles || git clone bitbucket:"$USER"/dotfiles ~/.dotfiles \
-  && make -C ~/.dotfiles
-git clone github:"$USER"/dotfiles-private ~/.dotfiles-private || git clone bitbucket:"$USER"/dotfiles-private ~/.dotfiles-private \
-  && make -C ~/.dotfiles-private
 
 # Setup go path if go is installed
 if [ -z "$GOPATH" ]; then :; else
