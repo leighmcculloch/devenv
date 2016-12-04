@@ -14,7 +14,7 @@ function get_and_make_repo_if_exists() {
 }
 
 # user defined dot files, download on first login
-if [ "$USER" -ne "vagrant" ] && [ ! -f ~/.dotfiles.loaded ]; then
+if [ "$USER" != "vagrant" ] && [ ! -f ~/.dotfiles.loaded ]; then
   touch ~/.dotfiles.loaded
   if [ "$DOWNLOAD" == "y" ]; then
     get_and_make_repo_if_exists "$USER" "dotfiles" "$HOME/.dotfiles"
