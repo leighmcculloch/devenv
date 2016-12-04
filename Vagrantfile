@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/setup"
   config.vm.synced_folder "..", "/workspace"
 
-  config.vm.provision :shell, privileged: true, inline: "cd /setup/setup-system && ./setup.sh", env: { "FEATURES" => "go,ruby,rust,swift,gcloud,awscli" }
+  config.vm.provision :shell, privileged: true, inline: "cd /setup/setup-system && ./setup.sh", env: { "FEATURES" => ENV["FEATURES"] }
   config.vm.provision :shell, privileged: true, inline: "adduser-github #{username}"
   config.vm.provision :shell, privileged: true, inline: "adduser #{username} sudo"
   config.vm.provision :shell, privileged: true, inline: "reboot"

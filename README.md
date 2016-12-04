@@ -56,4 +56,11 @@ Add additional users for anyone you plan to pair or share the instance with:
 
 ## Usage (Vagrant)
 
-The repository contains a Vagrantfile that will setup a development environment for the single vagrant user. Just run `vagrant up` in the repository directory, and the directory above the repository will be mapped to `/workspace` on the instance.
+The repository contains a Vagrantfile that will setup a development environment for the single vagrant user. The directory above the repository will be mapped to `/workspace` on the instance.
+
+```
+USER=[your-github-username] FEATURES=go,ruby,rust,swift vagrant up
+vagrant ssh -p
+```
+
+If your local machine username is the same as your github username, you can leave off the `USER` environment variable.
