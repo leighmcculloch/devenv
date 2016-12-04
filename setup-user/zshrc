@@ -14,8 +14,11 @@ function get_and_make_repo_if_exists() {
 }
 
 # user defined dot files, download on first login
-if [ ! -f ~/.dotfiles.loaded ]; then
+if [ "$USER" -ne "vagrant" ] && [ ! -f ~/.dotfiles.loaded ]; then
+  read -p "Download 'dotfiles' and 'dotfiles-private' from $USER's github/bitbucket? : y/n" DOWNLOAD;
   touch ~/.dotfiles.loaded
-  get_and_make_repo_if_exists "$USER" "dotfiles" "$HOME/.dotfiles"
-  get_and_make_repo_if_exists "$USER" "dotfiles-private" "$HOME/.dotfiles-private"
+  if [ "$DOWNLOAD" == "y" ]; then
+    get_and_make_repo_if_exists "$USER" "dotfiles" "$HOME/.dotfiles"
+    get_and_make_repo_if_exists "$USER" "dotfiles-private" "$HOME/.dotfiles-private"
+  fi
 fi
