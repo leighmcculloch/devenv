@@ -20,19 +20,8 @@ apt-get -y install \
   tig \
   jq
 
-# Install Vim Latest
-apt-get -y remove \
-  vim \
-  vim-runtime \
-  vim-tiny \
-  vim-common
-git clone https://github.com/vim/vim
-cd vim
-./configure --with-features=huge
-make
-make install
-cd -
-rm -fR vim
+# Install vim
+ln -s $PWD/deps/vim/bin/vim /usr/local/bin/vim
 
 # Install any custom files
 cp -R files/* /

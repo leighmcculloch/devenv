@@ -1,0 +1,20 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/xenial64"
+
+  config.vm.network :private_network, ip: "192.168.50.50"
+  config.vm.synced_folder "./bin", "/output"
+
+  config.vm.provision :shell, privileged: true, inline: <<SHELL
+apt-get -y install build-essential libncurses5-dev
+git clone https://github.com/vim/vim
+cd vim
+./configure --with-features=huge
+make
+cp src/vim /output/
+cd -
+# rm -fR vim
+SHELL
+end
