@@ -1,9 +1,9 @@
-TMP=$(mktemp -d)
-wget -qO - https://github.com/leighmcculloch/devenv/tarball/master | tar xz -C $TMP
-cd $TMP/leighmcculloch-devenv*
+apt-get install git
 
-cd setup-system
+DEVENV_DIR=.devenv
+
+git clone https://github.com/leighmcculloch/devenv $DEVENV_DIR
+
+cd $DEVENV_DIR/setup-system
 ./setup.sh
 cd -
-
-rm -fR $TMP
