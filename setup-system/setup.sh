@@ -35,32 +35,44 @@ cd -
 rm -fR vim
 
 # Install any custom files
-cp -R all/* /
+cp -R files/* /
 
 # Install optionals
 if test "${FEATURES#*go}" != "$FEATURES"
 then
+  cd install-go
   ./install-go.sh
+  cd -
 fi
 if test "${FEATURES#*swift}" != "$FEATURES"
 then
+  cd install-swift
   ./install-swift.sh
+  cd -
 fi
 if test "${FEATURES#*ruby}" != "$FEATURES"
 then
+  cd install-ruby
   ./install-ruby.sh
+  cd -
 fi
 if test "${FEATURES#*rust}" != "$FEATURES"
 then
+  cd install-rust
   ./install-rust.sh
+  cd -
 fi
 if test "${FEATURES#*gcloud}" != "$FEATURES"
 then
+  cd install-gcloud
   ./install-gcloud.sh
+  cd -
 fi
 if test "${FEATURES#*awscli}" != "$FEATURES"
 then
+  cd install-awscli
   ./install-awscli.sh
+  cd -
 fi
 
 # Set the script that will be executed when new users are added
