@@ -9,11 +9,11 @@ cp $(dirname $0)/ssh_config ~/.ssh/config
 cp $(dirname $0)/ssh_known_hosts ~/.ssh/known_hosts
 
 # default user and email in global gitconfig
-git config --global user.name "$(curl -s https://api.github.com/users/"$username" | jq -M -r '.name')"
+git config --global user.name "$(curl -s https://api.github.com/users/"$USER" | jq -M -r '.name')"
 git config --global user.email "$( \
-  (curl -s https://api.github.com/users/"$username" | jq -M -r -e '.email // empty') \
-  || (curl -s https://api.github.com/users/"$username"/events | jq -M -r -e '[.[] | select(.type == "PushEvent") | .payload.commits | .[-1] | .author.email] | .[0] // empty') \
-  || printf "$username"@users.noreply.github.com
+  (curl -s https://api.github.com/users/"$USER" | jq -M -r -e '.email // empty') \
+  || (curl -s https://api.github.com/users/"$USER"/events | jq -M -r -e '[.[] | select(.type == "PushEvent") | .payload.commits | .[-1] | .author.email] | .[0] // empty') \
+  || printf "$USER"@users.noreply.github.com
   )"
 
 # oh-my-zsh
