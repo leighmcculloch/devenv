@@ -9,8 +9,6 @@ fi
 
 # Install packages for general use and dev
 apt-get -y install \
-  build-essential \
-  libncurses5-dev \
   mosh \
   curl \
   zsh \
