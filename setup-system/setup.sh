@@ -19,7 +19,9 @@ apt-get -y install \
   jq
 
 # Install vim
-ln -s $PWD/deps/vim/bin/vim /usr/local/bin/vim
+cd deps/vim
+./install-vim.sh
+cd -
 
 # Install any custom files
 cp -R files/* /
