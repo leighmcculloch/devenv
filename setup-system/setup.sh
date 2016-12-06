@@ -9,6 +9,7 @@ fi
 
 # Install packages for general use and dev
 apt-get -y install \
+  build-essential \
   mosh \
   curl \
   zsh \
