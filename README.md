@@ -64,3 +64,25 @@ vagrant ssh -p
 ```
 
 If your local machine username is the same as your github username, you can leave off the `USER` environment variable.
+
+## Usage (X11)
+
+Follow the normal setup above, if you wish to use X11 remotely, assuming you have a local X11 server and using xclock as an example:
+
+```
+ssh -A -X [github-username]@[ip-address]
+
+sudo apt-get install x11-apps # to install xclock
+DISPLAY=:0 xclock
+```
+
+If you are running inside Vagrant, your guest OS will need to be able to access the 600x ports on your host:
+
+```
+DISPLAY=:0 ssh -A -X -R 6000:localhost:6000 [github-username]@[ip-address] -p 2222
+
+sudo apt-get install x11-apps # to install xclock
+DISPLAY=:0 xclock
+```
+
+Note: Port 2222 is common on vagrant, but to check the port run `vagrant ssh-config`.

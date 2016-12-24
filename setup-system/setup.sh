@@ -64,6 +64,12 @@ then
   ./install-awscli.sh
   cd -
 fi
+if test "${FEATURES#*gogland}" != "$FEATURES"
+then
+  cd install-jetbrains-gogland
+  ./install-jetbrains-gogland.sh
+  cd -
+fi
 
 # Set the script that will be executed when new users are added
 cp -R ../setup-user /usr/local/sbin/adduser
