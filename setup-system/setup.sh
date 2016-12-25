@@ -64,6 +64,12 @@ then
   ./install-awscli.sh
   cd -
 fi
+if test "${FEATURES#*jetbrains}" != "$FEATURES"
+then
+  cd install-jetbrains-toolbox
+  ./install-jetbrains-toolbox.sh
+  cd -
+fi
 if test "${FEATURES#*gogland}" != "$FEATURES"
 then
   cd install-jetbrains-gogland
