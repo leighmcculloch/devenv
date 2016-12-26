@@ -1,5 +1,6 @@
 wget -qO - https://storage.googleapis.com/golang/go1.7.3.linux-amd64.tar.gz | tar xz -C /usr/local
 cp -R files/* /
+
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=/usr/local/gopath
 mkdir -p $GOPATH
@@ -17,3 +18,5 @@ go get github.com/fatih/motion
 go get github.com/zmb3/gogetdoc
 go get github.com/josharian/impl
 go get github.com/mailgun/godebug
+
+. /etc/profile.d/go.sh
