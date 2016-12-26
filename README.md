@@ -65,6 +65,21 @@ vagrant ssh -p
 
 If your local machine username is the same as your github username, you can leave off the `USER` environment variable.
 
+## Usage (WSL)
+
+Install the Windows Subsystem for Linux (WSL) following these [instructions](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide). Then open Bash and:
+
+```
+sudo apt-get install git -y
+git clone https://github.com/leighmcculloch/devenv
+cd devenv/setup-system
+FEATURES=go,ruby,rust,swift ./setup.sh
+cd ../setup-user
+./setup.sh
+cd ..
+rm -fR devenv
+```
+
 ## Usage (X11)
 
 Follow the normal setup above, if you wish to use X11 remotely, assuming you have a local X11 server and using xclock as an example:
