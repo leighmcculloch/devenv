@@ -65,6 +65,19 @@ vagrant ssh -p
 
 If your local machine username is the same as your github username, you can leave off the `USER` environment variable.
 
+## Usage (Vagrant on Windows 10)
+
+The repository contains a Vagrantfile that will setup a development environment for the single vagrant user. The directory above the repository will be mapped to `/workspace` on the instance.
+
+```
+set USER=[your-github-username]
+set FEATURES=go,ruby,rust,swift
+vagrant up
+vagrant ssh -p
+```
+
+If you are running vagrant in Windows 10 and wish to use _Bash on Ubuntu on Windows_ running on the _Windows Subsystem for Linux_, run the `vagrant up` in the Console, and ssh manually in Bash. Use `vagrant ssh-config` to dump out the SSH parameters.
+
 ## Usage (X11)
 
 Follow the normal setup above, if you wish to use X11 remotely, assuming you have a local X11 server and using xclock as an example:
