@@ -17,6 +17,8 @@ export VIM_REVISION=$(git rev-parse --short HEAD)
 ./configure --with-features=huge
 make
 
+rm -fr .git
+
 cd -
 
 tar czf vim-$VIM_REVISION.tar.gz vim
