@@ -1,3 +1,9 @@
+# If no features specified, install everything
+if [ -z "$FEATURES" ]
+then
+  FEATURES=upgrade,go,swift,ruby,rust,gcloud,awscli,gogland
+fi
+
 # Update local package directory
 apt-get -y update
 
