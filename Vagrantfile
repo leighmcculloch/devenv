@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :shell, privileged: true, inline: "cd /setup/setup-system && ./setup.sh", env: { "FEATURES" => ENV["FEATURES"] }
   config.vm.provision :shell, privileged: true, inline: "adduser-github #{username}"
-  config.vm.provision :shell, privileged: true, inline: "cat ~#{config.ssh.username}/.ssh/authorized_keys >> ~#{username}/.ssh/authorized_keys"
+  config.vm.provision :shell, privileged: true, inline: "cat ~ubuntu/.ssh/authorized_keys >> ~#{username}/.ssh/authorized_keys"
   config.vm.provision :shell, privileged: true, inline: "adduser #{username} sudo"
   config.vm.provision :shell, privileged: true, inline: "reboot"
 end
