@@ -1,7 +1,7 @@
 # If no features specified, install everything
 if [ -z "$FEATURES" ]
 then
-  FEATURES=upgrade,go,swift,ruby,rust,gcloud,awscli,gogland
+  FEATURES=upgrade,go,swift,ruby,rust,gcloud,cfcli,awscli,gogland
 fi
 
 # Update local package directory
@@ -62,6 +62,12 @@ if test "${FEATURES#*gcloud}" != "$FEATURES"
 then
   cd install-gcloud
   ./install-gcloud.sh
+  cd -
+fi
+if test "${FEATURES#*cfcli}" != "$FEATURES"
+then
+  cd install-cfcli
+  ./install-cfcli.sh
   cd -
 fi
 if test "${FEATURES#*awscli}" != "$FEATURES"
