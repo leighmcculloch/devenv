@@ -1,4 +1,4 @@
-wget -qO - https://storage.googleapis.com/golang/go1.7.3.linux-amd64.tar.gz | tar xz -C /usr/local
+wget -qO - https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz | tar xz -C /usr/local
 cp -R files/* /
 
 export PATH=$PATH:/usr/local/go/bin
