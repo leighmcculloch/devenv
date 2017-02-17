@@ -11,9 +11,8 @@ Vagrant.configure("2") do |config|
   config.ssh.username = username if VAGRANT_COMMAND == "ssh"
   config.ssh.forward_agent = true
 
-  config.vm.network :private_network, ip: "192.168.50.50"
-  config.vm.synced_folder ".", "/setup"
-  config.vm.synced_folder "..", "/workspace"
+  config.vm.synced_folder ".", "/setup", :mount_options => ["ro"]
+  config.vm.synced_folder "..", "/workspace", :mount_options => ["ro"]
 
   config.vm.provision :shell, privileged: true, inline: "cd /setup/setup-system && ./setup.sh", env: { "FEATURES" => ENV["FEATURES"] }
   config.vm.provision :shell, privileged: true, inline: "adduser-github #{username}"

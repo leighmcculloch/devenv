@@ -4,19 +4,15 @@ then
   FEATURES=upgrade,go,swift,ruby,rust,gcloud,cfcli,awscli,gogland
 fi
 
-# Update local package directory
-apt-get -y update
-
 # Update to the latest of all packages
 if test "${FEATURES#*upgrade}" != "$FEATURES"
 then
+  apt-get -y update
   apt-get -y dist-upgrade
 fi
 
 # Install packages for general use and dev
 apt-get -y install \
-  build-essential \
-  mosh \
   curl \
   zsh \
   tmux \
@@ -24,11 +20,6 @@ apt-get -y install \
   make \
   tig \
   jq
-
-# Install vim
-cd deps/vim
-./install-vim.sh
-cd -
 
 # Install any custom files
 cp -R files/* /
