@@ -106,3 +106,18 @@ DISPLAY=:0 ssh default
 ```
 
 Note: Port 2222 is common on vagrant, but to check the port run `vagrant ssh-config`.
+
+## Usage (X11 on Vagrant)
+
+To use X11 with Vagrant, replace the `vagrant ssh -p` in the instructions above with:
+
+```
+vagrant ssh -p -- -X -R 6000:127.0.0.1:6000
+```
+
+You can then prefix starting any X11 app with `DISPLAY=:0`. Example:
+
+```
+sudo apt-get install x11-apps # to install xclock
+DISPLAY=:0 xclock
+```
