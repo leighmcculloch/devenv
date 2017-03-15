@@ -2,9 +2,6 @@
 username="$1"
 adduser --disabled-password --gecos "" "$username"
 
-# Add user to the rvm group if rvm is installed
-which rvm > /dev/null && adduser $username rvm
-
 # Add user's github ssh key to authorized_keys
 mkdir -p /home/"$username"/.ssh
 chmod 700 /home/"$username"/.ssh
