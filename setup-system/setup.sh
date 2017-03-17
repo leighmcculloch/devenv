@@ -67,6 +67,12 @@ then
   ./install-awscli.sh
   cd -
 fi
+if test "${FEATURES#*liteide}" != "$FEATURES"
+then
+  cd install-liteide
+  ./install-liteide.sh
+  cd -
+fi
 if test "${FEATURES#*gogland}" != "$FEATURES"
 then
   cd install-jetbrains-gogland
