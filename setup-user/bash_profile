@@ -1,2 +1,3 @@
 source ~/.profile
-/usr/bin/zsh --login
+tmux -2 attach || tmux -2 new
+exit
