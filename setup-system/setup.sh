@@ -1,7 +1,7 @@
 # If no features specified, install everything
 if [ -z "$FEATURES" ]
 then
-  FEATURES=upgrade,go,swift,ruby,rust,gcloud,cfcli,awscli
+  FEATURES=upgrade,go,swift,ruby,rust,gcloud,cfcli,awscli,dotnetcore,docker
 fi
 
 # Update to the latest of all packages
@@ -29,6 +29,18 @@ if test "${FEATURES#*go}" != "$FEATURES"
 then
   cd install-go
   ./install-go.sh
+  cd -
+fi
+if test "${FEATURES#*dotnetcore}" != "$FEATURES"
+then
+  cd install-dotnetcore
+  ./install-dotnetcore.sh
+  cd -
+fi
+if test "${FEATURES#*docker}" != "$FEATURES"
+then
+  cd install-docker
+  ./install-docker.sh
   cd -
 fi
 if test "${FEATURES#*swift}" != "$FEATURES"
