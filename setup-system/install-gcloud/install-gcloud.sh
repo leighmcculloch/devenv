@@ -8,3 +8,6 @@ apt-get -y update
 # Install Google Cloud SDK
 apt-get -y install \
   google-cloud-sdk \
+  google-cloud-sdk-app-engine-go \
+  google-cloud-sdk-datastore-emulator \
+  google-cloud-sdk-pubsub-emulator
