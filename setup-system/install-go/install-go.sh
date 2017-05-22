@@ -18,5 +18,6 @@ go get github.com/fatih/motion
 go get github.com/zmb3/gogetdoc
 go get github.com/josharian/impl
 go get github.com/mailgun/godebug
+go get github.com/kardianos/govendor
 
 . /etc/profile.d/go.sh
