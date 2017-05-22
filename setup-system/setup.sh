@@ -26,7 +26,12 @@ apt-get -y install \
 cp -R files/* /
 
 # Install optionals
-if test "${FEATURES#*go}" != "$FEATURES"
+if test "${FEATURES#*go16}" != "$FEATURES"
+then
+  cd install-go1.6
+  ./install-go.sh
+  cd -
+elif test "${FEATURES#*go}" != "$FEATURES"
 then
   cd install-go
   ./install-go.sh
