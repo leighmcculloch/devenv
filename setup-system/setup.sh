@@ -19,7 +19,8 @@ apt-get -y install \
   git \
   make \
   tig \
-  jq
+  jq \
+  tree
 
 # Install any custom files
 cp -R files/* /
