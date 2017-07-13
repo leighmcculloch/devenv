@@ -25,6 +25,9 @@ apt-get -y install \
 # Install any custom files
 cp -R files/* /
 
+# Install neovim
+./install-neovim/install-neovim.sh
+
 # Install optionals
 if test "${FEATURES#*go16}" != "$FEATURES"
 then

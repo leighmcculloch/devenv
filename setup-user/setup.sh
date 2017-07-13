@@ -31,6 +31,10 @@ git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles ~/.tmux_do
 git clone https://github.com/leighmcculloch/vim_dotfiles ~/.vim_dotfiles \
   && make -C ~/.vim_dotfiles install
 
+# neovim dot files
+git clone https://github.com/leighmcculloch/neovim_dotfiles ~/.neovim_dotfiles \
+  && make -C ~/.neovim_dotfiles install
+
 # Setup go path if go is installed
 if [ -z "$GOPATH" ]; then :; else
   mkdir -p $GOPATH_USER/src/github.com/"$USER"
