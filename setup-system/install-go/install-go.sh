@@ -20,5 +20,6 @@ go get github.com/josharian/impl
 go get github.com/mailgun/godebug
 go get github.com/kardianos/govendor
 go get github.com/tools/godep
+go get github.com/derekparker/delve/cmd/dlv
 
 . /etc/profile.d/go.sh
