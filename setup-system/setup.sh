@@ -29,12 +29,7 @@ cp -R files/* /
 ./install-nvim/install-nvim.sh
 
 # Install optionals
-if test "${FEATURES#*go16}" != "$FEATURES"
-then
-  cd install-go1.6
-  ./install-go.sh
-  cd -
-elif test "${FEATURES#*go}" != "$FEATURES"
+if test "${FEATURES#*go}" != "$FEATURES"
 then
   cd install-go
   ./install-go.sh
@@ -86,12 +81,6 @@ if test "${FEATURES#*awscli}" != "$FEATURES"
 then
   cd install-awscli
   ./install-awscli.sh
-  cd -
-fi
-if test "${FEATURES#*liteide}" != "$FEATURES"
-then
-  cd install-liteide
-  ./install-liteide.sh
   cd -
 fi
 if test "${FEATURES#*gogland}" != "$FEATURES"
