@@ -1,7 +1,7 @@
 # If no features specified, install everything
 if [ -z "$FEATURES" ]
 then
-  FEATURES=upgrade,go,swift,ruby,rust,gcloud,cfcli,awscli,dotnetcore,docker
+  FEATURES=upgrade,go,swift,ruby,rust,gcloud,cfcli,awscli,dotnetcore,docker,kotlin
 fi
 
 # Update to the latest of all packages
@@ -87,6 +87,12 @@ if test "${FEATURES#*gogland}" != "$FEATURES"
 then
   cd install-jetbrains-gogland
   ./install-jetbrains-gogland.sh
+  cd -
+fi
+if test "${FEATURES#*kotlin}" != "$FEATURES"
+then
+  cd install-kotlin
+  ./install-kotlin.sh
   cd -
 fi
 
