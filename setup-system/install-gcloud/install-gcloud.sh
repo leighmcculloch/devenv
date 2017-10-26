@@ -1,13 +1,9 @@
-# apt-get source for google-cloud-sdk
-echo "deb http://packages.cloud.google.com/apt cloud-sdk-$(lsb_release -c -s) main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+wget -qO - https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-177.0.0-linux-x86_64.tar.gz | tar xz -C /usr/local
 
-# Update local package directory
-apt-get -y update
-
-# Install Google Cloud SDK
-apt-get -y install \
-  google-cloud-sdk \
-  google-cloud-sdk-app-engine-go \
-  google-cloud-sdk-datastore-emulator \
-  google-cloud-sdk-pubsub-emulator
+/usr/local/google-cloud-sdk/install.sh \
+	--usage-reporting false \
+	--additional-components app-engine-go cloud-datastore-emulator pubsub-emulator \
+	--rc-path ~/.zshrc \
+	--command-completion true \
+	--path-update true \
+	--quiet
