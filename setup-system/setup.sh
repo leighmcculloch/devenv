@@ -1,7 +1,7 @@
 # If no features specified, install everything
 if [ -z "$FEATURES" ]
 then
-  FEATURES=upgrade,go,swift,ruby,rust,gcloud,cfcli,awscli,dotnetcore,docker,kotlin
+  FEATURES=upgrade,go,ruby,gcloud,awscli
 fi
 
 # Update to the latest of all packages
