@@ -22,4 +22,7 @@ go get github.com/kardianos/govendor
 go get github.com/tools/godep
 go get github.com/derekparker/delve/cmd/dlv
 
+go get golang.org/x/review/git-codereview
+go get golang.org/x/tools/cmd/go-contrib-init
+
 . /etc/profile.d/go.sh

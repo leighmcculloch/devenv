@@ -39,3 +39,8 @@ git clone https://github.com/leighmcculloch/neovim_dotfiles ~/.neovim_dotfiles \
 if [ -z "$GOPATH" ]; then :; else
   mkdir -p $GOPATH_USER/src/github.com/"$USER"
 fi
+
+# Download go src if go is installed
+if [ -z "$GOPATH" ]; then :; else
+  git clone https://go.googlesource.com/go ~/gosrc
+fi
