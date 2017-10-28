@@ -28,4 +28,6 @@ go get golang.org/x/tools/cmd/go-contrib-init
 
 go get golang.org/x/tools/cmd/present
 
+go get github.com/jmhodges/justrun
+
 . /etc/profile.d/go.sh
