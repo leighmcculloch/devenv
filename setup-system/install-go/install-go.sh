@@ -4,6 +4,7 @@ cp -R files/* /
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=/usr/local/gopath
 mkdir -p $GOPATH
+
 go get github.com/nsf/gocode
 go get github.com/alecthomas/gometalinter
 go get golang.org/x/tools/cmd/goimports
@@ -24,5 +25,7 @@ go get github.com/derekparker/delve/cmd/dlv
 
 go get golang.org/x/review/git-codereview
 go get golang.org/x/tools/cmd/go-contrib-init
+
+go get golang.org/x/tools/cmd/present
 
 . /etc/profile.d/go.sh
