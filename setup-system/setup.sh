@@ -84,6 +84,12 @@ then
   ./install-awscli.sh
   cd -
 fi
+if test "${FEATURES#*vscode}" != "$FEATURES"
+then
+  cd install-jetbrains-vscode
+  ./install-jetbrains-vscode.sh
+  cd -
+fi
 if test "${FEATURES#*gogland}" != "$FEATURES"
 then
   cd install-jetbrains-gogland
