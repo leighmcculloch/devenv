@@ -90,10 +90,10 @@ then
   ./install-jetbrains-vscode.sh
   cd -
 fi
-if test "${FEATURES#*gogland}" != "$FEATURES"
+if test "${FEATURES#*goland}" != "$FEATURES"
 then
-  cd install-jetbrains-gogland
-  ./install-jetbrains-gogland.sh
+  cd install-jetbrains-goland
+  ./install-jetbrains-goland.sh
   cd -
 fi
 if test "${FEATURES#*kotlin}" != "$FEATURES"
