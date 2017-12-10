@@ -1,19 +1,20 @@
+ID ?= 0
+
 run:
-	docker run -d -i -t --name="devenv" \
+	docker run -d -i -t --name="devenv-$(ID)" \
 		-v="$$HOME/.ssh/id_rsa:/root/.ssh/id_rsa" \
 		-v="$$PWD:/root/devenv" \
-		-p="4567:4567" \
-		-p="8080:8080" \
-		-p="6060:6060" \
+		-p="808$(ID):808$(ID)" \
+		-p="606$(ID):606$(ID)" \
 		leighmcculloch/devenv \
-		|| docker start devenv
+		|| docker start devenv-$(ID)
 	docker ps
-	docker attach --detach-keys="ctrl-a,d" devenv || true
+	docker attach --detach-keys="ctrl-a,d" devenv-$(ID) || true
 	docker ps
 
 clean:
-	docker stop devenv || true
-	docker rm devenv || true
+	docker stop devenv-$(ID) || true
+	docker rm devenv-$(ID) || true
 
 build:
 	docker build . -t leighmcculloch/devenv
