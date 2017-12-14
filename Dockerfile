@@ -16,8 +16,6 @@ RUN apt-get -y install \
 RUN add-apt-repository -y ppa:neovim-ppa/stable
 RUN apt-get update
 RUN apt-get -y install neovim
-RUN apt-get -y install python-dev python-pip python3-dev python3-pip
-RUN pip3 install --upgrade neovim
 
 # home
 ENV HOME="/root"
