@@ -1,0 +1,4 @@
+FROM leighmcculloch/devenv
+
+# rust
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
