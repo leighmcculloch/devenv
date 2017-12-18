@@ -10,27 +10,27 @@ ENV PATH="${PATH}:$GOPATH_USER/bin:$GOPATH_TOOLS/bin:/usr/local/go/bin"
 
 # go - tools
 ENV GOPATH=$GOPATH_TOOLS
-RUN go get github.com/nsf/gocode
-RUN go get github.com/alecthomas/gometalinter
-RUN go get golang.org/x/tools/cmd/goimports
-RUN go get golang.org/x/tools/cmd/guru
-RUN go get golang.org/x/tools/cmd/gorename
-RUN go get github.com/golang/lint/golint
-RUN go get github.com/rogpeppe/godef
-RUN go get github.com/kisielk/errcheck
-RUN go get github.com/jstemmer/gotags
-RUN go get github.com/klauspost/asmfmt/cmd/asmfmt
-RUN go get github.com/fatih/motion
-RUN go get github.com/zmb3/gogetdoc
-RUN go get github.com/josharian/impl
-RUN go get github.com/mailgun/godebug
-RUN go get github.com/kardianos/govendor
-RUN go get github.com/tools/godep
-RUN go get github.com/derekparker/delve/cmd/dlv
-RUN go get golang.org/x/review/git-codereview
-RUN go get golang.org/x/tools/cmd/go-contrib-init
-RUN go get golang.org/x/tools/cmd/present
-RUN go get github.com/jmhodges/justrun
+RUN go get github.com/nsf/gocode \
+  && go get github.com/alecthomas/gometalinter \
+  && go get golang.org/x/tools/cmd/goimports \
+  && go get golang.org/x/tools/cmd/guru \
+  && go get golang.org/x/tools/cmd/gorename \
+  && go get github.com/golang/lint/golint \
+  && go get github.com/rogpeppe/godef \
+  && go get github.com/kisielk/errcheck \
+  && go get github.com/jstemmer/gotags \
+  && go get github.com/klauspost/asmfmt/cmd/asmfmt \
+  && go get github.com/fatih/motion \
+  && go get github.com/zmb3/gogetdoc \
+  && go get github.com/josharian/impl \
+  && go get github.com/mailgun/godebug \
+  && go get github.com/kardianos/govendor \
+  && go get github.com/tools/godep \
+  && go get github.com/derekparker/delve/cmd/dlv \
+  && go get golang.org/x/review/git-codereview \
+  && go get golang.org/x/tools/cmd/go-contrib-init \
+  && go get golang.org/x/tools/cmd/present \
+  && go get github.com/jmhodges/justrun
 
 # go - working dir
 ENV GOPATH=$GOPATH_USER

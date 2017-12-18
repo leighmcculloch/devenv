@@ -3,36 +3,17 @@ ID ?= 0
 basic:
 	$(call run,)
 
-go:
-	$(call run,go)
+go ruby rust: 
+	$(call run,$@)
 
-ruby:
-	$(call run,ruby)
-
-rust:
-	$(call run,rust)
-
-crystal:
-	$(call run,crystal)
-
-goclean:
-	$(call run,go)
-
-rubyclean:
-	$(call run,ruby)
-
-rustclean:
-	$(call run,rust)
-
-crystalclean:
-	$(call run,crystal)
+clean:
+	docker rm $$(docker ps -aq)
 
 build:
 	docker build -f Dockerfile . -t leighmcculloch/devenv:latest
 	docker build -f Dockerfile-go . -t leighmcculloch/devenv:latestgo
 	docker build -f Dockerfile-ruby . -t leighmcculloch/devenv:latestruby
 	docker build -f Dockerfile-rust . -t leighmcculloch/devenv:latestrust
-	docker build -f Dockerfile-crystal . -t leighmcculloch/devenv:latestcrystal
 
 pull:
 	docker pull leighmcculloch/devenv
@@ -48,9 +29,4 @@ define run
 	docker ps
 	docker attach --detach-keys="ctrl-a,d" devenv-$(1)-$(ID) || true
 	docker ps
-endef
-
-define clean
-	docker stop devenv-$(1)-$(ID) || true
-	docker rm devenv-$(1)-$(ID) || true
 endef

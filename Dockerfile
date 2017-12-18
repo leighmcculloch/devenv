@@ -1,23 +1,29 @@
-FROM ubuntu:17.10
+FROM debian:stretch
 
-RUN apt-get update
-RUN apt-get -y install \
-  curl \
-  zsh \
-  tmux \
-  git \
-  make \
-  tig \
-  jq \
-  tree \
-  software-properties-common
+RUN apt-get update \
+  && apt-get -y install \
+    locales \
+    curl \
+    zsh \
+    tmux \
+    git \
+    make \
+    gnupg2 \
+    tig \
+    tree \
+    jq \
+  && apt-get -y autoremove \
+  && apt-get -y clean
+
+# locale with utf8
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
+ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8   
 
 # neovim
-RUN add-apt-repository -y ppa:neovim-ppa/stable
-RUN apt-get update
 RUN apt-get -y install neovim
 
 # gcloud
+RUN apt-get -y install python2.7
 RUN curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-182.0.0-linux-x86_64.tar.gz | tar xz -C /usr/local
 RUN /usr/local/google-cloud-sdk/install.sh \
   --usage-reporting false \
@@ -42,9 +48,8 @@ ADD dotfiles/gitmessage       $HOME/.gitmessage
 
 # oh-my-zsh
 RUN git clone https://github.com/robbyrussell/oh-my-zsh $HOME/.oh-my-zsh
-RUN mkdir -p $HOME/.oh-my-zsh/custom/themes
-RUN curl https://raw.githubusercontent.com/leighmcculloch/zsh-theme-enormous/master/enormous.zsh-theme \
-  > $HOME/.oh-my-zsh/custom/themes/enormous.zsh-theme
+RUN mkdir -p $HOME/.oh-my-zsh/custom/themes \
+  && curl https://raw.githubusercontent.com/leighmcculloch/zsh-theme-enormous/master/enormous.zsh-theme > $HOME/.oh-my-zsh/custom/themes/enormous.zsh-theme
 
 # tmux dot files
 RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $HOME/.tmux_dotfiles \
@@ -58,4 +63,4 @@ RUN git clone https://github.com/leighmcculloch/neovim_dotfiles $HOME/.neovim_do
 WORKDIR $HOME
 
 # shell
-CMD ["tmux", "-2", "new"]
+ENTRYPOINT ["tmux", "-2", "new"]
