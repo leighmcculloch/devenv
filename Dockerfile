@@ -19,8 +19,8 @@ RUN apt-get update \
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8   
 
-# neovim
-RUN apt-get -y install neovim
+# vim
+RUN apt-get -y install vim-nox
 
 # gcloud
 RUN apt-get -y install python2.7
@@ -55,9 +55,9 @@ RUN mkdir -p $HOME/.oh-my-zsh/custom/themes \
 RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $HOME/.tmux_dotfiles \
   && make -C $HOME/.tmux_dotfiles install
 
-# neovim dot files
-RUN git clone https://github.com/leighmcculloch/neovim_dotfiles $HOME/.neovim_dotfiles \
-  && make -C $HOME/.neovim_dotfiles install
+# vim dot files
+RUN git clone https://github.com/leighmcculloch/vim_dotfiles $HOME/.vim_dotfiles \
+  && make -C $HOME/.vim_dotfiles install
 
 # working directory
 WORKDIR $HOME
