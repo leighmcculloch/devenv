@@ -6,6 +6,9 @@ basic:
 go ruby rust: 
 	$(call run,$@)
 
+stop:
+	docker stop $$(docker ps -aq)
+
 clean:
 	docker rm $$(docker ps -aq)
 
