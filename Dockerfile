@@ -12,6 +12,7 @@ RUN apt-get update \
     tig \
     tree \
     jq \
+    python python-pip \
   && apt-get -y autoremove \
   && apt-get -y clean
 
@@ -22,14 +23,16 @@ ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
 # vim
 RUN apt-get -y install vim-nox
 
-# gcloud
-RUN apt-get -y install python2.7
+# gcloud (requires python)
 RUN curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-182.0.0-linux-x86_64.tar.gz | tar xz -C /usr/local
 RUN /usr/local/google-cloud-sdk/install.sh \
   --usage-reporting false \
   --additional-components app-engine-go cloud-datastore-emulator pubsub-emulator \
   --quiet
 ENV PATH="${PATH}:/usr/local/google-cloud-sdk/bin"
+
+# aws (requires python, python-pip)
+RUN pip install awscli --upgrade --user
 
 # home
 ENV HOME="/root"
