@@ -11,6 +11,7 @@ ENV PATH="${PATH}:$GOPATH_USER/bin:$GOPATH_TOOLS/bin:/usr/local/go/bin"
 # go - tools
 ENV GOPATH=$GOPATH_TOOLS
 RUN go get github.com/nsf/gocode \
+  && go get github.com/golang/dep/cmd/dep \
   && go get github.com/alecthomas/gometalinter \
   && go get golang.org/x/tools/cmd/goimports \
   && go get golang.org/x/tools/cmd/guru \
@@ -24,8 +25,6 @@ RUN go get github.com/nsf/gocode \
   && go get github.com/zmb3/gogetdoc \
   && go get github.com/josharian/impl \
   && go get github.com/mailgun/godebug \
-  && go get github.com/kardianos/govendor \
-  && go get github.com/tools/godep \
   && go get github.com/derekparker/delve/cmd/dlv \
   && go get golang.org/x/review/git-codereview \
   && go get golang.org/x/tools/cmd/go-contrib-init \
