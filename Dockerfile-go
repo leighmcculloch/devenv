@@ -35,3 +35,9 @@ RUN go get github.com/nsf/gocode \
 ENV GOPATH=$GOPATH_USER
 RUN mkdir -p $GOPATH/src/github.com/leighmcculloch
 RUN mkdir -p $GOPATH/src/4d63.com
+
+# old app engine go sdk
+RUN curl -O https://storage.googleapis.com/appengine-sdks/featured/go_appengine_sdk_linux_amd64-1.9.61.zip \
+  && unzip go_appengine_sdk_linux_amd64-1.9.61.zip -d /usr/local/google-appengine-sdk-go/ \
+  && rm go_appengine_sdk_linux_amd64-1.9.61.zip
+ENV PATH="${PATH}:/usr/local/google-appengine-sdk-go/go_appengine"
