@@ -25,8 +25,6 @@ define run
 	docker run -d -i -t --name="devenv-$(1)-$(ID)" \
 		-v="$$HOME/.ssh/id_rsa:/root/.ssh/id_rsa" \
 		-v="$$PWD:/root/devenv" \
-		-p="808$(ID):808$(ID)" \
-		-p="606$(ID):606$(ID)" \
 		leighmcculloch/devenv:latest$(1) \
 		|| docker start devenv-$(1)-$(ID)
 	docker ps
