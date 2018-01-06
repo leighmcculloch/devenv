@@ -13,6 +13,7 @@ RUN apt-get update \
     tree \
     jq \
     python python-pip \
+    sassc \
   && apt-get -y autoremove \
   && apt-get -y clean
 
