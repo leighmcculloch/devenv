@@ -7,22 +7,88 @@ The environment is based on a single Dockerfile.
 
 For my previous development environment built on Vagrant, see the `v1` branch.
 
-## Usage
+## Usage (Docker)
 
-### Build Image Locally
+### Build all development environment images
 
 ```
 make build
 ```
 
-### Pull Pre-Built Image
+### Create and attach to base development environment
 
 ```
-make pull
+make
 ```
 
-### Enter Devenv
+### Create and attach to Go development environment
 
 ```
-make run
+make go
 ```
+
+### Create and attach to Ruby development environment
+
+```
+make ruby
+```
+
+### Create and attach to Rust development environment
+
+```
+make rust
+```
+
+### Detach from a developement environment
+
+Type `Ctrl-A D`.
+
+### Reattach to a development environment
+
+Rerun the `make` command you ran to create it.
+
+### Create multiple of each type of development environment
+
+Append `ID=n` where `n` is a number.
+
+```
+make go
+make go ID=2
+make go ID=3
+```
+
+### Stop all development environments
+
+```
+make stop
+```
+
+### Delete all development environments
+
+```
+make clean
+```
+
+## Usage (Docker inside Vagrant)
+
+Create the vagrant virtual machine:
+
+```
+vagrant up
+```
+
+SSH in to the virtual machine:
+
+```
+vagrant ssh
+```
+
+To forward your local ssh-agent, make sure it's running, add your keys and append `-A`:
+
+```
+eval $(ssh-agent)
+ssh-add
+vagrant ssh -- -A
+```
+
+Use the commands listed under the Usage (Docker) section above to build and run the devenv docker containers.
