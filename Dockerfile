@@ -14,6 +14,7 @@ RUN apt-get update \
     jq \
     python python-pip \
     sassc \
+    protobuf-compiler \
   && apt-get -y autoremove \
   && apt-get -y clean
 
