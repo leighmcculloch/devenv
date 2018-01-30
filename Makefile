@@ -22,7 +22,10 @@ pull:
 	docker pull leighmcculloch/devenv
 
 define run
-	docker run -d -i -t --name="devenv-$(1)-$(ID)" \
+	docker network create devenv || true
+	docker run -d -i -t \
+		--name="devenv-$(1)-$(ID)" \
+		--network="devenv" \
 		-v="$$HOME/.ssh/id_rsa:/root/.ssh/id_rsa" \
 		-v="$$PWD:/root/devenv" \
 		leighmcculloch/devenv:latest$(1) \
