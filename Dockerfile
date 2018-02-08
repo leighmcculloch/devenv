@@ -64,11 +64,17 @@ RUN mkdir -p $HOME/.oh-my-zsh/custom/themes \
 
 # tmux dot files
 RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $HOME/.tmux_dotfiles \
-  && make -C $HOME/.tmux_dotfiles install
+  && cd $HOME/.tmux_dotfiles \
+  && make install \
+  && git remote remove origin \
+  && git remote add origin github:leighmcculloch/tmux_dotfiles
 
 # vim dot files
 RUN git clone https://github.com/leighmcculloch/vim_dotfiles $HOME/.vim_dotfiles \
-  && make -C $HOME/.vim_dotfiles install
+  && cd $HOME/.vim_dotfiles \
+  && make install \
+  && git remote remove origin \
+  && git remote add origin github:leighmcculloch/vim_dotfiles
 
 # working directory
 WORKDIR $HOME
