@@ -1,7 +1,7 @@
 FROM leighmcculloch/devenv
 
 # go
-RUN curl https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz | tar xz -C /usr/local
+RUN curl https://storage.googleapis.com/golang/go1.10.linux-amd64.tar.gz | tar xz -C /usr/local
 
 # go - env vars
 ENV GOPATH_TOOLS="/usr/local/gopath"
