@@ -30,7 +30,8 @@ RUN go get github.com/nsf/gocode \
   && go get golang.org/x/tools/cmd/go-contrib-init \
   && go get golang.org/x/tools/cmd/present \
   && go get github.com/jmhodges/justrun \
-  && go get github.com/golang/protobuf/protoc-gen-go
+  && go get github.com/golang/protobuf/protoc-gen-go \
+  && go get golang.org/x/vgo
 
 # go - working dir
 ENV GOPATH=$GOPATH_USER
