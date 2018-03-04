@@ -42,6 +42,13 @@ RUN curl -O https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip \
   && rm ngrok-stable-linux-amd64.zip
 ENV PATH="${PATH}:/usr/local/ngrok"
 
+# hub
+RUN curl -LO https://github.com/github/hub/releases/download/v2.2.9/hub-linux-amd64-2.2.9.tgz \
+  && mkdir -p /usr/local/hub \
+  && tar -xvzf hub-linux-amd64-2.2.9.tgz -C /usr/local/hub/ \
+  && rm hub-linux-amd64-2.2.9.tgz
+ENV PATH="${PATH}:/usr/local/hub/hub-linux-amd64-2.2.9/bin"
+
 # home
 ENV HOME="/root"
 

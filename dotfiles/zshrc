@@ -9,3 +9,4 @@ export PATH=$PATH:$HOME/.local/bin
 
 # aliases
 alias renv="eval \$(tmux show-env -s | grep '^SSH_')"
+eval "$(hub alias -s)"
