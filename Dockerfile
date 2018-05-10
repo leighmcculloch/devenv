@@ -36,6 +36,9 @@ ENV PATH="${PATH}:/usr/local/google-cloud-sdk/bin"
 # aws (requires python, python-pip)
 RUN pip install awscli --upgrade --user
 
+# azure
+RUN curl -L https://aka.ms/InstallAzureCli | bash
+
 # ngrok
 RUN curl -O https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip \
   && unzip ngrok-stable-linux-amd64.zip -d /usr/local/ngrok/ \
