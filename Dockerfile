@@ -15,6 +15,8 @@ RUN apt-get update \
     python python-pip \
     sassc \
     protobuf-compiler \
+    apt-transport-https \
+    lsb-release \
   && apt-get -y autoremove \
   && apt-get -y clean
 
@@ -37,7 +39,11 @@ ENV PATH="${PATH}:/usr/local/google-cloud-sdk/bin"
 RUN pip install awscli --upgrade --user
 
 # azure
-RUN curl -L https://aka.ms/InstallAzureCli | bash
+RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/azure-cli.list \
+  && apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893 \
+  && curl -L https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+  && apt-get update \
+  && apt-get install -y azure-cli
 
 # ngrok
 RUN curl -O https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip \
