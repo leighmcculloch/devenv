@@ -9,3 +9,23 @@ export PATH=$PATH:$HOME/.local/bin
 
 # aliases
 alias renv="eval \$(tmux show-env -s | grep '^SSH_')"
+
+gotipinstall() {
+	local install_path="/usr/local/go-tip"
+	local goroot_bootstrap="/usr/local/go"
+
+	if [ -d $install_path ]
+	then
+		pushd $install_path
+		git pull --ff-only
+		popd
+	else
+		git clone https://go.googlesource.com/go $install_path -b master
+	fi
+
+	pushd $install_path/src
+	env GOROOT_BOOTSTRAP=$goroot_bootstrap ./make.bash
+	popd
+
+	export PATH=$install_path/bin/:$PATH
+}
