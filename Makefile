@@ -28,7 +28,7 @@ define run
 		--name="devenv-$(1)-$(ID)" \
 		--network="devenv" \
 		-v="$$HOME/.ssh/id_rsa:/root/.ssh/id_rsa" \
-		-v="$$PWD:/root/devenv" \
+		-v="$$PWD:/root/devel/devenv" \
 		leighmcculloch/devenv:latest$(1) \
 		|| docker start devenv-$(1)-$(ID)
 	docker ps

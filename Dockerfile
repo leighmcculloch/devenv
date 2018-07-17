@@ -55,16 +55,16 @@ ENV PATH="${PATH}:/usr/local/ngrok"
 ENV HOME="/root"
 
 # ssh files
-RUN mkdir                     $HOME/.ssh
-ADD dotfiles/ssh/config       $HOME/.ssh/config
-ADD dotfiles/ssh/known_hosts  $HOME/.ssh/known_hosts
+RUN mkdir                          $HOME/.ssh
+RUN ln -s $HOME/.ssh/config        $HOME/devel/devenv/dotfiles/ssh/config
+RUN ln -s $HOME/.ssh/known_hosts   $HOME/devel/devenv/dotfiles/ssh/known_hosts
 
 # dotfiles
-ADD dotfiles/zshrc            $HOME/.zshrc
-ADD dotfiles/zprofile         $HOME/.zprofile
-ADD dotfiles/gitconfig        $HOME/.gitconfig
-ADD dotfiles/gitignore_global $HOME/.gitignore_global
-ADD dotfiles/gitmessage       $HOME/.gitmessage
+RUN ln -s $HOME/.zshrc             $HOME/devel/devenv/dotfiles/zshrc
+RUN ln -s $HOME/.zprofile          $HOME/devel/devenv/dotfiles/zprofile
+RUN ln -s $HOME/.gitconfig         $HOME/devel/devenv/dotfiles/gitconfig
+RUN ln -s $HOME/.gitignore_global  $HOME/devel/devenv/dotfiles/gitignore_global
+RUN ln -s $HOME/.gitmessage        $HOME/devel/devenv/dotfiles/gitmessage
 
 # oh-my-zsh
 RUN git clone https://github.com/robbyrussell/oh-my-zsh $HOME/.oh-my-zsh
@@ -87,6 +87,9 @@ RUN git clone https://github.com/leighmcculloch/vim_dotfiles $HOME/.vim_dotfiles
 
 # working directory
 WORKDIR $HOME
+
+# directory for projects
+RUN mkdir $HOME/devel
 
 # shell
 ENTRYPOINT ["tmux", "-2", "new"]
