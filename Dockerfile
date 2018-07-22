@@ -45,6 +45,12 @@ RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb
   && apt-get update \
   && apt-get install -y azure-cli
 
+# cloudfoundry cli
+RUN echo "deb https://packages.cloudfoundry.org/debian stable main" | tee /etc/apt/sources.list.d/cloudfoundry-cli.list \
+  && curl https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | apt-key add - \
+  && apt-get update \
+  && apt-get install -y cf-cli
+
 # ngrok
 RUN curl -O https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip \
   && unzip ngrok-stable-linux-amd64.zip -d /usr/local/ngrok/ \
