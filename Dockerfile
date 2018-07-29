@@ -35,6 +35,17 @@ RUN /usr/local/google-cloud-sdk/install.sh \
   --quiet
 ENV PATH="${PATH}:/usr/local/google-cloud-sdk/bin"
 
+# nodejs
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+  && apt-get install -y nodejs \
+  && curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+  && apt-get update \
+  && apt-get install -y yarn
+
+# firebase
+RUN yarn global add firebase-tools
+
 # aws (requires python, python-pip)
 RUN pip install awscli --upgrade --user
 
