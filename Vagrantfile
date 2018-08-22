@@ -9,5 +9,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
     apt-get -y install make
+    cd /vagrant && make build
   SHELL
 end
