@@ -25,8 +25,53 @@ RUN apt-get update \
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8   
 
+# nodejs
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+  && apt-get install -y nodejs \
+  && curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+  && apt-get update \
+  && apt-get install -y yarn
+
+# vim
+RUN apt-get -y install vim-nox
+
+# gcloud (requires python)
+RUN curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-182.0.0-linux-x86_64.tar.gz | tar xz -C /usr/local
+RUN /usr/local/google-cloud-sdk/install.sh \
+  --usage-reporting false \
+  --additional-components app-engine-go cloud-datastore-emulator pubsub-emulator \
+  --quiet
+ENV PATH="${PATH}:/usr/local/google-cloud-sdk/bin"
+
+# firebase (requires nodejs, yarn)
+RUN yarn global add firebase-tools
+
+# aws (requires python, python-pip)
+RUN pip install awscli --upgrade --user
+
+# azure
+RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/azure-cli.list \
+  && apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893 \
+  && curl -L https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+  && apt-get update \
+  && apt-get install -y azure-cli
+
+# cloudfoundry cli
+RUN echo "deb https://packages.cloudfoundry.org/debian stable main" | tee /etc/apt/sources.list.d/cloudfoundry-cli.list \
+  && curl https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | apt-key add - \
+  && apt-get update \
+  && apt-get install -y cf-cli
+
+# ngrok
+RUN curl -O https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip \
+  && unzip ngrok-stable-linux-amd64.zip -d /usr/local/ngrok/ \
+  && rm ngrok-stable-linux-amd64.zip
+ENV PATH="${PATH}:/usr/local/ngrok"
+
 # go - install
-RUN curl https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz | tar xz -C /usr/local
+RUN curl https://dl.google.com/go/go1.11rc1.linux-amd64.tar.gz | tar xz -C /usr/local
+ENV GO111MODULE=on
 ENV GOPATH="$HOME/go"
 ENV PATH="${PATH}:/usr/local/go/bin:$GOPATH/bin"
 RUN go get github.com/nsf/gocode \
@@ -57,55 +102,11 @@ RUN mkdir -p $GOPATH/src/4d63.com
 # ruby
 RUN gem install bundler
 
-# nodejs
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
-  && apt-get install -y nodejs \
-  && curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-  && apt-get update \
-  && apt-get install -y yarn
-
-# vim
-RUN apt-get -y install vim-nox
-
-# gcloud (requires python)
-RUN curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-182.0.0-linux-x86_64.tar.gz | tar xz -C /usr/local
-RUN /usr/local/google-cloud-sdk/install.sh \
-  --usage-reporting false \
-  --additional-components app-engine-go cloud-datastore-emulator pubsub-emulator \
-  --quiet
-ENV PATH="${PATH}:/usr/local/google-cloud-sdk/bin"
-
 # old app engine go sdk (requires python)
 RUN curl -O https://storage.googleapis.com/appengine-sdks/featured/go_appengine_sdk_linux_amd64-1.9.67.zip \
   && unzip go_appengine_sdk_linux_amd64-1.9.67.zip -d /usr/local/google-appengine-sdk-go/ \
   && rm go_appengine_sdk_linux_amd64-1.9.67.zip
 ENV PATH="${PATH}:/usr/local/google-appengine-sdk-go/go_appengine"
-
-# firebase (requires nodejs, yarn)
-RUN yarn global add firebase-tools
-
-# aws (requires python, python-pip)
-RUN pip install awscli --upgrade --user
-
-# azure
-RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/azure-cli.list \
-  && apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893 \
-  && curl -L https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-  && apt-get update \
-  && apt-get install -y azure-cli
-
-# cloudfoundry cli
-RUN echo "deb https://packages.cloudfoundry.org/debian stable main" | tee /etc/apt/sources.list.d/cloudfoundry-cli.list \
-  && curl https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | apt-key add - \
-  && apt-get update \
-  && apt-get install -y cf-cli
-
-# ngrok
-RUN curl -O https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip \
-  && unzip ngrok-stable-linux-amd64.zip -d /usr/local/ngrok/ \
-  && rm ngrok-stable-linux-amd64.zip
-ENV PATH="${PATH}:/usr/local/ngrok"
 
 # home
 ENV HOME="/root"
