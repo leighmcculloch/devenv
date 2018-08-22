@@ -71,7 +71,6 @@ ENV PATH="${PATH}:/usr/local/ngrok"
 
 # go - install
 RUN curl https://dl.google.com/go/go1.11rc1.linux-amd64.tar.gz | tar xz -C /usr/local
-ENV GO111MODULE=on
 ENV GOPATH="$HOME/go"
 ENV PATH="${PATH}:/usr/local/go/bin:$GOPATH/bin"
 RUN go get github.com/nsf/gocode \

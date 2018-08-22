@@ -9,33 +9,22 @@ For my previous development environment built on Vagrant, see the `v1` branch.
 
 ## Usage (Docker)
 
-### Build all development environment images
+### Building and running (go, ruby, nodejs, python)
 
 ```
 make build
-```
-
-### Create and attach to base development environment
-
-```
 make
 ```
 
-### Create and attach to Go development environment
+### Additional languages (rust, dart)
 
 ```
-make go
+make build-extra
+make dart
 ```
 
-### Create and attach to Ruby development environment
-
 ```
-make ruby
-```
-
-### Create and attach to Rust development environment
-
-```
+make build-extra
 make rust
 ```
 
@@ -52,9 +41,9 @@ Rerun the `make` command you ran to create it.
 Append `ID=n` where `n` is a number.
 
 ```
-make go
-make go ID=2
-make go ID=3
+make 
+make ID=2
+make ID=3
 ```
 
 ### Stop all development environments

@@ -13,14 +13,11 @@ clean:
 	docker rm $$(docker ps -aq)
 
 build:
-	docker build -f Dockerfile . -t leighmcculloch/devenv:latest
+	docker build -f Dockerfile . -t leighmcculloch/devenv/default:latest
 
 build-extra:
-	docker build -f Dockerfile-rust . -t leighmcculloch/devenv:latestrust
-	docker build -f Dockerfile-dart . -t leighmcculloch/devenv:latestdart
-
-pull:
-	docker pull leighmcculloch/devenv
+	docker build -f Dockerfile-rust . -t leighmcculloch/devenv/rust:latest
+	docker build -f Dockerfile-dart . -t leighmcculloch/devenv/dart:latest
 
 define run
 	docker network create devenv || true
@@ -29,9 +26,9 @@ define run
 		--network="devenv" \
 		-v="$$HOME/.ssh/id_rsa:/root/.ssh/id_rsa" \
 		-v="$$PWD:/root/devel/devenv" \
-		leighmcculloch/devenv:latest$(1) \
+		leighmcculloch/devenv/$(1) \
 		|| docker start devenv-$(1)-$(ID)
 	docker ps
-	docker attach --detach-keys="ctrl-a,d" devenv-$(1)-$(ID) || true
+	docker attach --detach-keys="ctrl-a,d" "devenv-$(1)-$(ID)" || true
 	docker ps
 endef
