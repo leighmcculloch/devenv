@@ -1,9 +1,9 @@
 ID ?= 0
 
-basic:
+default:
 	$(call run,)
 
-go ruby rust dart:
+rust dart:
 	$(call run,$@)
 
 stop:
@@ -14,8 +14,8 @@ clean:
 
 build:
 	docker build -f Dockerfile . -t leighmcculloch/devenv:latest
-	docker build -f Dockerfile-go . -t leighmcculloch/devenv:latestgo
-	docker build -f Dockerfile-ruby . -t leighmcculloch/devenv:latestruby
+
+build-extra:
 	docker build -f Dockerfile-rust . -t leighmcculloch/devenv:latestrust
 	docker build -f Dockerfile-dart . -t leighmcculloch/devenv:latestdart
 

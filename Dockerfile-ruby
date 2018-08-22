@@ -1,5 +1,0 @@
-FROM leighmcculloch/devenv
-
-# ruby
-RUN apt-get -y install ruby ruby-dev
-RUN gem install bundler
