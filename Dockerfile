@@ -13,6 +13,7 @@ RUN apt-get update \
     tree \
     jq \
     python python-pip \
+    ruby ruby-dev \
     sassc \
     protobuf-compiler \
     apt-transport-https \
@@ -26,12 +27,8 @@ ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
 
 # go - install
 RUN curl https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz | tar xz -C /usr/local
-ENV GOPATH_TOOLS="/usr/local/gopath"
-ENV GOPATH_USER="$HOME/go"
-ENV PATH="${PATH}:$GOPATH_USER/bin:$GOPATH_TOOLS/bin:/usr/local/go/bin"
-
-# go - tools
-ENV GOPATH=$GOPATH_TOOLS
+ENV GOPATH="$HOME/go"
+ENV PATH="${PATH}:/usr/local/go/bin:$GOPATH/bin"
 RUN go get github.com/nsf/gocode \
   && go get github.com/golang/dep/cmd/dep \
   && go get github.com/alecthomas/gometalinter \
@@ -53,21 +50,20 @@ RUN go get github.com/nsf/gocode \
   && go get golang.org/x/tools/cmd/present \
   && go get github.com/jmhodges/justrun \
   && go get github.com/golang/protobuf/protoc-gen-go
-
-# go - working dir
-ENV GOPATH=$GOPATH_USER
 RUN mkdir -p $GOPATH/src/github.com/leighmcculloch
+RUN mkdir -p $GOPATH/src/github.com/lionelbarrow
 RUN mkdir -p $GOPATH/src/4d63.com
 
-# go - old app engine go sdk
-RUN curl -O https://storage.googleapis.com/appengine-sdks/featured/go_appengine_sdk_linux_amd64-1.9.61.zip \
-  && unzip go_appengine_sdk_linux_amd64-1.9.61.zip -d /usr/local/google-appengine-sdk-go/ \
-  && rm go_appengine_sdk_linux_amd64-1.9.61.zip
-ENV PATH="${PATH}:/usr/local/google-appengine-sdk-go/go_appengine"
-
 # ruby
-RUN apt-get -y install ruby ruby-dev
 RUN gem install bundler
+
+# nodejs
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+  && apt-get install -y nodejs \
+  && curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+  && apt-get update \
+  && apt-get install -y yarn
 
 # vim
 RUN apt-get -y install vim-nox
@@ -80,15 +76,13 @@ RUN /usr/local/google-cloud-sdk/install.sh \
   --quiet
 ENV PATH="${PATH}:/usr/local/google-cloud-sdk/bin"
 
-# nodejs
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
-  && apt-get install -y nodejs \
-  && curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-  && apt-get update \
-  && apt-get install -y yarn
+# old app engine go sdk (requires python)
+RUN curl -O https://storage.googleapis.com/appengine-sdks/featured/go_appengine_sdk_linux_amd64-1.9.67.zip \
+  && unzip go_appengine_sdk_linux_amd64-1.9.67.zip -d /usr/local/google-appengine-sdk-go/ \
+  && rm go_appengine_sdk_linux_amd64-1.9.67.zip
+ENV PATH="${PATH}:/usr/local/google-appengine-sdk-go/go_appengine"
 
-# firebase
+# firebase (requires nodejs, yarn)
 RUN yarn global add firebase-tools
 
 # aws (requires python, python-pip)
