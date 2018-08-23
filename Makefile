@@ -1,7 +1,7 @@
 ID ?= 0
 
 default:
-	$(call run,)
+	$(call run,default)
 
 rust dart:
 	$(call run,$@)
@@ -27,7 +27,7 @@ define run
 		-v="$$HOME/.ssh/id_rsa:/root/.ssh/id_rsa" \
 		-v="$$PWD:/root/devel/devenv" \
 		leighmcculloch/devenv/$(1) \
-		|| docker start devenv-$(1)-$(ID)
+		|| docker start "devenv-$(1)-$(ID)"
 	docker ps
 	docker attach --detach-keys="ctrl-a,d" "devenv-$(1)-$(ID)" || true
 	docker ps
