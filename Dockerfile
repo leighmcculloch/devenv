@@ -70,7 +70,7 @@ RUN curl -O https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip \
 ENV PATH="${PATH}:/usr/local/ngrok"
 
 # go - install
-RUN curl https://dl.google.com/go/go1.11rc1.linux-amd64.tar.gz | tar xz -C /usr/local
+RUN curl https://dl.google.com/go/go1.11.linux-amd64.tar.gz | tar xz -C /usr/local
 ENV GOPATH="$HOME/go"
 ENV PATH="${PATH}:/usr/local/go/bin:$GOPATH/bin"
 RUN go get github.com/nsf/gocode \
