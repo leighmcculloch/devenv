@@ -24,6 +24,7 @@ define run
 	docker run -d -i -t \
 		--name="devenv-$(1)-$(ID)" \
 		--network="devenv" \
+		-e DISPLAY=docker.for.mac.localhost:0 \
 		-v="$$HOME/.ssh/id_rsa:/root/.ssh/id_rsa" \
 		-v="$$PWD:/root/devel/devenv" \
 		leighmcculloch/devenv/$(1) \
