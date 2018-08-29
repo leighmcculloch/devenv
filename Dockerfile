@@ -101,6 +101,12 @@ RUN mkdir -p $GOPATH/src/4d63.com
 # ruby
 RUN gem install bundler
 
+# vscode
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg \
+  && sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list' \
+  && apt-get update \
+  && apt-get install code
+
 # old app engine go sdk (requires python)
 RUN curl -O https://storage.googleapis.com/appengine-sdks/featured/go_appengine_sdk_linux_amd64-1.9.67.zip \
   && unzip go_appengine_sdk_linux_amd64-1.9.67.zip -d /usr/local/google-appengine-sdk-go/ \
