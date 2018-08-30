@@ -73,7 +73,7 @@ ENV PATH="${PATH}:/usr/local/ngrok"
 RUN curl https://dl.google.com/go/go1.11.linux-amd64.tar.gz | tar xz -C /usr/local
 ENV GOPATH="$HOME/go"
 ENV PATH="${PATH}:/usr/local/go/bin:$GOPATH/bin"
-RUN go get github.com/nsf/gocode \
+RUN go get github.com/mdempsky/gocode \
   && go get github.com/golang/dep/cmd/dep \
   && go get github.com/alecthomas/gometalinter \
   && go get golang.org/x/tools/cmd/goimports \
@@ -115,6 +115,15 @@ RUN mkdir -p $HOME/.vscode
 RUN code --user-data-dir="$HOME/.vscode" --install-extension="ms-vscode.go" \
   && code --user-data-dir="$HOME/.vscode" --install-extension="rebornix.ruby" \
   && code --user-data-dir="$HOME/.vscode" --install-extension="peterjausovec.vscode-docker"
+RUN go get github.com/ramya-rao-a/go-outline \
+  && go get github.com/acroca/go-symbols \
+  && go get golang.org/x/tools/cmd/godoc \
+  && go get github.com/fatih/gomodifytags \
+  && go get sourcegraph.com/sqs/goreturns \
+  && go get github.com/cweill/gotests/... \
+  && go get github.com/haya14busa/goplay/cmd/goplay \
+  && go get github.com/uudashr/gopkgs/cmd/gopkgs \
+  && go get github.com/davidrjenni/reftools/cmd/fillstruct
 
 # old app engine go sdk (requires python)
 RUN curl -O https://storage.googleapis.com/appengine-sdks/featured/go_appengine_sdk_linux_amd64-1.9.67.zip \
