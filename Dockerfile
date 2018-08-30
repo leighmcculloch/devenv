@@ -107,14 +107,20 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /et
   && apt-get update \
   && apt-get install -y code libxss1 libasound2
 
+# home
+ENV HOME="/root"
+
+# vscode extensions
+RUN mkdir -p $HOME/.vscode
+RUN code --user-data-dir="$HOME/.vscode" --install-extension="ms-vscode.go" \
+  && code --user-data-dir="$HOME/.vscode" --install-extension="rebornix.ruby" \
+  && code --user-data-dir="$HOME/.vscode" --install-extension="peterjausovec.vscode-docker"
+
 # old app engine go sdk (requires python)
 RUN curl -O https://storage.googleapis.com/appengine-sdks/featured/go_appengine_sdk_linux_amd64-1.9.67.zip \
   && unzip go_appengine_sdk_linux_amd64-1.9.67.zip -d /usr/local/google-appengine-sdk-go/ \
   && rm go_appengine_sdk_linux_amd64-1.9.67.zip
 ENV PATH="${PATH}:/usr/local/google-appengine-sdk-go/go_appengine"
-
-# home
-ENV HOME="/root"
 
 # directory for projects
 RUN mkdir $HOME/devel
