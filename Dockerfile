@@ -18,12 +18,22 @@ RUN apt-get update \
     protobuf-compiler \
     apt-transport-https \
     lsb-release \
+    software-properties-common \
   && apt-get -y autoremove \
   && apt-get -y clean
 
 # locale with utf8
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8   
+
+# docker client
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
+  && add-apt-repository \
+     "deb [arch=amd64] https://download.docker.com/linux/debian \
+     $(lsb_release -cs) \
+     stable" \
+  && apt-get update \
+  && apt-get -y install docker-ce
 
 # nodejs
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \

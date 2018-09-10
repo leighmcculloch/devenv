@@ -27,6 +27,7 @@ define run
 		-e DISPLAY=docker.for.mac.localhost:0 \
 		-v="$$HOME/.ssh/id_rsa:/root/.ssh/id_rsa" \
 		-v="$$PWD:/root/devel/devenv" \
+		-v="/var/run/docker.sock:/var/run/docker.sock" \
 		leighmcculloch/devenv/$(1) \
 		|| docker start "devenv-$(1)-$(ID)"
 	docker ps
