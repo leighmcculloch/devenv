@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+me="$(basename "$0")"
+
+if ! [ -f /usr/bin/yarn ] ; then
+  echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
+
+  node -v
+  curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+  apt-get update
+  apt-get -y install yarn
+
+  echo -e "\e[1;32mFinished installing '$me'.\e[0m"
+fi
+
+"$me" $@

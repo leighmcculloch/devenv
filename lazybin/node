@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+me="$(basename "$0")"
+
+if ! [ -f /usr/bin/node ] ; then
+  echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
+
+  curl -sL https://deb.nodesource.com/setup_10.x | bash -
+  apt-get -y install nodejs
+
+  echo -e "\e[1;32mFinished installing '$me'.\e[0m"
+fi
+
+"$me" $@

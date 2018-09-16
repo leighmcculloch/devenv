@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+me="$(basename "$0")"
+
+if ! [ -f /usr/bin/ruby ] ; then
+  echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
+
+  apt-get -y install apt-transport-https
+  apt-get update
+  curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
+  sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+  apt-get update
+  apt-get -y install libxss1 libasound2 code
+
+  # extensions
+  mkdir -p $HOME/.vscode
+  code --user-data-dir="$HOME/.vscode" --install-extension="ms-vscode.go"
+  code --user-data-dir="$HOME/.vscode" --install-extension="rebornix.ruby"
+  code --user-data-dir="$HOME/.vscode" --install-extension="peterjausovec.vscode-docker"
+  go get github.com/ramya-rao-a/go-outline
+  go get github.com/acroca/go-symbols
+  go get golang.org/x/tools/cmd/godoc
+  go get github.com/fatih/gomodifytags
+  go get sourcegraph.com/sqs/goreturns
+  go get github.com/cweill/gotests/...
+  go get github.com/haya14busa/goplay/cmd/goplay
+  go get github.com/uudashr/gopkgs/cmd/gopkgs
+  go get github.com/davidrjenni/reftools/cmd/fillstruct
+
+  echo -e "\e[1;32mFinished installing '$me'.\e[0m"
+fi
+
+"$me" $@
