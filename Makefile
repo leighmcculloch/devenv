@@ -3,7 +3,7 @@ ID ?= 0
 default:
 	$(call run,default)
 
-rust dart:
+rust:
 	$(call run,$@)
 
 stop:
@@ -17,7 +17,6 @@ build:
 
 build-extra:
 	docker build -f Dockerfile-rust . -t leighmcculloch/devenv/rust:latest
-	docker build -f Dockerfile-dart . -t leighmcculloch/devenv/dart:latest
 
 define run
 	docker network create devenv || true
