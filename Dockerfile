@@ -59,15 +59,15 @@ RUN mkdir -p $HOME/.oh-my-zsh/custom/themes \
   && curl https://raw.githubusercontent.com/leighmcculloch/zsh-theme-enormous/master/enormous.zsh-theme > $HOME/.oh-my-zsh/custom/themes/enormous.zsh-theme
 
 # tmux dot files
-RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $HOME/.tmux_dotfiles \
-  && cd $HOME/.tmux_dotfiles \
+RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $HOME/devel/tmux_dotfiles \
+  && cd $HOME/devel/tmux_dotfiles \
   && make install \
   && git remote remove origin \
   && git remote add origin github:leighmcculloch/tmux_dotfiles
 
 # vim dot files
-RUN git clone https://github.com/leighmcculloch/vim_dotfiles $HOME/.vim_dotfiles \
-  && cd $HOME/.vim_dotfiles \
+RUN git clone https://github.com/leighmcculloch/vim_dotfiles $HOME/devel/vim_dotfiles \
+  && cd $HOME/devel/vim_dotfiles \
   && make install \
   && git remote remove origin \
   && git remote add origin github:leighmcculloch/vim_dotfiles
