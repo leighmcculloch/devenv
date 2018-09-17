@@ -16,7 +16,7 @@ RUN apt-get update \
 
 # locale with utf8
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
-ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8   
+ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
 
 # vim
 RUN apt-get -y install vim-nox
@@ -31,12 +31,6 @@ RUN mkdir -p $GOPATH/src/4d63.com
 
 # home
 ENV HOME="/root"
-
-# old app engine go sdk (requires python)
-RUN curl -O https://storage.googleapis.com/appengine-sdks/featured/go_appengine_sdk_linux_amd64-1.9.67.zip \
-  && unzip go_appengine_sdk_linux_amd64-1.9.67.zip -d /usr/local/google-appengine-sdk-go/ \
-  && rm go_appengine_sdk_linux_amd64-1.9.67.zip
-ENV PATH="${PATH}:/usr/local/google-appengine-sdk-go/go_appengine"
 
 # directory for projects
 RUN mkdir $HOME/devel
