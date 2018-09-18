@@ -1,6 +1,6 @@
 ID ?= 0
 
-default:
+run:
 	$(call run,default)
 
 rust:

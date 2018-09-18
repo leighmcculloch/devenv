@@ -22,7 +22,7 @@ docker pull leighmcculloch/devenv
 ### Running
 
 ```
-make
+make run
 ```
 
 ### Detach from a developement environment
@@ -38,9 +38,9 @@ Rerun the `make` command you ran to create it.
 Append `ID=n` where `n` is a number.
 
 ```
-make
-make ID=2
-make ID=3
+make run
+make run ID=2
+make run ID=3
 ```
 
 ### Stop all development environments
