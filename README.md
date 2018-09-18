@@ -9,23 +9,20 @@ For my previous development environment built on Vagrant, see the `v1` branch.
 
 ## Usage (Docker)
 
-### Building and running (go, ruby, nodejs, python)
+### Build or Pull
 
 ```
 make build
+```
+
+```
+docker pull leighmcculloch/devenv
+```
+
+### Running
+
+```
 make
-```
-
-### Additional languages (rust, dart)
-
-```
-make build-extra
-make dart
-```
-
-```
-make build-extra
-make rust
 ```
 
 ### Detach from a developement environment
@@ -41,7 +38,7 @@ Rerun the `make` command you ran to create it.
 Append `ID=n` where `n` is a number.
 
 ```
-make 
+make
 make ID=2
 make ID=3
 ```
