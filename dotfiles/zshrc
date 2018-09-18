@@ -4,14 +4,5 @@ ZSH_THEME="enormous"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
-# paths for rust if it's lazily installed
-export PATH=$PATH:$HOME/.cargo/bin
-
-# paths for python if it's lazily installed
-export PATH=$PATH:$HOME/.local/bin
-
-# paths
-export PATH=$PATH:$HOME/devel/devenv/lazybin
-
 # aliases
 alias renv="eval \$(tmux show-env -s | grep '^SSH_')"

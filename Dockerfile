@@ -41,8 +41,8 @@ RUN ln -s $HOME/devel/devenv/dotfiles/ssh/config      $HOME/.ssh/config
 RUN ln -s $HOME/devel/devenv/dotfiles/ssh/known_hosts $HOME/.ssh/known_hosts
 
 # dotfiles
+RUN ln -s $HOME/devel/devenv/dotfiles/zshenv           $HOME/.zshenv
 RUN ln -s $HOME/devel/devenv/dotfiles/zshrc            $HOME/.zshrc
-RUN ln -s $HOME/devel/devenv/dotfiles/zprofile         $HOME/.zprofile
 RUN ln -s $HOME/devel/devenv/dotfiles/gitconfig        $HOME/.gitconfig
 RUN ln -s $HOME/devel/devenv/dotfiles/gitignore_global $HOME/.gitignore_global
 RUN ln -s $HOME/devel/devenv/dotfiles/gitmessage       $HOME/.gitmessage
