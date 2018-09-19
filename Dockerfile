@@ -11,6 +11,7 @@ RUN apt-get update \
     tig \
     tree \
     jq \
+    gcc \
   && apt-get -y autoremove \
   && apt-get -y clean
 
