@@ -16,10 +16,10 @@ run:
 	docker ps
 
 stop:
-	docker stop $$(docker ps -aq)
+	docker stop $$(docker ps -aq --filter 'name=devenv-*')
 
 clean:
-	docker rm $$(docker ps -aq)
+	docker rm $$(docker ps -aq --filter 'name=devenv-*')
 
 build:
 	docker build -t leighmcculloch/devenv:latest .
