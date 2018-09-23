@@ -19,56 +19,83 @@ RUN apt-get update \
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
 
-# vim
-RUN apt-get -y install vim-nox
-
-# go - install
-RUN curl https://dl.google.com/go/go1.11.linux-amd64.tar.gz | tar xz -C /usr/local
-ENV GOPATH="$HOME/go"
-ENV PATH="${PATH}:/usr/local/go/bin:$GOPATH/bin"
-RUN mkdir -p $GOPATH/src/github.com/leighmcculloch
-RUN mkdir -p $GOPATH/src/github.com/lionelbarrow
-RUN mkdir -p $GOPATH/src/4d63.com
-
 # home
 ENV HOME="/root"
 
 # directory for projects
-RUN mkdir $HOME/devel
+ENV DEVEL="$HOME/devel"
+RUN mkdir -p "$DEVEL"
+
+# vim
+RUN apt-get -y install libncurses5-dev python3-dev \
+  && apt-get -y autoremove \
+  && apt-get -y clean \
+  && mkdir -p "$DEVEL/vim" \
+  && curl -L https://github.com/vim/vim/archive/master.tar.gz | tar xz -C "$DEVEL/vim" --strip-components 1 \
+  && cd $DEVEL/vim \
+  && ./configure \
+    --enable-python3interp=yes \
+    --with-python3-config-dir=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu \
+  && make install
+
+# go - install
+RUN curl https://dl.google.com/go/go1.11.linux-amd64.tar.gz | tar xz -C /usr/local
+ENV GOBIN="/usr/local/bin"
+ENV PATH="${PATH}:/usr/local/go/bin:$GOBIN"
+
+# go - tools (from https://github.com/fatih/vim-go/blob/de896a6/plugin/go.vim#L33-L52)
+RUN go get github.com/klauspost/asmfmt/cmd/asmfmt \
+  && go get github.com/derekparker/delve/cmd/dlv \
+  && go get github.com/kisielk/errcheck \
+  && go get github.com/davidrjenni/reftools/cmd/fillstruct \
+  && go get github.com/mdempsky/gocode \
+  && go get github.com/rogpeppe/godef \
+  && go get github.com/zmb3/gogetdoc \
+  && go get golang.org/x/tools/cmd/goimports \
+  && go get github.com/golang/lint/golint \
+  && go get github.com/alecthomas/gometalinter \
+  && go get github.com/fatih/gomodifytags \
+  && go get golang.org/x/tools/cmd/gorename \
+  && go get github.com/jstemmer/gotags \
+  && go get golang.org/x/tools/cmd/guru \
+  && go get github.com/josharian/impl \
+  && go get honnef.co/go/tools/cmd/keyify \
+  && go get github.com/fatih/motion \
+  && go get github.com/koron/iferr
 
 # ssh files
 RUN mkdir $HOME/.ssh
-RUN ln -s $HOME/devel/devenv/dotfiles/ssh/config      $HOME/.ssh/config
-RUN ln -s $HOME/devel/devenv/dotfiles/ssh/known_hosts $HOME/.ssh/known_hosts
+RUN ln -s $HOME/devel/devenv/dotfiles/ssh/config $HOME/.ssh/config \
+  && ln -s $HOME/devel/devenv/dotfiles/ssh/known_hosts $HOME/.ssh/known_hosts
 
 # dotfiles
-RUN ln -s $HOME/devel/devenv/dotfiles/zshenv           $HOME/.zshenv
-RUN ln -s $HOME/devel/devenv/dotfiles/zshrc            $HOME/.zshrc
-RUN ln -s $HOME/devel/devenv/dotfiles/gitconfig        $HOME/.gitconfig
-RUN ln -s $HOME/devel/devenv/dotfiles/gitignore_global $HOME/.gitignore_global
-RUN ln -s $HOME/devel/devenv/dotfiles/gitmessage       $HOME/.gitmessage
+RUN ln -s $HOME/devel/devenv/dotfiles/zshenv $HOME/.zshenv \
+  && ln -s $HOME/devel/devenv/dotfiles/zshrc $HOME/.zshrc \
+  && ln -s $HOME/devel/devenv/dotfiles/gitconfig $HOME/.gitconfig \
+  && ln -s $HOME/devel/devenv/dotfiles/gitignore_global $HOME/.gitignore_global \
+  && ln -s $HOME/devel/devenv/dotfiles/gitmessage $HOME/.gitmessage
 
 # oh-my-zsh
-RUN git clone https://github.com/robbyrussell/oh-my-zsh $HOME/.oh-my-zsh
-RUN mkdir -p $HOME/.oh-my-zsh/custom/themes \
+RUN git clone https://github.com/robbyrussell/oh-my-zsh $HOME/.oh-my-zsh \
+  && mkdir -p $HOME/.oh-my-zsh/custom/themes \
   && curl https://raw.githubusercontent.com/leighmcculloch/zsh-theme-enormous/master/enormous.zsh-theme > $HOME/.oh-my-zsh/custom/themes/enormous.zsh-theme
 
 # tmux dot files
-RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $HOME/devel/tmux_dotfiles \
-  && cd $HOME/devel/tmux_dotfiles \
+RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $DEVEL/tmux_dotfiles \
+  && cd $DEVEL/tmux_dotfiles \
   && make install \
   && git remote remove origin \
   && git remote add origin github:leighmcculloch/tmux_dotfiles
 
 # vim dot files
-RUN git clone https://github.com/leighmcculloch/vim_dotfiles $HOME/devel/vim_dotfiles \
-  && cd $HOME/devel/vim_dotfiles \
+RUN git clone https://github.com/leighmcculloch/vim_dotfiles $DEVEL/vim_dotfiles \
+  && cd $DEVEL/vim_dotfiles \
   && make install \
   && git remote remove origin \
   && git remote add origin github:leighmcculloch/vim_dotfiles
 
 # working directory
-WORKDIR $HOME
+WORKDIR $DEVEL
 
 # shell
 ENTRYPOINT ["tmux", "-2", "new"]
