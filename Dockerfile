@@ -12,6 +12,7 @@ RUN apt-get update \
     tree \
     jq \
     gcc \
+    sudo \
   && apt-get -y autoremove \
   && apt-get -y clean
 
@@ -19,29 +20,40 @@ RUN apt-get update \
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
 
-# home
-ENV HOME="/root"
+# add user
+ARG USER=leighmcculloch
+RUN adduser --home /home/$USER --disabled-password --gecos GECOS $USER \
+  && echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER \
+  && chmod 0440 /etc/sudoers.d/$USER \
+  && groupadd docker \
+  && usermod -aG docker $USER
+USER $USER
+ENV HOME=/home/$USER
 
 # directory for projects
 ENV DEVEL="$HOME/devel"
-RUN mkdir -p "$DEVEL"
+ENV LOCAL="$HOME/local"
+ENV LOCAL_BIN="$LOCAL/bin"
+ENV PATH="$PATH:$LOCAL_BIN"
+RUN mkdir -p "$LOCAL_BIN" \
+  && mkdir -p "$DEVEL"
 
 # vim
-RUN apt-get -y install libncurses5-dev python3-dev \
-  && apt-get -y autoremove \
-  && apt-get -y clean \
+RUN sudo apt-get -y install libncurses5-dev python3-dev \
+  && sudo apt-get -y autoremove \
+  && sudo apt-get -y clean \
   && mkdir -p "$DEVEL/vim" \
   && curl -L https://github.com/vim/vim/archive/master.tar.gz | tar xz -C "$DEVEL/vim" --strip-components 1 \
   && cd $DEVEL/vim \
-  && ./configure \
+  && ./configure --prefix=$LOCAL \
     --enable-python3interp=yes \
     --with-python3-config-dir=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu \
   && make install
 
 # go - install
-RUN curl https://dl.google.com/go/go1.11.linux-amd64.tar.gz | tar xz -C /usr/local
-ENV GOBIN="/usr/local/bin"
-ENV PATH="${PATH}:/usr/local/go/bin:$GOBIN"
+RUN curl https://dl.google.com/go/go1.11.linux-amd64.tar.gz | tar xz -C $LOCAL_BIN
+ENV GOBIN=$LOCAL_BIN
+ENV PATH="$PATH:$LOCAL_BIN/go/bin"
 
 # go - tools (from https://github.com/fatih/vim-go/blob/de896a6/plugin/go.vim#L33-L52)
 RUN go get github.com/klauspost/asmfmt/cmd/asmfmt \

@@ -10,7 +10,7 @@ if ! [ -f /usr/bin/cf ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
   curl -o /tmp/ngrok-stable-linux-amd64.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
-  unzip /tmp/ngrok-stable-linux-amd64.zip -d /usr/local/bin/
+  unzip /tmp/ngrok-stable-linux-amd64.zip -d $LOCAL_BIN
   rm /tmp/ngrok-stable-linux-amd64.zip
 
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"

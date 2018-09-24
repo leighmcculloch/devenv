@@ -5,8 +5,8 @@ run:
 	docker run -d -i -t \
 		--network="devenv" \
 		-e DISPLAY=docker.for.mac.localhost:0 \
-		-v="$$HOME/.ssh/id_rsa:/root/.ssh/id_rsa" \
-		-v="$$PWD:/root/devel/devenv" \
+		-v="$$HOME/.ssh/id_rsa:/home/leighmcculloch/.ssh/id_rsa" \
+		-v="$$PWD:/home/leighmcculloch/devel/devenv" \
 		-v="/var/run/docker.sock:/var/run/docker.sock" \
 		--name="devenv-$(ID)" \
 		leighmcculloch/devenv:latest \

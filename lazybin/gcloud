@@ -6,22 +6,22 @@ set -o nounset
 
 me="$(basename "$0")"
 
-if ! [ -f /usr/local/bin/gcloud ] ; then
+if ! [ -f $LOCAL_BIN/gcloud ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
   # gcloud
-  curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-182.0.0-linux-x86_64.tar.gz | tar xz -C /usr/local
-  /usr/local/google-cloud-sdk/install.sh \
+  curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-182.0.0-linux-x86_64.tar.gz | tar xz -C $LOCAL
+  $LOCAL/google-cloud-sdk/install.sh \
     --usage-reporting false \
     --additional-components app-engine-go cloud-datastore-emulator pubsub-emulator \
     --quiet
-  ln -sf /usr/local/google-cloud-sdk/bin/gcloud /usr/local/bin/gcloud
+  ln -sf $LOCAL/google-cloud-sdk/bin/gcloud $LOCAL_BIN/gcloud
 
   # old appengine sdk
   curl -o /tmp/go_appengine_sdk_linux_amd64-1.9.67.zip https://storage.googleapis.com/appengine-sdks/featured/go_appengine_sdk_linux_amd64-1.9.67.zip
-  unzip /tmp/go_appengine_sdk_linux_amd64-1.9.67.zip -d /usr/local/google-appengine-sdk-go/
+  unzip /tmp/go_appengine_sdk_linux_amd64-1.9.67.zip -d $LOCAL/google-appengine-sdk-go/
   rm /tmp/go_appengine_sdk_linux_amd64-1.9.67.zip
-  ln -sf /usr/local/google-appengine-sdk-go/go_appengine/appcfg.py /usr/local/bin/appcfg.py
+  ln -sf $LOCAL/google-appengine-sdk-go/go_appengine/appcfg.py $LOCAL_BIN/appcfg.py
 
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi

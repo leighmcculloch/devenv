@@ -9,7 +9,7 @@ me="$(basename "$0")"
 if ! [ -f /usr/bin/protoc ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
-  apt-get -y install protobuf-compiler
+  sudo apt-get -y install protobuf-compiler
 
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi

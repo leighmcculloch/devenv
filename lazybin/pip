@@ -10,7 +10,7 @@ if ! [ -f /usr/bin/pip ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
   python -V
-  apt-get -y install python-pip
+  sudo apt-get -y install python-pip
 
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi

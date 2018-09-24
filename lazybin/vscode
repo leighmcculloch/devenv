@@ -6,15 +6,15 @@ set -o nounset
 
 me="$(basename "$0")"
 
-if ! [ -f /usr/bin/ruby ] ; then
+if ! [ -f /usr/bin/vscode ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
-  apt-get -y install apt-transport-https
-  apt-get update
-  curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
-  sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-  apt-get update
-  apt-get -y install libxss1 libasound2 code
+  sudo apt-get -y install apt-transport-https
+  sudo apt-get update
+  curl https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
+  sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+  sudo apt-get update
+  sudo apt-get -y install libxss1 libasound2 code
 
   # extensions
   mkdir -p $HOME/.vscode
