@@ -83,16 +83,14 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh $HOME/.oh-my-zsh \
 # tmux dot files
 RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $DEVEL/tmux_dotfiles \
   && cd $DEVEL/tmux_dotfiles \
-  && make install \
-  && git remote remove origin \
-  && git remote add origin github:leighmcculloch/tmux_dotfiles
+  && git remote set-url origin github:leighmcculloch/tmux_dotfiles \
+  && make install
 
 # vim dot files
 RUN git clone https://github.com/leighmcculloch/vim_dotfiles $DEVEL/vim_dotfiles \
   && cd $DEVEL/vim_dotfiles \
-  && make install \
-  && git remote remove origin \
-  && git remote add origin github:leighmcculloch/vim_dotfiles
+  && git remote set-url origin github:leighmcculloch/vim_dotfiles \
+  && make install
 
 # working directory
 WORKDIR $DEVEL
