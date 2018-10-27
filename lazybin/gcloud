@@ -10,7 +10,7 @@ if ! [ -f $LOCAL_BIN/gcloud ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
   # gcloud
-  curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-182.0.0-linux-x86_64.tar.gz | tar xz -C $LOCAL
+  curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-221.0.0-linux-x86_64.tar.gz | tar xz -C $LOCAL
   $LOCAL/google-cloud-sdk/install.sh \
     --usage-reporting false \
     --additional-components app-engine-go cloud-datastore-emulator pubsub-emulator \
