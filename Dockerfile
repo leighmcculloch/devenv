@@ -13,6 +13,7 @@ RUN apt-get update \
     jq \
     gcc \
     sudo \
+    man \
   && apt-get -y autoremove \
   && apt-get -y clean
 
