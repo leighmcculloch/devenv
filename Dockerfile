@@ -52,7 +52,7 @@ RUN sudo apt-get -y install libncurses5-dev python3-dev \
   && make install
 
 # go - install
-RUN curl https://dl.google.com/go/go1.11.1.linux-amd64.tar.gz | tar xz -C $LOCAL_BIN
+RUN curl https://dl.google.com/go/go1.11.3.linux-amd64.tar.gz | tar xz -C $LOCAL_BIN
 ENV GOBIN=$LOCAL_BIN
 ENV PATH="$PATH:$LOCAL_BIN/go/bin"
 
