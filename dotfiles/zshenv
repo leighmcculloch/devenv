@@ -1,10 +1,14 @@
-# paths for rust if it's lazily installed
+# path for go if it's lazily installed
+export PATH=$PATH:$LOCAL_BIN/go/bin
+export GOBIN=$LOCAL_BIN
+
+# path for rust if it's lazily installed
 export PATH=$PATH:$HOME/.cargo/bin
 
-# paths for python if it's lazily installed
+# path for python if it's lazily installed
 export PATH=$PATH:$HOME/.local/bin
 
-# paths for yarn if ti's lazily installed
+# path for yarn if it's lazily installed
 export PATH=$PATH:$HOME/.yarn/bin
 
 # paths

@@ -51,31 +51,6 @@ RUN sudo apt-get -y install libncurses5-dev python3-dev \
     --with-python3-config-dir=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu \
   && make install
 
-# go - install
-RUN curl https://dl.google.com/go/go1.11.4.linux-amd64.tar.gz | tar xz -C $LOCAL_BIN
-ENV GOBIN=$LOCAL_BIN
-ENV PATH="$PATH:$LOCAL_BIN/go/bin"
-
-# go - tools (from https://github.com/fatih/vim-go/blob/de896a6/plugin/go.vim#L33-L52)
-RUN go get github.com/klauspost/asmfmt/cmd/asmfmt \
-  && go get github.com/derekparker/delve/cmd/dlv \
-  && go get github.com/kisielk/errcheck \
-  && go get github.com/davidrjenni/reftools/cmd/fillstruct \
-  && go get github.com/mdempsky/gocode \
-  && go get github.com/rogpeppe/godef \
-  && go get github.com/zmb3/gogetdoc \
-  && go get golang.org/x/tools/cmd/goimports \
-  && go get github.com/golang/lint/golint \
-  && go get github.com/alecthomas/gometalinter \
-  && go get github.com/fatih/gomodifytags \
-  && go get golang.org/x/tools/cmd/gorename \
-  && go get github.com/jstemmer/gotags \
-  && go get golang.org/x/tools/cmd/guru \
-  && go get github.com/josharian/impl \
-  && go get honnef.co/go/tools/cmd/keyify \
-  && go get github.com/fatih/motion \
-  && go get github.com/koron/iferr
-
 # ssh files
 RUN mkdir $HOME/.ssh
 RUN ln -s $HOME/devel/devenv/dotfiles/ssh/config $HOME/.ssh/config \
