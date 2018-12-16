@@ -27,4 +27,4 @@ if ! [ -f /usr/bin/docker ] ; then
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi
 
-"$me" $@
+"$me" "$@"

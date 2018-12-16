@@ -16,4 +16,4 @@ if ! [ -f $LOCAL_BIN/ngrok ] ; then
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi
 
-"$me" $@
+"$me" "$@"

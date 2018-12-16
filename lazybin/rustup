@@ -14,4 +14,4 @@ if ! [ -f $HOME/.cargo/bin/"$me" ] ; then
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi
 
-"$me" $@
+"$me" "$@"

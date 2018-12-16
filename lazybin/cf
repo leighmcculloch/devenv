@@ -17,4 +17,4 @@ if ! [ -f /usr/bin/cf ] ; then
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi
 
-"$me" $@
+"$me" "$@"
