@@ -13,7 +13,7 @@ if ! [ -f $LOCAL_BIN/gcloud ] ; then
   curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-221.0.0-linux-x86_64.tar.gz | tar xz -C $LOCAL
   $LOCAL/google-cloud-sdk/install.sh \
     --usage-reporting false \
-    --additional-components app-engine-go cloud-datastore-emulator pubsub-emulator \
+    --additional-components app-engine-go cloud-datastore-emulator pubsub-emulator kubectl \
     --quiet
   ln -sf $LOCAL/google-cloud-sdk/bin/gcloud $LOCAL_BIN/gcloud
   ln -sf $LOCAL/google-cloud-sdk/bin/gsutil $LOCAL_BIN/gsutil
