@@ -23,7 +23,7 @@ clean:
 	docker rm $$(docker ps -aq --filter 'name=devenv-*') || true
 
 build:
-	docker build -t leighmcculloch/devenv:latest .
+	docker build --no-cache -t leighmcculloch/devenv:latest .
 
 pull:
 	docker pull leighmcculloch/devenv:latest
