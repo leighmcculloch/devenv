@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+me="$(basename "$0")"
+
+if ! [ -f $LOCAL_BIN/randstr ] ; then
+  echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
+
+  curl -o $LOCAL_BIN/randstr https://raw.githubusercontent.com/leighmcculloch/randstr/binaries/linux/amd64/randstr
+  chmod +x $LOCAL_BIN/randstr
+
+  echo -e "\e[1;32mFinished installing '$me'.\e[0m"
+fi
+
+"$me" "$@"
