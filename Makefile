@@ -3,6 +3,7 @@ ID ?= 0
 run:
 	docker network create devenv || true
 	docker run -d -i -t \
+		--network="devenv" \
 		-e DISPLAY=docker.for.mac.localhost:0 \
 		-v="$$HOME/.ssh/id_rsa:/home/leighmcculloch/.ssh/id_rsa" \
 		-v="$$PWD:/home/leighmcculloch/devel/devenv" \
@@ -10,8 +11,6 @@ run:
 		--name="devenv-$(ID)" \
 		leighmcculloch/devenv:latest \
 		|| docker start "devenv-$(ID)"
-	docker network connect "host" "devenv-$(ID)"
-	docker network connect "devenv" "devenv-$(ID)"
 	docker ps
 	docker attach --detach-keys="ctrl-a,d" "devenv-$(ID)" || true
 	docker ps
