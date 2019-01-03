@@ -6,3 +6,4 @@ source $ZSH/oh-my-zsh.sh
 
 # aliases
 alias renv="eval \$(tmux show-env -s | grep '^SSH_')"
+alias clone="githubclone"
