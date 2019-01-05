@@ -2,6 +2,10 @@
 export PATH=$PATH:$LOCAL_BIN/go/bin
 export GOBIN=$LOCAL_BIN
 
+# path for ruby if it's lazily installed
+export GEM_HOME=$HOME/.ruby
+export PATH=$PATH:$GEM_HOME/bin
+
 # path for rust if it's lazily installed
 export PATH=$PATH:$HOME/.cargo/bin
 
