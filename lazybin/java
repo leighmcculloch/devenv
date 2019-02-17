@@ -10,7 +10,7 @@ if ! [ -f /usr/bin/java ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
   sudo apt-get update
-  sudo apt-get -y install default-jre
+  sudo apt-get -y install default-jdk
 
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi
