@@ -15,5 +15,9 @@ export PATH=$PATH:$HOME/.local/bin
 # path for yarn if it's lazily installed
 export PATH=$PATH:$HOME/.yarn/bin
 
+# path for java
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+export PATH=$PATH:$LOCAL/apache-maven-3.6.0/bin
+
 # paths
 export PATH=$PATH:$HOME/devel/devenv/lazybin
