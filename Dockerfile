@@ -44,16 +44,12 @@ RUN mkdir -p "$LOCAL_BIN" \
   && mkdir -p "$DEVEL"
 
 # vim
-RUN sudo apt-get -y install libncurses5-dev python3-dev \
-  && sudo apt-get -y autoremove \
-  && sudo apt-get -y clean \
-  && mkdir -p "$DEVEL/vim" \
-  && curl -L https://github.com/vim/vim/archive/master.tar.gz | tar xz -C "$DEVEL/vim" --strip-components 1 \
+RUN git clone https://github.com/leighmcculloch/vim-compile $DEVEL/vim-compile \
+  && cd $DEVEL/vim-compile \
+  && git remote set-url origin github:leighmcculloch/vim-compile \
+  && git clone https://github.com/vim/vim $DEVEL/vim \
   && cd $DEVEL/vim \
-  && ./configure --prefix=$LOCAL \
-    --enable-python3interp=yes \
-    --with-python3-config-dir=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu \
-  && make install
+  && sudo $DEVEL/vim-compile/install-debian.sh $LOCAL
 
 # ssh files
 RUN mkdir $HOME/.ssh
