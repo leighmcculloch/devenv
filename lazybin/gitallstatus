@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+me="$(basename "$0")"
+
+if ! [ -f $LOCAL_BIN/gitallstatus ] ; then
+  echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
+
+  curl -sSL https://github.com/leighmcculloch/gitallstatus/releases/download/v2.2.0/gitallstatus_2.2.0_linux_amd64.tar.gz | tar xz -C $LOCAL
+  ln -sf $LOCAL/gitallstatus_2.2.0_linux_amd64/gitallstatus $LOCAL_BIN/gitallstatus
+
+  echo -e "\e[1;32mFinished installing '$me'.\e[0m"
+fi
+
+"$me" "$@"
