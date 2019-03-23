@@ -14,10 +14,6 @@ RUN apt-get update \
     gcc \
     sudo \
     man \
-  && apt-get remove -y \
-    ghostscript \
-    adwaita-icon-theme \
-    'font*' \
   && apt-get -y autoremove \
   && apt-get -y clean
 
