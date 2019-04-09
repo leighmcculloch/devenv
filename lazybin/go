@@ -10,7 +10,7 @@ if ! [ -d $LOCAL_BIN/"$me" ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
   rm -fr $LOCAL_BIN/go
-  curl https://dl.google.com/go/go1.12.2.linux-amd64.tar.gz | tar xz -C $LOCAL_BIN
+  curl https://dl.google.com/go/go1.12.3.linux-amd64.tar.gz | tar xz -C $LOCAL_BIN
 
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi
