@@ -7,3 +7,6 @@ source $ZSH/oh-my-zsh.sh
 # aliases
 alias renv="eval \$(tmux show-env -s | grep '^SSH_')"
 alias clone="githubclone"
+
+# free up the c-q shortcut for use in vim
+stty start undef
