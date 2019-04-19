@@ -2,6 +2,7 @@ FROM debian:buster
 
 RUN apt-get update \
   && apt-get -y install \
+    procps \
     locales \
     curl \
     zsh \
