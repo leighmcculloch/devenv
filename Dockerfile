@@ -28,7 +28,8 @@ RUN adduser --home /home/$USER --disabled-password --gecos GECOS $USER \
   && echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER \
   && chmod 0440 /etc/sudoers.d/$USER \
   && groupadd docker \
-  && usermod -aG docker $USER
+  && usermod -aG docker $USER \
+  && chsh -s /bin/zsh $USER
 USER $USER
 ENV HOME=/home/$USER
 
@@ -81,4 +82,5 @@ RUN git clone https://github.com/leighmcculloch/vim_dotfiles $DEVEL/vim_dotfiles
 WORKDIR $DEVEL
 
 # shell
-ENTRYPOINT ["tmux", "-2", "new"]
+SHELL ["/bin/zsh", "--login", "-c"]
+ENTRYPOINT tmux -2 new

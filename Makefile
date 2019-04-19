@@ -1,5 +1,4 @@
 ID ?= 0
-SHELL = /bin/zsh
 
 run:
 	docker network create devenv || true
@@ -16,7 +15,6 @@ run:
 		-p="8000:8000" \
 		--name="devenv-$(ID)" \
 		leighmcculloch/devenv:latest \
-		$(SHELL) \
 		|| docker start "devenv-$(ID)"
 	docker ps
 	docker attach --detach-keys="ctrl-a,d" "devenv-$(ID)" || true
