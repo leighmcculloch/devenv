@@ -15,6 +15,7 @@ RUN apt-get update \
     gcc \
     sudo \
     man \
+    vim-nox \
   && apt-get -y autoremove \
   && apt-get -y clean
 
@@ -41,13 +42,13 @@ ENV PATH="$PATH:$LOCAL_BIN"
 RUN mkdir -p "$LOCAL_BIN" \
   && mkdir -p "$DEVEL"
 
-# vim
-RUN git clone https://github.com/leighmcculloch/vim-compile $DEVEL/vim-compile \
-  && cd $DEVEL/vim-compile \
-  && git remote set-url origin github:leighmcculloch/vim-compile \
-  && git clone https://github.com/vim/vim $DEVEL/vim \
-  && cd $DEVEL/vim \
-  && sudo $DEVEL/vim-compile/install-debian.sh $LOCAL
+# vim latest
+#RUN git clone https://github.com/leighmcculloch/vim-compile $DEVEL/vim-compile \
+#  && cd $DEVEL/vim-compile \
+#  && git remote set-url origin github:leighmcculloch/vim-compile \
+#  && git clone https://github.com/vim/vim $DEVEL/vim \
+#  && cd $DEVEL/vim \
+#  && sudo $DEVEL/vim-compile/install-debian.sh $LOCAL
 
 # ssh files
 RUN mkdir $HOME/.ssh
