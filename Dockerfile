@@ -90,7 +90,7 @@ COPY . $DEVEL/devenv
 RUN $HOME/devel/devenv/lazybin/rvm install ruby
 RUN $HOME/devel/devenv/lazybin/go version
 RUN go get github.com/go-delve/delve/cmd/dlv \
-  && go get golang.org/x/tools/cmd/gopls \
+  && go get golang.org/x/tools/cmd/gopls
 
 # tmux
 ENTRYPOINT tmux -2 new
