@@ -1,6 +1,6 @@
 ID ?= 0
 
-run:
+start:
 	docker network create devenv || true
 	docker run -d -i -t \
 		--network="devenv" \
@@ -16,6 +16,9 @@ run:
 		--name="devenv-$(ID)" \
 		leighmcculloch/devenv:latest \
 		|| docker start "devenv-$(ID)"
+	docker ps
+
+join:
 	docker ps
 	docker attach --detach-keys="ctrl-a,d" "devenv-$(ID)" || true
 	docker ps
