@@ -8,6 +8,7 @@ RUN apt-get update \
     zsh \
     tmux \
     git \
+    mercurial \
     make \
     tig \
     tree \
