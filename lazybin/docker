@@ -22,7 +22,7 @@ if ! [ -f /usr/bin/docker ] ; then
     $(lsb_release -cs) \
     stable"
   sudo apt-get update
-  sudo apt-get -y install docker-ce
+  sudo apt-get -y install docker-ce-cli
 
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi
