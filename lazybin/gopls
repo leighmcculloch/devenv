@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+me="$(basename "$0")"
+
+{
+  if ! [ -d $LOCAL_BIN/"$me" ] ; then
+    echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
+
+    go get golang.org/x/tools/gopls
+
+    echo -e "\e[1;32mFinished installing '$me'.\e[0m"
+  fi
+} 1>&2
+
+"$me" "$@"

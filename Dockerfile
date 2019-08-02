@@ -78,6 +78,7 @@ SHELL ["/bin/zsh", "--login", "-c"]
 RUN ./devenv/lazybin/vim.nox --version
 RUN ./devenv/lazybin/docker --version
 RUN ./devenv/lazybin/go version
+RUN ./devenv/lazybin/gopls version
 RUN ./devenv/lazybin/githubclone
 
 # tmux
