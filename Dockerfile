@@ -68,18 +68,17 @@ RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $DEVEL
 # working directory
 WORKDIR $DEVEL
 
-# shell
-SHELL ["/bin/zsh", "--login", "-c"]
-
 # add current version of the devenv
 ADD . "$DEVEL/devenv"
+
+# shell
+SHELL ["/bin/zsh", "--login", "-c"]
 
 # trigger preinstalls
 RUN ./devenv/lazybin/vim.nox --version
 RUN ./devenv/lazybin/docker --version
 RUN ./devenv/lazybin/go version
-RUN ./devenv/lazybin/rvm list
 RUN ./devenv/lazybin/githubclone
 
 # tmux
-ENTRYPOINT tmux -2 new
+ENTRYPOINT zsh ./devenv/entrypoint.sh
