@@ -65,6 +65,21 @@ RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $DEVEL
   && git remote set-url origin github:leighmcculloch/tmux_dotfiles \
   && make install
 
+# trigger preinstalls
+RUN mkdir -p $DEVEL/devenv/lazybin
+COPY \
+  ./lazybin/vim.nox \
+  ./lazybin/docker \
+  ./lazybin/go \
+  ./lazybin/gopls \
+  ./lazybin/githubclone \
+  $DEVEL/devenv/lazybin/
+RUN $DEVEL/devenv/lazybin/vim.nox --version
+RUN $DEVEL/devenv/lazybin/docker --version
+RUN $DEVEL/devenv/lazybin/go version
+RUN $DEVEL/devenv/lazybin/gopls version
+RUN $DEVEL/devenv/lazybin/githubclone
+
 # working directory
 WORKDIR $DEVEL
 
@@ -73,13 +88,6 @@ ADD . "$DEVEL/devenv"
 
 # shell
 SHELL ["/bin/zsh", "--login", "-c"]
-
-# trigger preinstalls
-RUN ./devenv/lazybin/vim.nox --version
-RUN ./devenv/lazybin/docker --version
-RUN ./devenv/lazybin/go version
-RUN ./devenv/lazybin/gopls version
-RUN ./devenv/lazybin/githubclone
 
 # tmux
 ENTRYPOINT zsh ./devenv/entrypoint.sh
