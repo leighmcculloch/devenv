@@ -17,4 +17,4 @@ me="$(basename "$0")"
   fi
 } 1>&2
 
-"$me" "$@"
+"$LOCAL_BIN/go/bin/$me" "$@"

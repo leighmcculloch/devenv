@@ -36,11 +36,18 @@ ENV HOME=/home/$USER
 
 # directory for projects
 ENV DEVEL="$HOME/devel"
+ENV DEVEN="$DEVEL/devenv"
+ENV LAZYBIN="$DEVEN/lazybin"
 ENV LOCAL="$HOME/local"
 ENV LOCAL_BIN="$LOCAL/bin"
 ENV PATH="$PATH:$LOCAL_BIN"
 RUN mkdir -p "$LOCAL_BIN" \
-  && mkdir -p "$DEVEL"
+  && mkdir -p "$DEVEL" \
+  && mkdir -p "$LAZYBIN"
+
+# paths for lazybins always installed
+ENV PATH=$PATH:$LOCAL_BIN/go/bin
+ENV GOBIN=$LOCAL_BIN
 
 # ssh files
 RUN mkdir $HOME/.ssh
@@ -66,19 +73,16 @@ RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $DEVEL
   && make install
 
 # trigger preinstalls
-RUN mkdir -p $DEVEL/devenv/lazybin
-COPY \
-  ./lazybin/vim.nox \
-  ./lazybin/docker \
-  ./lazybin/go \
-  ./lazybin/gopls \
-  ./lazybin/githubclone \
-  $DEVEL/devenv/lazybin/
-RUN $DEVEL/devenv/lazybin/vim.nox --version
-RUN $DEVEL/devenv/lazybin/docker --version
-RUN $DEVEL/devenv/lazybin/go version
-RUN $DEVEL/devenv/lazybin/gopls version
-RUN $DEVEL/devenv/lazybin/githubclone
+COPY ./lazybin/vim.nox $LAZYBIN
+RUN $LAZYBIN/vim.nox --version
+COPY ./lazybin/docker $LAZYBIN
+RUN $LAZYBIN/docker --version
+COPY ./lazybin/go $LAZYBIN
+RUN $LAZYBIN/go version
+COPY ./lazybin/gopls $LAZYBIN
+RUN $LAZYBIN/gopls version
+COPY ./lazybin/githubclone $LAZYBIN
+RUN $LAZYBIN/githubclone
 
 # working directory
 WORKDIR $DEVEL
