@@ -92,6 +92,11 @@ COPY ./lazybin/githubclone $LAZYBIN
 RUN $LAZYBIN/githubclone
 COPY ./lazybin/rvm $LAZYBIN
 RUN $LAZYBIN/rvm list
+COPY ./lazybin/node $LAZYBIN
+RUN node --version
+RUN npm --version
+COPY ./lazybin/yarn $LAZYBIN
+RUN yarn --version
 
 # add current version of the devenv
 ADD . "$DEVEL/devenv"
