@@ -81,17 +81,17 @@ SHELL ["/bin/zsh", "--login", "-c"]
 
 # trigger preinstalls
 COPY ./lazybin/vim.nox $LAZYBIN
-RUN $LAZYBIN/vim.nox --version
+RUN vim.nox --version
 COPY ./lazybin/docker $LAZYBIN
-RUN $LAZYBIN/docker --version
+RUN docker --version
 COPY ./lazybin/go $LAZYBIN
-RUN $LAZYBIN/go version
+RUN go version
 COPY ./lazybin/gopls $LAZYBIN
-RUN $LAZYBIN/gopls version
+RUN gopls version
 COPY ./lazybin/githubclone $LAZYBIN
-RUN $LAZYBIN/githubclone
+RUN githubclone
 COPY ./lazybin/rvm $LAZYBIN
-RUN $LAZYBIN/rvm list
+RUN rvm list
 COPY ./lazybin/node $LAZYBIN
 RUN node --version
 RUN npm --version
