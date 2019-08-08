@@ -83,6 +83,8 @@ COPY ./lazybin/gopls $LAZYBIN
 RUN $LAZYBIN/gopls version
 COPY ./lazybin/githubclone $LAZYBIN
 RUN $LAZYBIN/githubclone
+COPY ./lazybin/rvm $LAZYBIN
+RUN $LAZYBIN/rvm install ruby
 
 # working directory
 WORKDIR $DEVEL
