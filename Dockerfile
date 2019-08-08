@@ -37,6 +37,7 @@ ENV HOME=/home/$USER
 # directory for projects
 ENV DEVEL="$HOME/devel"
 ENV DEVEN="$DEVEL/devenv"
+ENV DOTFILES="$DEVEN/dotfiles"
 ENV LAZYBIN="$DEVEN/lazybin"
 ENV LOCAL="$HOME/local"
 ENV LOCAL_BIN="$LOCAL/bin"
@@ -48,6 +49,9 @@ RUN mkdir -p "$LOCAL_BIN" \
 # paths for lazybins always installed
 ENV PATH=$PATH:$LOCAL_BIN/go/bin
 ENV GOBIN=$LOCAL_BIN
+
+# add dotfiles from current version of devenv
+COPY ./dotfiles $DOTFILES
 
 # ssh files
 RUN mkdir $HOME/.ssh
@@ -72,6 +76,9 @@ RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $DEVEL
   && git remote set-url origin github:leighmcculloch/tmux_dotfiles \
   && make install
 
+# shell
+SHELL ["/bin/zsh", "--login", "-c"]
+
 # trigger preinstalls
 COPY ./lazybin/vim.nox $LAZYBIN
 RUN $LAZYBIN/vim.nox --version
@@ -84,16 +91,13 @@ RUN $LAZYBIN/gopls version
 COPY ./lazybin/githubclone $LAZYBIN
 RUN $LAZYBIN/githubclone
 COPY ./lazybin/rvm $LAZYBIN
-RUN $LAZYBIN/rvm install ruby
-
-# working directory
-WORKDIR $DEVEL
+RUN $LAZYBIN/rvm list
 
 # add current version of the devenv
 ADD . "$DEVEL/devenv"
 
-# shell
-SHELL ["/bin/zsh", "--login", "-c"]
+# working directory
+WORKDIR $DEVEL
 
 # tmux
 ENTRYPOINT zsh ./devenv/entrypoint.sh
