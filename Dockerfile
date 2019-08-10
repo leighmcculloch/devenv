@@ -46,10 +46,6 @@ RUN mkdir -p "$LOCAL_BIN" \
   && mkdir -p "$DEVEL" \
   && mkdir -p "$LAZYBIN"
 
-# paths for lazybins always installed
-ENV PATH=$PATH:$LOCAL_BIN/go/bin
-ENV GOBIN=$LOCAL_BIN
-
 # add dotfiles from current version of devenv
 COPY ./dotfiles $DOTFILES
 

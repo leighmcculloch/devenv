@@ -1,3 +1,7 @@
+# path for go if it's lazyily installed
+export PATH=$PATH:$LOCAL_BIN/go1.13beta1/bin
+export GOBIN=$LOCAL_BIN
+
 # path for rust if it's lazily installed
 export PATH=$PATH:$HOME/.cargo/bin
 
