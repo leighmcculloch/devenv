@@ -8,5 +8,12 @@ source $ZSH/oh-my-zsh.sh
 alias renv="eval \$(tmux show-env -s | grep '^SSH_')"
 alias clone="githubclone"
 
+# go aliases
+for dir in $LOCAL_BIN/go/*;
+do
+  local v=${dir##*/}
+  alias "go$v"="$LOCAL_BIN/go/$v/bin/go"
+done
+
 # free up the c-q shortcut for use in vim
 stty start undef

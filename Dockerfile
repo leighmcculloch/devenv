@@ -36,9 +36,9 @@ ENV HOME=/home/$USER
 
 # directory for projects
 ENV DEVEL="$HOME/devel"
-ENV DEVEN="$DEVEL/devenv"
-ENV DOTFILES="$DEVEN/dotfiles"
-ENV LAZYBIN="$DEVEN/lazybin"
+ENV DEVENV="$DEVEL/devenv"
+ENV DOTFILES="$DEVENV/dotfiles"
+ENV LAZYBIN="$DEVENV/lazybin"
 ENV LOCAL="$HOME/local"
 ENV LOCAL_BIN="$LOCAL/bin"
 ENV PATH="$PATH:$LOCAL_BIN"
@@ -51,15 +51,15 @@ COPY ./dotfiles $DOTFILES
 
 # ssh files
 RUN mkdir $HOME/.ssh
-RUN ln -s $HOME/devel/devenv/dotfiles/ssh/config $HOME/.ssh/config \
-  && ln -s $HOME/devel/devenv/dotfiles/ssh/known_hosts $HOME/.ssh/known_hosts
+RUN ln -s $DOTFILES/ssh/config $HOME/.ssh/config \
+  && ln -s $DOTFILES/ssh/known_hosts $HOME/.ssh/known_hosts
 
 # dotfiles
-RUN ln -s $HOME/devel/devenv/dotfiles/zshenv $HOME/.zshenv \
-  && ln -s $HOME/devel/devenv/dotfiles/zshrc $HOME/.zshrc \
-  && ln -s $HOME/devel/devenv/dotfiles/gitconfig $HOME/.gitconfig \
-  && ln -s $HOME/devel/devenv/dotfiles/gitignore_global $HOME/.gitignore_global \
-  && ln -s $HOME/devel/devenv/dotfiles/gitmessage $HOME/.gitmessage
+RUN ln -s $DOTFILES/zshenv $HOME/.zshenv \
+  && ln -s $DOTFILES/zshrc $HOME/.zshrc \
+  && ln -s $DOTFILES/gitconfig $HOME/.gitconfig \
+  && ln -s $DOTFILES/gitignore_global $HOME/.gitignore_global \
+  && ln -s $DOTFILES/gitmessage $HOME/.gitmessage
 
 # oh-my-zsh
 RUN git clone https://github.com/robbyrussell/oh-my-zsh $HOME/.oh-my-zsh \

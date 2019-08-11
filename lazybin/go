@@ -5,22 +5,27 @@ set -o pipefail
 set -o nounset
 
 me="$(basename "$0")"
-dir="$LOCAL_BIN/go"
+installdir="$LOCAL_BIN/go"
+
+versions=(
+  "1.13beta1"
+  "1.12.7"
+  "1.11.12"
+  "1.10.8"
+)
 
 {
-  if ! [ -d "$LOCAL_BIN/go*" ] ; then
+  if ! [ -d "$installdir" ] ; then
     echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
-    rm -fr $LOCAL_BIN/go*
-    mkdir \
-      $LOCAL_BIN/go1.13beta1 \
-      $LOCAL_BIN/go1.12.17 \
-      $LOCAL_BIN/go1.11.12 \
-      $LOCAL_BIN/go1.10.8
-    curl https://dl.google.com/go/go1.13beta1.linux-amd64.tar.gz | tar xz --strip-components=1 -C $LOCAL_BIN/go1.13beta1
-    curl https://dl.google.com/go/go1.12.7.linux-amd64.tar.gz | tar xz --strip-components=1 -C $LOCAL_BIN/go1.12.17
-    curl https://dl.google.com/go/go1.11.12.linux-amd64.tar.gz | tar xz --strip-components=1 -C $LOCAL_BIN/go1.11.12
-    curl https://dl.google.com/go/go1.10.8.linux-amd64.tar.gz | tar xz --strip-components=1 -C $LOCAL_BIN/go1.10.8
+    sudo rm -fr "$installdir"
+
+    for v in "${versions[@]}"
+    do
+      echo -e "\e[1;93mInstalling 'go$v'...\e[0m"
+      mkdir -p "$installdir/$v"
+      curl "https://dl.google.com/go/go$v.linux-amd64.tar.gz" | tar xz --strip-components=1 -C "$installdir/$v"
+    done
 
     echo -e "\e[1;32mFinished installing '$me'.\e[0m"
   fi
