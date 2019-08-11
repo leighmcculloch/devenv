@@ -1,5 +1,7 @@
 Host *
     HashKnownHosts no
+    StrictHostKeyChecking yes
+    CheckHostIP no
 
 Host github
     HostName github.com
