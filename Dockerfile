@@ -76,8 +76,8 @@ RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $DEVEL
 SHELL ["/bin/zsh", "--login", "-c"]
 
 # trigger preinstalls
-COPY ./lazybin/vim.nox $LAZYBIN
-RUN vim.nox --version
+COPY ./lazybin/vim $LAZYBIN
+RUN vim --version
 COPY ./lazybin/docker $LAZYBIN
 RUN docker --version
 COPY ./lazybin/go $LAZYBIN
