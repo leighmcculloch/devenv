@@ -9,17 +9,25 @@ installdir="$LOCAL_BIN/go"
 
 versions=(
   "1.13beta1"
-  "1.12.8"
+  "1.12.9"
   "1.11.13"
 )
 
 {
-  if ! [ -d "$installdir" ] ; then
+  versions_to_install=()
+  for v in "${versions[@]}"
+  do
+    if [ ! -f "$installdir/$v/bin/go" ] ; then
+      echo -e "\e[1;32mChecking '$installdir/$v/bin/go' \e[0m"
+
+      versions_to_install+=($v)
+    fi
+  done
+
+  if ! [ ${#versions_to_install[@]} -eq 0 ] ; then
     echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
-    sudo rm -fr "$installdir"
-
-    for v in "${versions[@]}"
+    for v in "${versions_to_install[@]}"
     do
       echo -e "\e[1;93mInstalling 'go$v'...\e[0m"
       mkdir -p "$installdir/$v"
