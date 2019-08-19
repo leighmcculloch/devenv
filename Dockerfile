@@ -82,8 +82,6 @@ COPY ./lazybin/vim $LAZYBIN
 RUN vim --version
 COPY ./lazybin/docker $LAZYBIN
 RUN docker --version
-COPY ./lazybin/gopls $LAZYBIN
-RUN gopls version
 COPY ./lazybin/githubclone $LAZYBIN
 RUN githubclone
 COPY ./lazybin/rvm $LAZYBIN
