@@ -76,12 +76,12 @@ RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $DEVEL
 SHELL ["/bin/zsh", "--login", "-c"]
 
 # trigger preinstalls
+COPY ./lazybin/go $LAZYBIN
+RUN go version
 COPY ./lazybin/vim $LAZYBIN
 RUN vim --version
 COPY ./lazybin/docker $LAZYBIN
 RUN docker --version
-COPY ./lazybin/go $LAZYBIN
-RUN go version
 COPY ./lazybin/gopls $LAZYBIN
 RUN gopls version
 COPY ./lazybin/githubclone $LAZYBIN
