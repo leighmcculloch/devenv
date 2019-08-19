@@ -18,7 +18,7 @@ if ! [ -d $LOCAL_BIN/"$me" ] ; then
   sudo $DEVEL/vim_compile/install-debian.sh $LOCAL
   popd
 
-  git clone --recurse-submodules https://github.com/leighmcculloch/vim_dotfiles $DEVEL/vim_dotfiles
+  git clone https://github.com/leighmcculloch/vim_dotfiles $DEVEL/vim_dotfiles
   pushd $DEVEL/vim_dotfiles
   git remote set-url origin github:leighmcculloch/vim_dotfiles
   make install
