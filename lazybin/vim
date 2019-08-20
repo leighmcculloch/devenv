@@ -15,7 +15,8 @@ if ! [ -d $LOCAL_BIN/"$me" ] ; then
   popd
   git clone https://github.com/vim/vim $DEVEL/vim
   pushd $DEVEL/vim
-  sudo $DEVEL/vim_compile/install-debian.sh $LOCAL
+  sudo $DEVEL/vim_compile/install-deps.sh
+  $DEVEL/vim_compile/install-vim.sh $LOCAL
   popd
 
   git clone https://github.com/leighmcculloch/vim_dotfiles $DEVEL/vim_dotfiles
