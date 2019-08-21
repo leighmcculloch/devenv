@@ -91,6 +91,8 @@ RUN node --version
 RUN npm --version
 COPY ./lazybin/yarn $LAZYBIN
 RUN yarn --version
+COPY ./lazybin/gitallstatus $LAZYBIN
+RUN gitallstatus --help
 
 # add current version of the devenv
 ADD . "$DEVEL/devenv"
