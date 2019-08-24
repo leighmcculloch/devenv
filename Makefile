@@ -40,7 +40,7 @@ build:
 	docker build --build-arg USER=$(USER) -t leighmcculloch/devenv:latest .
 
 buildnc:
-	docker build --no-cache -t leighmcculloch/devenv:latest .
+	docker build --build-arg USER=$(USER) --no-cache -t leighmcculloch/devenv:latest .
 
 pull:
 	docker pull leighmcculloch/devenv:latest
