@@ -4,6 +4,7 @@ start:
 	docker network create devenv || true
 	docker run -d -i -t \
 		--network="devenv" \
+		--hostname="devenv-$(ID)" \
 		-e DISPLAY=docker.for.mac.localhost:0 \
 		-v="$$HOME/.ssh/id_rsa:/home/leighmcculloch/.ssh/id_rsa" \
 		-v="$$PWD:/home/leighmcculloch/devel/devenv" \
