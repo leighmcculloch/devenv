@@ -10,9 +10,15 @@ start:
 		-v="/var/run/docker.sock:/var/run/docker.sock" \
 		--security-opt="apparmor=unconfined" \
 		--cap-add=SYS_PTRACE \
-		-p="4567:4567" \
-		-p="8080:8080" \
-		-p="8000:8000" \
+		-p="8$(ID)00:8000" \
+		-p="8$(ID)01:8001" \
+		-p="8$(ID)02:8002" \
+		-p="8$(ID)03:8003" \
+		-p="8$(ID)04:8004" \
+		-p="8$(ID)05:8005" \
+		-p="8$(ID)06:8006" \
+		-p="8$(ID)07:8007" \
+		-p="8$(ID)08:8008" \
 		--name="devenv-$(ID)" \
 		leighmcculloch/devenv:latest \
 		|| docker start "devenv-$(ID)"
@@ -24,10 +30,10 @@ join:
 	docker ps
 
 stop:
-	docker stop $$(docker ps -aq --filter 'name=devenv-*') || true
+	docker stop $$(docker ps -aq --filter 'name=devenv-$(ID)') || true
 
-clean:
-	docker rm $$(docker ps -aq --filter 'name=devenv-*') || true
+rm:
+	docker rm $$(docker ps -aq --filter 'name=devenv-$(ID)') || true
 
 build:
 	docker build -t leighmcculloch/devenv:latest .
