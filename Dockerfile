@@ -63,9 +63,12 @@ RUN ln -s $DOTFILES/zshenv $HOME/.zshenv \
   && ln -s $DOTFILES/gitmessage $HOME/.gitmessage
 
 # oh-my-zsh
-RUN git clone https://github.com/robbyrussell/oh-my-zsh $HOME/.oh-my-zsh \
-  && mkdir -p $HOME/.oh-my-zsh/custom/themes \
-  && curl https://raw.githubusercontent.com/leighmcculloch/zsh-theme-enormous/master/enormous.zsh-theme > $HOME/.oh-my-zsh/custom/themes/enormous.zsh-theme
+RUN git clone https://github.com/robbyrussell/oh-my-zsh $HOME/.oh-my-zsh
+
+# zsh theme
+RUN git clone https://github.com/leighmcculloch/zsh-theme-enormous $DEVEL/zsh-theme-enormous \
+  && cd $DEVEL/zsh-theme-enormous \
+  && make install
 
 # tmux dot files
 RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $DEVEL/tmux_dotfiles \
