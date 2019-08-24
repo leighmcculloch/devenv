@@ -37,7 +37,7 @@ rm:
 	docker rm $$(docker ps -aq --filter 'name=devenv-$(ID)') || true
 
 build:
-	docker build -t leighmcculloch/devenv:latest .
+	docker build --build-arg USER=$(USER) -t leighmcculloch/devenv:latest .
 
 buildnc:
 	docker build --no-cache -t leighmcculloch/devenv:latest .
