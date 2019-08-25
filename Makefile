@@ -7,7 +7,7 @@ start:
 		--hostname="devenv-$(ID)" \
 		-e DISPLAY=docker.for.mac.localhost:0 \
 		-v="$$HOME/.ssh/id_rsa:/home/leighmcculloch/.ssh/id_rsa" \
-		-v="$$PWD:/home/leighmcculloch/devel/devenv" \
+		-v="$$PWD:/home/leighmcculloch/devel/.devenv" \
 		-v="/var/run/docker.sock:/var/run/docker.sock" \
 		--security-opt="apparmor=unconfined" \
 		--cap-add=SYS_PTRACE \

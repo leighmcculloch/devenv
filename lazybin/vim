@@ -9,18 +9,18 @@ me="$(basename "$0")"
 if ! [ -d $LOCAL_BIN/"$me" ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
-  git clone https://github.com/leighmcculloch/vim_compile $DEVEL/vim_compile
-  pushd $DEVEL/vim_compile
-  git remote set-url origin github:leighmcculloch/vim_compile
+  git clone https://github.com/leighmcculloch/vim_compile $DEVEL/.vim_compile
+  pushd $DEVEL/.vim_compile
+  git remote set-url origin github:leighmcculloch/.vim_compile
   popd
-  git clone https://github.com/vim/vim $DEVEL/vim
-  pushd $DEVEL/vim
-  sudo $DEVEL/vim_compile/install-deps.sh
-  $DEVEL/vim_compile/install-vim.sh $LOCAL
+  git clone https://github.com/vim/vim $DEVEL/.vim
+  pushd $DEVEL/.vim
+  sudo $DEVEL/.vim_compile/install-deps.sh
+  $DEVEL/.vim_compile/install-vim.sh $LOCAL
   popd
 
-  git clone https://github.com/leighmcculloch/vim_dotfiles $DEVEL/vim_dotfiles
-  pushd $DEVEL/vim_dotfiles
+  git clone https://github.com/leighmcculloch/vim_dotfiles $DEVEL/.vim_dotfiles
+  pushd $DEVEL/.vim_dotfiles
   git remote set-url origin github:leighmcculloch/vim_dotfiles
   make install
   popd

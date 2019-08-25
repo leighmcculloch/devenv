@@ -37,7 +37,7 @@ ENV HOME=/home/$USER
 
 # directory for projects
 ENV DEVEL="$HOME/devel"
-ENV DEVENV="$DEVEL/devenv"
+ENV DEVENV="$DEVEL/.devenv"
 ENV DOTFILES="$DEVENV/dotfiles"
 ENV LAZYBIN="$DEVENV/lazybin"
 ENV LOCAL="$HOME/local"
@@ -67,13 +67,14 @@ ENV ZSH="$HOME/.oh-my-zsh"
 RUN git clone https://github.com/robbyrussell/oh-my-zsh $ZSH
 
 # zsh theme
-RUN git clone https://github.com/leighmcculloch/zsh-theme-enormous $DEVEL/zsh-theme-enormous \
-  && cd $DEVEL/zsh-theme-enormous \
+RUN git clone https://github.com/leighmcculloch/zsh-theme-enormous $DEVEL/.zsh-theme-enormous \
+  && cd $DEVEL/.zsh-theme-enormous \
+  && git remote set-url origin github:leighmcculloch/zsh-theme-enormous \
   && make install
 
 # tmux dot files
-RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $DEVEL/tmux_dotfiles \
-  && cd $DEVEL/tmux_dotfiles \
+RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $DEVEL/.tmux_dotfiles \
+  && cd $DEVEL/.tmux_dotfiles \
   && git remote set-url origin github:leighmcculloch/tmux_dotfiles \
   && make install
 
@@ -100,10 +101,10 @@ COPY ./lazybin/gitallstatus $LAZYBIN
 RUN gitallstatus --help
 
 # add current version of the devenv
-ADD . "$DEVEL/devenv"
+ADD . $DEVENV
 
 # working directory
 WORKDIR $DEVEL
 
 # tmux
-ENTRYPOINT zsh ./devenv/entrypoint.sh
+ENTRYPOINT zsh ./.devenv/entrypoint.sh
