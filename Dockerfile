@@ -63,7 +63,8 @@ RUN ln -s $DOTFILES/zshenv $HOME/.zshenv \
   && ln -s $DOTFILES/gitmessage $HOME/.gitmessage
 
 # oh-my-zsh
-RUN git clone https://github.com/robbyrussell/oh-my-zsh $HOME/.oh-my-zsh
+ENV ZSH="$HOME/.oh-my-zsh"
+RUN git clone https://github.com/robbyrussell/oh-my-zsh $ZSH
 
 # zsh theme
 RUN git clone https://github.com/leighmcculloch/zsh-theme-enormous $DEVEL/zsh-theme-enormous \
