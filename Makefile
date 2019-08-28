@@ -1,10 +1,12 @@
 ID ?= 0
+TZ ?= $(shell readlink /etc/localtime | sed -E 's/.*\/([A-Za-z_]+\/[A-Za-z_]+)/\1/g')
 
 start:
 	docker network create devenv || true
 	docker run -d -i -t \
 		--network="devenv" \
 		--hostname="devenv-$(ID)" \
+		-e TZ=$(TZ) \
 		-e DISPLAY=docker.for.mac.localhost:0 \
 		-v="$$HOME/.ssh/id_rsa:/home/leighmcculloch/.ssh/id_rsa" \
 		-v="$$PWD:/home/leighmcculloch/devel/.devenv" \
