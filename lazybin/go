@@ -8,6 +8,7 @@ me="$(basename "$0")"
 installdir="$LOCAL_BIN/go"
 
 versions=(
+  "1.13rc2"
   "1.13rc1"
   "1.12.9"
   "1.11.13"
