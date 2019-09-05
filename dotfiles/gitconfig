@@ -10,3 +10,5 @@
 	template = ~/.gitmessage
 [push]
 	default = simple
+[pull]
+  ff = only
