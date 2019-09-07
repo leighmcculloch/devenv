@@ -13,4 +13,4 @@
 [push]
 	default = simple
 [pull]
-  ff = only
+	ff = only
