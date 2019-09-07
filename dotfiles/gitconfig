@@ -1,6 +1,7 @@
 [user]
 	name = Leigh McCulloch
 	email = leigh@mcchouse.com
+	signingkey = Leigh McCulloch
 [core]
 	excludesfile = ~/.gitignore_global
 	quotepath = false
@@ -8,6 +9,7 @@
 	commentChar = ";"
 [commit]
 	template = ~/.gitmessage
+	gpgsign = true
 [push]
 	default = simple
 [pull]

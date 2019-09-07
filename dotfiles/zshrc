@@ -17,3 +17,6 @@ done
 
 # free up the c-q shortcut for use in vim
 stty start undef
+
+# run the first run script
+[ -f "$DEVENV/firstrun.sh" ] && "$DEVENV/firstrun.sh"

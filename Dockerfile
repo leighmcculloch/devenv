@@ -16,6 +16,8 @@ RUN apt-get update \
     gcc \
     sudo \
     man \
+    gpg \
+    pinentry-tty \
   && apt-get -y autoremove \
   && apt-get -y clean
 
