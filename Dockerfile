@@ -62,7 +62,8 @@ RUN ln -s $DOTFILES/zshenv $HOME/.zshenv \
   && ln -s $DOTFILES/zshrc $HOME/.zshrc \
   && ln -s $DOTFILES/gitconfig $HOME/.gitconfig \
   && ln -s $DOTFILES/gitignore_global $HOME/.gitignore_global \
-  && ln -s $DOTFILES/gitmessage $HOME/.gitmessage
+  && ln -s $DOTFILES/gitmessage $HOME/.gitmessage \
+  && ln -s $DOTFILES/tigrc $HOME/.tigrc
 
 # oh-my-zsh
 ENV ZSH="$HOME/.oh-my-zsh"

@@ -1,0 +1,6 @@
+set log-options = --show-signature
+set diff-options = --show-signature
+
+set main-view-date = custom
+set main-view-date-local = true
+set main-view-date-format = "%a %F %R %Z"
