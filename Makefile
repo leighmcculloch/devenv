@@ -15,15 +15,7 @@ start:
 		-v="/var/run/docker.sock:/var/run/docker.sock" \
 		--security-opt="apparmor=unconfined" \
 		--cap-add=SYS_PTRACE \
-		-p="8$(ID)00:8000" \
-		-p="8$(ID)01:8001" \
-		-p="8$(ID)02:8002" \
-		-p="8$(ID)03:8003" \
-		-p="8$(ID)04:8004" \
-		-p="8$(ID)05:8005" \
-		-p="8$(ID)06:8006" \
-		-p="8$(ID)07:8007" \
-		-p="8$(ID)08:8008" \
+		-p="8$(ID)00-8$(ID)08:8000-8008" \
 		--name="devenv-$(ID)" \
 		leighmcculloch/devenv:latest \
 		|| docker start "devenv-$(ID)"
