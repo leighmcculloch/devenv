@@ -84,15 +84,13 @@ RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $DEVEL
 # shell
 SHELL ["/bin/zsh", "--login", "-c"]
 
-# trigger preinstalls
+# trigger big preinstalls
 COPY ./lazybin/go $LAZYBIN
 RUN go version
 COPY ./lazybin/vim $LAZYBIN
 RUN vim --version
 COPY ./lazybin/docker $LAZYBIN
 RUN docker --version
-COPY ./lazybin/githubclone $LAZYBIN
-RUN githubclone
 #COPY ./lazybin/rvm $LAZYBIN
 #RUN rvm list
 #COPY ./lazybin/node $LAZYBIN
@@ -100,6 +98,10 @@ RUN githubclone
 #RUN npm --version
 #COPY ./lazybin/yarn $LAZYBIN
 #RUN yarn --version
+
+# trigger small tool preinstalls
+COPY ./lazybin/githubclone $LAZYBIN
+RUN githubclone
 COPY ./lazybin/gitallstatus $LAZYBIN
 RUN gitallstatus --help
 
