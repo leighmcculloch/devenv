@@ -110,4 +110,4 @@ ADD . $DEVENV
 WORKDIR $DEVEL
 
 # tmux
-ENTRYPOINT zsh ./.devenv/entrypoint.sh
+ENTRYPOINT ./.devenv/entrypoint.sh
