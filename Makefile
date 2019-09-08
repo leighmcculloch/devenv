@@ -1,5 +1,6 @@
 ID ?= 0
 TZ ?= $(shell readlink /etc/localtime | sed -E 's/.*\/([A-Za-z_]+\/[A-Za-z_]+)/\1/g')
+HOST ?= $(shell hostname | tr '[:upper:]' '[:lower:]' | sed 's/\.local$$//')
 
 start:
 	docker network create devenv || true
@@ -8,6 +9,7 @@ start:
 		--hostname="devenv-$(ID)" \
 		-e TZ=$(TZ) \
 		-e DISPLAY=docker.for.mac.localhost:0 \
+		-e HOST="$(HOST)" \
 		-v="$$HOME/.ssh/id_rsa:/home/leighmcculloch/.ssh/id_rsa" \
 		-v="$$PWD:/home/leighmcculloch/devel/.devenv" \
 		-v="/var/run/docker.sock:/var/run/docker.sock" \
