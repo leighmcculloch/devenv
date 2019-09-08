@@ -93,13 +93,13 @@ COPY ./lazybin/docker $LAZYBIN
 RUN docker --version
 COPY ./lazybin/githubclone $LAZYBIN
 RUN githubclone
-COPY ./lazybin/rvm $LAZYBIN
-RUN rvm list
-COPY ./lazybin/node $LAZYBIN
-RUN node --version
-RUN npm --version
-COPY ./lazybin/yarn $LAZYBIN
-RUN yarn --version
+#COPY ./lazybin/rvm $LAZYBIN
+#RUN rvm list
+#COPY ./lazybin/node $LAZYBIN
+#RUN node --version
+#RUN npm --version
+#COPY ./lazybin/yarn $LAZYBIN
+#RUN yarn --version
 COPY ./lazybin/gitallstatus $LAZYBIN
 RUN gitallstatus --help
 
