@@ -15,7 +15,7 @@ if ! [ -d "$vimnox" ] ; then
 
   git clone https://github.com/leighmcculloch/vim_dotfiles $DEVEL/.vim_dotfiles
   pushd $DEVEL/.vim_dotfiles
-  git remote set-url origin github:leighmcculloch/vim_dotfiles
+  git remote set-url --add --push origin github:leighmcculloch/vim_dotfiles
   make install
   popd
 
