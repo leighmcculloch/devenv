@@ -42,9 +42,8 @@ echo
 
 # Import known GPG key for GitHub
 title 'Importing known gpg keys...'
-curl https://github.com/leighmcculloch.gpg | gpg --import
-curl https://github.com/web-flow.gpg | gpg --import
-echo -e "5\ny\n" |  gpg --command-fd 0 --edit-key 4AEE18F83AFDEB23 trust
+curl -sSL https://github.com/leighmcculloch.gpg | gpg --import
+curl -sSL https://github.com/web-flow.gpg | gpg --import
 
 # Configure user
 title 'Configuring git...'
