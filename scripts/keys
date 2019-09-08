@@ -1,0 +1,54 @@
+#! /usr/bin/env zsh
+
+function title {
+  print -P "%F{green}$1%f"
+}
+
+# Collect user info
+title 'Collecting user info...'
+host="$HOST-$(hostname)"
+timestamp="$(date +%Y%m%d%a | tr '[:lower:]' '[:upper:]')"
+name=$(git config --global user.name)
+email=$(git config --global user.email)
+vared -p 'Name: ' -c name
+vared -p 'Email: ' -c email
+identity="$name ($host) [$timestamp] <$email>"
+echo "Identity: $identity"
+echo
+
+# Generate ssh key
+title 'Generating ssh key...'
+ssh-keygen -o -a 100 -t ed25519 -f "$HOME/.ssh/id_ed25519" -C "$identity"
+ssh-add
+echo
+
+# Generate key for user
+title 'Generating gpg key...'
+gpg --batch --quick-generate-key "$identity" future-default default 5d
+echo
+
+# Upload keys
+title 'Upload keys to %F{cyan}https://github.com/settings/keys'
+title 'SSH:'
+cat "$HOME/.ssh/id_ed25519.pub"
+title 'GPG:'
+gpg --armor --export "$identity"
+echo
+
+# Wait
+title 'Press any key to continue...'
+read -k1 -s
+echo
+
+# Import known GPG key for GitHub
+title 'Importing known gpg keys...'
+curl https://github.com/leighmcculloch.gpg | gpg --import
+curl https://github.com/web-flow.gpg | gpg --import
+echo -e "5\ny\n" |  gpg --command-fd 0 --edit-key 4AEE18F83AFDEB23 trust
+
+# Configure user
+title 'Configuring git...'
+git config -f "$HOME/.gitconfig.local" user.name "$name"
+git config -f "$HOME/.gitconfig.local" user.email "$email"
+git config -f "$HOME/.gitconfig.local" user.signingkey "$name"
+git config -f "$HOME/.gitconfig.local" commit.gpgsign true
