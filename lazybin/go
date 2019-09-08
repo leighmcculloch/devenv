@@ -10,7 +10,6 @@ installdir="$LOCAL_BIN/go"
 versions=(
   "1.13"
   "1.12.9"
-  "1.11.13"
 )
 
 {
