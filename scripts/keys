@@ -22,21 +22,29 @@ gpg --batch --quick-generate-key "$identity" future-default sign 5d
 keydetails1=$(gpg --show-keys --with-keygrip --with-colons <(gpg --armor --export "$identity"))
 fingerprint1=$(echo "$keydetails1" | grep '^fpr' | head -n 1 | sed -e 's/[fpr:]//g')
 keygrip1=$(echo "$keydetails1" | grep '^grp' | head -n 1 | sed -e 's/[grp:]//g')
-echo "Master: $fingerprint1 ($keygrip1)"
-gpg --yes --batch -v --quick-addkey "$fingerprint1" ed25519 sign,auth 5d
+keyid1=$(echo "$keydetails1" | grep '^pub' | head -n 1 | cut -d':' -f5)
+title "Master: $keyid1 / $fingerprint1 ($keygrip1)"
+gpg --yes --batch -v --quick-addkey "$fingerprint1" ed25519 sign 5d
 keydetails2=$(gpg --show-keys --with-keygrip --with-colons <(gpg --armor --export "$identity"))
 fingerprint2=$(echo "$keydetails2" | grep '^fpr' | head -n 2 | tail -n 1 | sed -e 's/[fpr:]//g')
-keygrip2=$(echo "$keydetails2" | grep '^grp' | head -n 2 | tail -n 1| sed -e 's/[grp:]//g')
-echo "Sign,Auth: $fingerprint2 ($keygrip2)"
-echo "$keygrip2 7200" >> "$HOME/.gnupg/sshcontrol"
+keygrip2=$(echo "$keydetails2" | grep '^grp' | head -n 2 | tail -n 1 | sed -e 's/[grp:]//g')
+keyid2=$(echo "$keydetails2" | grep '^sub' | head -n 2 | tail -n 1 | cut -d':' -f5)
+title "Sign (Git Commit): $keyid2 / $fingerprint2 ($keygrip2)"
+gpg --yes --batch -v --quick-addkey "$fingerprint1" ed25519 sign,auth 5d
+keydetails3=$(gpg --show-keys --with-keygrip --with-colons <(gpg --armor --export "$identity"))
+fingerprint3=$(echo "$keydetails3" | grep '^fpr' | head -n 3 | tail -n 1 | sed -e 's/[fpr:]//g')
+keygrip3=$(echo "$keydetails3" | grep '^grp' | head -n 3 | tail -n 1 | sed -e 's/[grp:]//g')
+keyid3=$(echo "$keydetails3" | grep '^sub' | head -n 3 | tail -n 1 | cut -d':' -f5)
+title "Sign,Auth (SSH): $keyid3 / $fingerprint3 ($keygrip3)"
+echo "$keygrip3 7200" >> "$HOME/.gnupg/sshcontrol"
 echo
 
 # Upload keys
 title 'Upload keys to %F{cyan}https://github.com/settings/keys'
 title 'SSH:'
-gpg --export-ssh-key "$identity"
+gpg --export-ssh-key "$keyid3"
 title 'GPG:'
-gpg --armor --export "$identity"
+gpg --armor --export "$keyid2"
 echo
 
 # Wait
@@ -53,5 +61,5 @@ curl -sSL https://github.com/web-flow.gpg | gpg --import
 title 'Configuring git...'
 git config -f "$HOME/.gitconfig.local" user.name "$name"
 git config -f "$HOME/.gitconfig.local" user.email "$email"
-git config -f "$HOME/.gitconfig.local" user.signingkey "$name"
+git config -f "$HOME/.gitconfig.local" user.signingkey "$keyid2!"
 git config -f "$HOME/.gitconfig.local" commit.gpgsign true
