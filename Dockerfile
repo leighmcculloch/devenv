@@ -59,12 +59,14 @@ RUN ln -s $DOTFILES/ssh/config $HOME/.ssh/config \
   && ln -s $DOTFILES/ssh/known_hosts $HOME/.ssh/known_hosts
 
 # dotfiles
+RUN mkdir -m 700 -p $HOME/.gnupg
 RUN ln -s $DOTFILES/zshenv $HOME/.zshenv \
   && ln -s $DOTFILES/zshrc $HOME/.zshrc \
   && ln -s $DOTFILES/gitconfig $HOME/.gitconfig \
   && ln -s $DOTFILES/gitignore_global $HOME/.gitignore_global \
   && ln -s $DOTFILES/gitmessage $HOME/.gitmessage \
-  && ln -s $DOTFILES/tigrc $HOME/.tigrc
+  && ln -s $DOTFILES/tigrc $HOME/.tigrc \
+  && ln -s $DOTFILES/gnupg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
 
 # oh-my-zsh
 ENV ZSH="$HOME/.oh-my-zsh"

@@ -16,21 +16,25 @@ identity="$name ($host) [$timestamp] <$email>"
 echo "Identity: $identity"
 echo
 
-# Generate ssh key
-title 'Generating ssh key...'
-ssh-keygen -o -a 100 -t ed25519 -f "$HOME/.ssh/id_ed25519" -C "$identity"
-ssh-add
-echo
-
 # Generate key for user
 title 'Generating gpg key...'
-gpg --batch --quick-generate-key "$identity" future-default default 5d
+gpg --batch --quick-generate-key "$identity" future-default sign 5d
+keydetails1=$(gpg --show-keys --with-keygrip --with-colons <(gpg --armor --export "$identity"))
+fingerprint1=$(echo "$keydetails1" | grep '^fpr' | head -n 1 | sed -e 's/[fpr:]//g')
+keygrip1=$(echo "$keydetails1" | grep '^grp' | head -n 1 | sed -e 's/[grp:]//g')
+echo "Master: $fingerprint1 ($keygrip1)"
+gpg --yes --batch -v --quick-addkey "$fingerprint1" ed25519 sign,auth 5d
+keydetails2=$(gpg --show-keys --with-keygrip --with-colons <(gpg --armor --export "$identity"))
+fingerprint2=$(echo "$keydetails2" | grep '^fpr' | head -n 2 | tail -n 1 | sed -e 's/[fpr:]//g')
+keygrip2=$(echo "$keydetails2" | grep '^grp' | head -n 2 | tail -n 1| sed -e 's/[grp:]//g')
+echo "Sign,Auth: $fingerprint2 ($keygrip2)"
+echo "$keygrip2 7200" >> "$HOME/.gnupg/sshcontrol"
 echo
 
 # Upload keys
 title 'Upload keys to %F{cyan}https://github.com/settings/keys'
 title 'SSH:'
-cat "$HOME/.ssh/id_ed25519.pub"
+gpg --export-ssh-key "$identity"
 title 'GPG:'
 gpg --armor --export "$identity"
 echo
