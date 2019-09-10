@@ -6,6 +6,8 @@
 	quotepath = false
 	editor = vim
 	commentChar = ";"
+[gpg]
+	program = gpgwithtty.sh
 [commit]
 	template = ~/.gitmessage
 [push]

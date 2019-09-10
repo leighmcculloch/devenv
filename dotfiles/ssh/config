@@ -1,3 +1,5 @@
+Match host * exec gpgupdatetty.sh
+
 Host *
     HashKnownHosts no
     StrictHostKeyChecking yes

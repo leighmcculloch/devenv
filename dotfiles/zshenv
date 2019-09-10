@@ -20,6 +20,3 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # path for lazybin and scripts
 export PATH=$PATH:$LAZYBIN:$SCRIPTS
-
-# tty for gpg
-export GPG_TTY=$(tty)
