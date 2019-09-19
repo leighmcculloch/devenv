@@ -45,7 +45,7 @@ echo
 # Upload keys
 title 'Upload keys to %F{cyan}https://github.com/settings/keys'
 title 'SSH:'
-gpg --export-ssh-key "$keyid3"
+echo $(gpg --export-ssh-key "$keyid3") $identity
 title 'GPG:'
 gpg --armor --export "$keyid2"
 echo
