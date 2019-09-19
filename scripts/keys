@@ -7,12 +7,12 @@ function title {
 # Collect user info
 title 'Collecting user info...'
 host="$HOST-$(hostname)"
-timestamp="$(date +%Y%m%d%a | tr '[:lower:]' '[:upper:]')"
+timestamp="$(date +%Y%m%d-%I%M%p-%Z-%a | tr '[:lower:]' '[:upper:]')"
 name=$(git config --global user.name)
 email=$(git config --global user.email)
 vared -p 'Name: ' -c name
 vared -p 'Email: ' -c email
-identity="$name ($host) [$timestamp] <$email>"
+identity=$(echo "$name ($host) ($timestamp) <$email>")
 echo "Identity: $identity"
 echo
 
@@ -45,7 +45,7 @@ echo
 # Upload keys
 title 'Upload keys to %F{cyan}https://github.com/settings/keys'
 title 'SSH:'
-echo $(gpg --export-ssh-key "$keyid3") $identity
+echo $(gpg --export-ssh-key "$keyid3" | cut -d' ' -f'1,2') $(echo $identity | tr ' ' '-')
 title 'GPG:'
 gpg --armor --export "$keyid2"
 echo
