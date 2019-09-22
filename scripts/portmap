@@ -7,7 +7,7 @@ set -o nounset
 if [ "$#" -eq 0 ]; then
   echo "Current port mappings:"
   echo
-  ps -o command= -C socat
+  ps -o command= -C socat || true
   echo
 fi
 
