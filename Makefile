@@ -22,6 +22,11 @@ start:
 
 join:
 	docker ps
+	docker exec -i -t "devenv-$(ID)" tmux -2 attach -t 0 || true
+	docker ps
+
+attach:
+	docker ps
 	docker attach --detach-keys="ctrl-a,d" "devenv-$(ID)" || true
 	docker ps
 
