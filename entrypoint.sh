@@ -8,4 +8,7 @@ sudo chgrp docker /var/run/docker.sock
 eval $(gpg-agent --daemon --enable-ssh-support --disable-scdaemon)
 
 # Start TMUX for all terminal access.
-tmux -2 new
+tmux -2 new -d
+
+# Wait for incoming connections.
+while true; do sleep 1000; done

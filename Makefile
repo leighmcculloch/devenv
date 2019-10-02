@@ -22,7 +22,7 @@ start:
 
 join:
 	docker ps
-	docker exec -i -t "devenv-$(ID)" tmux -2 attach -t 0 || true
+	docker exec -i -t "devenv-$(ID)" tmux -2 new -A -t 0 || true
 	docker ps
 
 attach:
