@@ -14,15 +14,21 @@ start:
 		-v="/var/run/docker.sock:/var/run/docker.sock" \
 		--security-opt="apparmor=unconfined" \
 		--cap-add=SYS_PTRACE \
+		-p="222$(ID):22" \
 		-p="8$(ID)00-8$(ID)08:8000-8008" \
 		--name="devenv-$(ID)" \
 		leighmcculloch/devenv:latest \
 		|| docker start "devenv-$(ID)"
 	docker ps
 
-join:
+shell:
 	docker ps
 	docker exec -i -t "devenv-$(ID)" tmux -2 new -A -t 0 || true
+	docker ps
+
+ssh:
+	docker ps
+	ssh localhost -p 222$(ID) -t 'tmux -2 new -A -t 0'
 	docker ps
 
 attach:
