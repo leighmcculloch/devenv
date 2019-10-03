@@ -10,5 +10,10 @@ eval $(gpg-agent --daemon --enable-ssh-support --disable-scdaemon)
 # Start TMUX for all terminal access.
 tmux -2 new -d
 
-# Wait for incoming connections.
-while true; do sleep 1000; done
+# Wait while session is alive.
+while tmux has-session -t 0
+do
+  echo TMUX session is up. Available to join.
+  sleep 1
+done
+echo TMUX session is down. Exiting.
