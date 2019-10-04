@@ -3,14 +3,15 @@
 # Allow using the docker socket without root.
 sudo chgrp docker /var/run/docker.sock
 
-# Start-up the GPG-Agent for managing SSH and GPG so they can be used across
-# all tmux panes/windows.
-eval $(gpg-agent --daemon --enable-ssh-support --disable-scdaemon)
-
 # Start TMUX for all terminal access.
 function keep_tmux_up() {
   while true
   do
+    # Start-up the GPG-Agent for managing SSH and GPG so they can be used across
+    # all tmux panes/windows.
+    killall gpg-agent
+    eval $(gpg-agent --daemon --enable-ssh-support --disable-scdaemon)
+
     echo Starting TMUX session.
     tmux -2 new -d
 
