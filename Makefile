@@ -28,7 +28,7 @@ shell:
 
 ssh:
 	docker ps
-	ssh localhost -p 222$(ID) -t 'tmux -2 new -A -t 0'
+	ssh -A localhost -p 222$(ID) -t 'tmux -2 new -A -t 0'
 	docker ps
 
 attach:
