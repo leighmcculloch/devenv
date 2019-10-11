@@ -8,6 +8,17 @@ source $ZSH/oh-my-zsh.sh
 alias renv="eval \$(tmux show-env -s | grep '^SSH_')"
 alias clone="githubclone"
 
+# pull pr alias
+function gfpr() {
+  local prnum="$1"
+  local refspec="pull/$prnum/head:pr$prnum"
+  if git config remote.upstream.url; then
+    git fetch upstream "$refspec"
+  else
+    git fetch origin "$refspec"
+  fi
+}
+
 # go aliases
 for dir in $LOCAL_BIN/go/*;
 do
