@@ -18,12 +18,17 @@ RUN apt-get update \
     man \
     gpg \
     pinentry-tty \
+    openssh-server \
+    openssh-client \
   && apt-get -y autoremove \
   && apt-get -y clean
 
 # locale with utf8
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
+
+# create the temp runtime file system for the ssh server
+RUN mkdir -p /var/run/sshd
 
 # add user
 ARG USER
@@ -55,6 +60,7 @@ COPY ./dotfiles $DOTFILES
 
 # ssh files
 RUN mkdir $HOME/.ssh
+RUN curl "https://github.com/$USER.keys" > "$HOME/.ssh/authorized_keys"
 RUN ln -s $DOTFILES/ssh/config $HOME/.ssh/config \
   && ln -s $DOTFILES/ssh/known_hosts $HOME/.ssh/known_hosts
 

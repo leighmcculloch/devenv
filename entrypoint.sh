@@ -27,7 +27,4 @@ function keep_tmux_up() {
 }
 keep_tmux_up &
 
-curl "https://github.com/$USER.keys" > "$HOME/.ssh/authorized_keys"
-sudo apt install -y openssh-server
-sudo mkdir -p /var/run/sshd
 sudo /usr/sbin/sshd -D
