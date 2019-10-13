@@ -26,6 +26,10 @@ do
   alias "go$v"="$LOCAL_BIN/go/$v/bin/go"
 done
 
+# make c-p/c-n work exactly like up/down arrows
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
+
 # free up the c-q shortcut for use in vim
 stty start undef
 
