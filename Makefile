@@ -21,14 +21,15 @@ start:
 		|| docker start "devenv-$(ID)"
 	docker ps
 
-shell:
+join:
 	docker ps
-	docker exec -i -t "devenv-$(ID)" tmux -2 new -A -t 0 || true
+	ssh-add -l || true
+	ssh -A localhost -p 222$(ID) -t 'tmux -2 attach -t 0'
 	docker ps
 
-ssh:
+join-nossh:
 	docker ps
-	ssh -A localhost -p 222$(ID) -t 'tmux -2 new -A -t 0'
+	docker exec -i -t "devenv-$(ID)" tmux -2 attach -t 0 || true
 	docker ps
 
 attach:
