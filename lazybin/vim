@@ -13,7 +13,7 @@ if ! [ -d $LOCAL_BIN/"$me" ] ; then
   pushd $DEVEL/.vim_compile
   git remote set-url --add --push origin github:leighmcculloch/.vim_compile
   popd
-  git clone https://github.com/vim/vim $DEVEL/.vim
+  curl -L https://codeload.github.com/vim/vim/tar.gz/master | tar xz -C $DEVEL --transform 's,^vim-master,.vim,'
   pushd $DEVEL/.vim
   sudo $DEVEL/.vim_compile/install-deps.sh
   $DEVEL/.vim_compile/install-vim.sh $LOCAL
