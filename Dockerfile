@@ -93,6 +93,12 @@ RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $DEVEL
 # shell
 SHELL ["/bin/zsh", "--login", "-c"]
 
+# trigger small tool preinstalls
+COPY ./lazybin/githubclone $LAZYBIN
+RUN githubclone
+COPY ./lazybin/gitallstatus $LAZYBIN
+RUN gitallstatus --help
+
 # trigger big preinstalls
 COPY ./lazybin/go $LAZYBIN
 RUN go version
@@ -108,12 +114,6 @@ RUN rvm install ruby
 #RUN npm --version
 #COPY ./lazybin/yarn $LAZYBIN
 #RUN yarn --version
-
-# trigger small tool preinstalls
-COPY ./lazybin/githubclone $LAZYBIN
-RUN githubclone
-COPY ./lazybin/gitallstatus $LAZYBIN
-RUN gitallstatus --help
 
 # add current version of the devenv
 ADD . $DEVENV
