@@ -1,0 +1,65 @@
+#! /usr/bin/env zsh
+
+function title {
+  print -P "%F{green}$1%f"
+}
+
+# Collect user info
+title 'Collecting user info...'
+name=$(git config --global user.name)
+email=$(git config --global user.email)
+host=$(hostname | sed 's/\.local$//')
+vared -p 'Name: ' -c name
+vared -p 'Email: ' -c email
+vared -p 'Host: ' -c host
+
+identity=$(echo "$name ($host) <$email>")
+echo "Identity: $identity"
+echo
+
+function getgpgkey() {
+  local keynum=$1
+  local keydetails=$(gpg --show-keys --with-keygrip --with-colons <(gpg --armor --export "$identity"))
+  keyfingerprint=$(echo "$keydetails" | grep '^fpr' | head -n $keynum | tail -n 1 | cut -d':' -f10)
+  keygrip=$(echo "$keydetails" | grep '^grp' | head -n $keynum | tail -n 1 | cut -d':' -f10)
+  keyid=$(echo "$keydetails" | grep '^[ps]ub' | head -n $keynum | tail -n 1 | cut -d':' -f5)
+}
+
+# Generate key for user
+title 'Generating gpg key...'
+gpg --batch --quick-generate-key "$identity" ed25519 sign
+getgpgkey 1
+keyid1=$keyid
+keyfingerprint1=$keyfingerprint
+title "Master: $keyid1"
+gpg --yes --batch -v --quick-addkey "$keyfingerprint1" ed25519 sign
+getgpgkey 2
+keyid2=$keyid
+title "Sign (Git Commit): $keyid2"
+gpg --yes --batch -v --quick-addkey "$keyfingerprint1" ed25519 sign,auth
+getgpgkey 3
+keyid3=$keyid
+keygrip3=$keygrip
+title "Sign,Auth (SSH): $keyid3"
+echo
+
+# Setup use of keys
+title 'Enabling enable-ssh-support...'
+echo "enable-ssh-support" >> "$HOME/.gnupg/gpg-agent.conf"
+echo
+title "Enabling sshcontrol for $keyid / $keygrip3"
+echo "$keygrip3 7200" >> "$HOME/.gnupg/sshcontrol"
+echo
+
+# Reload
+title 'Reloading gpg-agent...'
+gpg-connect-agent reloadagent /bye
+echo
+
+# Upload keys
+title 'Upload keys to %F{cyan}https://github.com/settings/keys'
+title 'SSH:'
+echo $(gpg --export-ssh-key "$keyid3" | cut -d' ' -f'1,2') $(echo $identity | tr ' ' '-')
+title 'Git Commit:'
+gpg --armor --export "$keyid2"
+echo

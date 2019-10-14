@@ -35,6 +35,3 @@ stty start undef
 
 # run the first run script
 [ -f "$DEVENV/firstrun.sh" ] && "$DEVENV/firstrun.sh"
-
-# tty for gpg
-export GPG_TTY=$(tty)

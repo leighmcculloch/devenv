@@ -20,3 +20,6 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # path for lazybin and scripts
 export PATH=$PATH:$LAZYBIN:$SCRIPTS
+
+# socket for ssh via gpg
+export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
