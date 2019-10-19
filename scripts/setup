@@ -4,11 +4,18 @@ function title {
   print -P "%F{green}$1%f"
 }
 
+function shadow {
+  print -P "%F{white}$1%f"
+}
+
 # Collect user info
-title 'Collecting user info...'
-name=$(git config --global user.name)
-email=$(git config --global user.email)
-signingkey=""
+title 'Collecting user info from gpg-agent...'
+shadow "$(gpg --list-secret-keys --with-fingerprint --keyid-format LONG --with-subkey-fingerprint)"
+shadow ---------------------------------------
+identity="$(gpg --list-secret-keys --with-colons | awk -F':' '{if ($1 == "uid") { print $10; exit; }}')"
+name="$(echo -n $identity | awk -F'[()<>]' '{print $1}')"
+email="$(echo -n $identity | awk -F'[<>]' '{print $2}')"
+signingkey="$(gpg --list-secret-keys --with-colons "$identity" | awk -F':' '{if ($1 == "ssb" && $12 == "s") { print $5; exit; }}')"
 vared -p 'Name: ' -c name
 vared -p 'Email: ' -c email
 vared -p 'Signing Key (Keyid): ' -c signingkey
@@ -18,7 +25,6 @@ title 'Configuring git...'
 git config -f "$HOME/.gitconfig.local" user.name "$name"
 git config -f "$HOME/.gitconfig.local" user.email "$email"
 git config -f "$HOME/.gitconfig.local" user.signingkey "$signingkey!"
-git config -f "$HOME/.gitconfig.local" commit.gpgsign true
 
 # Import known GPG keys from GitHub
 title 'Importing known gpg keys...'
