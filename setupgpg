@@ -1,5 +1,7 @@
 #! /usr/bin/env zsh
 
+set -e
+
 function title {
   print -P "%F{green}$1%f"
 }
@@ -53,7 +55,7 @@ echo
 
 # Reload
 title 'Reloading gpg-agent...'
-gpg-connect-agent reloadagent /bye
+gpg-connect-agent reloadagent /bye || true
 echo
 
 # Upload keys
