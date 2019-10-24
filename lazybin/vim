@@ -9,15 +9,12 @@ me="$(basename "$0")"
 if ! [ -d $LOCAL_BIN/"$me" ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
-  git clone https://github.com/leighmcculloch/vim_compile $DEVEL/.vim_compile
-  pushd $DEVEL/.vim_compile
-  git remote set-url --add --push origin github:leighmcculloch/.vim_compile
-  popd
-  curl -L https://codeload.github.com/vim/vim/tar.gz/master | tar xz -C $DEVEL --transform 's,^vim-master,.vim,'
-  pushd $DEVEL/.vim
-  sudo $DEVEL/.vim_compile/install-deps.sh
-  $DEVEL/.vim_compile/install-vim.sh $LOCAL
-  popd
+  vim_commit=b1ba9ab
+  compile_commit=8c32b88
+  curl -sSL "https://github.com/leighmcculloch/vim_compile/releases/download/vim-$vim_commit-($compile_commit)/vim-$vim_commit.tar.gz" | tar xz -C $LOCAL
+
+  deps=$(apt-cache depends vim-nox | awk '/Depends: lib/{print$2}')
+  sudo apt-get install -y $deps
 
   git clone https://github.com/leighmcculloch/vim_dotfiles $DEVEL/.vim_dotfiles
   pushd $DEVEL/.vim_dotfiles
