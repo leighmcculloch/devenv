@@ -30,6 +30,9 @@ ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
 # create the temp runtime file system for the ssh server
 RUN mkdir -p /var/run/sshd
 
+# automatically unlink remote unix sockets when connecting
+RUN echo "StreamLocalBindUnlink yes" >> /etc/ssh/sshd_config
+
 # add user
 ARG USER
 ENV USER=$USER

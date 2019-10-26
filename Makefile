@@ -29,8 +29,6 @@ start:
 join:
 	gpg --armor --export > $(LOCAL_DIR)/publickeys.gpg
 	docker ps
-	ssh -i $(LOCAL_DIR)/id_ed25519 localhost -p 222$(ID) \
-		-t 'rm -f /home/$(USER)/.gnupg/S.*' || true
 	scp -i $(LOCAL_DIR)/id_ed25519 -P 222$(ID) \
 		$(LOCAL_DIR)/publickeys.gpg localhost:/home/$(USER)/.publickeys.gpg
 	ssh -i $(LOCAL_DIR)/id_ed25519 localhost -p 222$(ID) \
