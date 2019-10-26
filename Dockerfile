@@ -63,7 +63,6 @@ COPY ./dotfiles $DOTFILES
 
 # ssh files
 RUN mkdir $HOME/.ssh
-RUN curl "https://github.com/$USER.keys" > "$HOME/.ssh/authorized_keys"
 RUN ln -s $DOTFILES/ssh/config $HOME/.ssh/config \
   && ln -s $DOTFILES/ssh/known_hosts $HOME/.ssh/known_hosts
 
