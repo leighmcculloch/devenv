@@ -9,8 +9,8 @@ me="$(basename "$0")"
 if ! [ -f $LOCAL_BIN/githubclone ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
-  curl -sSL https://github.com/leighmcculloch/githubclone/releases/download/v1.3.0/githubclone_1.3.0_linux_amd64.tar.gz | tar xz -C $LOCAL
-  ln -sf $LOCAL/githubclone_1.3.0_linux_amd64/githubclone $LOCAL_BIN/githubclone
+  curl -sSL https://github.com/leighmcculloch/githubclone/releases/download/v1.4.0/githubclone_1.4.0_linux_amd64.tar.gz | tar xz -C $LOCAL
+  ln -sf $LOCAL/githubclone_1.4.0_linux_amd64/githubclone $LOCAL_BIN/githubclone
 
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi
