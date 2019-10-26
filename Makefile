@@ -20,7 +20,6 @@ start:
 		--security-opt="apparmor=unconfined" \
 		--cap-add=SYS_PTRACE \
 		-p="222$(ID):22" \
-		-p="8$(ID)00-8$(ID)08:8000-8008" \
 		--name="devenv-$(ID)" \
 		leighmcculloch/devenv:latest \
 		|| docker start "devenv-$(ID)"
@@ -32,6 +31,10 @@ join:
 	scp -i $(LOCAL_DIR)/id_ed25519 -P 222$(ID) \
 		$(LOCAL_DIR)/publickeys.gpg localhost:/home/$(USER)/.publickeys.gpg
 	ssh -i $(LOCAL_DIR)/id_ed25519 localhost -p 222$(ID) \
+		-L 8$(ID)00:localhost:8000 \
+		-L 8$(ID)01:localhost:8001 \
+		-L 8$(ID)02:localhost:8002 \
+		-L 8$(ID)03:localhost:8003 \
 		-R /home/$(USER)/.gnupg/S.gpg-agent:$(HOME)/.gnupg/S.gpg-agent.extra \
 		-R /home/$(USER)/.gnupg/S.gpg-agent.ssh:$(HOME)/.gnupg/S.gpg-agent.ssh \
 		-t '\
