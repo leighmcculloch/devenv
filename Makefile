@@ -32,11 +32,11 @@ join:
 	scp -i $(LOCAL_DIR)/id_ed25519 -P 222$(ID) \
 		$(LOCAL_DIR)/publickeys.gpg localhost:/home/$(USER)/.publickeys.gpg
 	ssh -i $(LOCAL_DIR)/id_ed25519 localhost -p 222$(ID) \
-		-t 'gpg --import $$HOME/.publickeys.gpg'
-	ssh -i $(LOCAL_DIR)/id_ed25519 localhost -p 222$(ID) \
 		-R /home/$(USER)/.gnupg/S.gpg-agent:$(HOME)/.gnupg/S.gpg-agent.extra \
 		-R /home/$(USER)/.gnupg/S.gpg-agent.ssh:$(HOME)/.gnupg/S.gpg-agent.ssh \
-		-t 'tmux -2 attach -t 0'
+		-t '\
+		    gpg --import $$HOME/.publickeys.gpg ; \
+			tmux -2 attach -t 0'
 	docker ps
 
 join-nossh:
