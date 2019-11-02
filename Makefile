@@ -2,6 +2,7 @@ ID ?= 0
 TZ ?= $(shell readlink /etc/localtime | sed -E 's/.*\/([A-Za-z_]+\/[A-Za-z_]+)/\1/g')
 HOST ?= $(shell hostname | tr '[:upper:]' '[:lower:]' | sed 's/\.local$$//')
 LOCAL_DIR = $(PWD)/.instance-$(ID)
+LABEL ?= latest
 
 start:
 	rm -rf $(LOCAL_DIR)
@@ -21,7 +22,7 @@ start:
 		--cap-add=SYS_PTRACE \
 		-p="222$(ID):22" \
 		--name="devenv-$(ID)" \
-		leighmcculloch/devenv:latest \
+		leighmcculloch/devenv:$(LABEL) \
 		|| docker start "devenv-$(ID)"
 	docker ps
 
@@ -59,10 +60,17 @@ rm:
 	docker rm $$(docker ps -aq --filter 'name=devenv-$(ID)') || true
 
 build:
-	docker build --build-arg USER=$(USER) -t leighmcculloch/devenv:latest .
+	docker build --build-arg USER=$(USER) -t leighmcculloch/devenv:$(LABEL) .
 
 buildnc:
-	docker build --build-arg USER=$(USER) --no-cache -t leighmcculloch/devenv:latest .
+	docker build --build-arg USER=$(USER) --no-cache -t leighmcculloch/devenv:$(LABEL) .
 
 pull:
-	docker pull leighmcculloch/devenv:latest
+	docker pull leighmcculloch/devenv:$(LABEL)
+
+push:
+	docker push leighmcculloch/devenv:${LABEL}
+
+pushlatest:
+	docker tag leighmcculloch/devenv:${LABEL} leighmcculloch/devenv:latest
+	docker push leighmcculloch/devenv:latest

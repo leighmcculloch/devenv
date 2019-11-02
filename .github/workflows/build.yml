@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  schedule:
+    - cron:  '0 14 * * *'
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: Environment Variables
+      run: |
+        echo "::set-env name=LABEL::$(date +%Y%m%d)-${GITHUB_SHA::8}"
+    - name: Build
+      env:
+        USER: leighmcculloch
+      run: |
+        make buildnc
+    - name: Push
+      run: |
+        docker login -u leighmcculloch -p "${{secrets.DOCKER_TOKEN}}"
+        make push
+        make pushlatest
