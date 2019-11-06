@@ -9,9 +9,8 @@ me="$(basename "$0")"
 if ! [ -d $LOCAL_BIN/"$me" ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
-  vim_commit=197c6b7
-  compile_commit=22a89a5
-  curl -sSL "https://dl.bintray.com/leighmcculloch/vim_compile/vim_${vim_commit}_${compile_commit}.tar.gz" | tar xz -C $LOCAL
+  version=20191106_36ec6f6_f3a4a34
+  curl -sSL "https://dl.bintray.com/leighmcculloch/vim_compile/vim_${version}.tar.gz" | tar xz -C $LOCAL
 
   deps=$(apt-cache depends vim-nox | awk '/Depends: lib/{print$2}')
   sudo apt-get install -y $deps
