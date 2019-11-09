@@ -7,7 +7,7 @@ set -o nounset
 me="$(basename "$0")"
 
 {
-  if ! [ -d $LOCAL_BIN/"$me" ] ; then
+  if ! [ -f $LOCAL_BIN/"$me" ] ; then
     echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
     go get -u github.com/onsi/ginkgo/ginkgo
