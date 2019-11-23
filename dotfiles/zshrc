@@ -26,6 +26,9 @@ do
   alias "go$v"="$LOCAL_BIN/go/$v/bin/go"
 done
 
+# load fzf
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+
 # make c-p/c-n work exactly like up/down arrows
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search

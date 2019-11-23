@@ -20,6 +20,7 @@ RUN apt-get update \
     pinentry-tty \
     openssh-server \
     openssh-client \
+    fzf \
   && apt-get -y autoremove \
   && apt-get -y clean
 
