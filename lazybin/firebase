@@ -6,10 +6,11 @@ set -o nounset
 
 me="$(basename "$0")"
 
-if ! [ -f /usr/local/bin/firebase ] ; then
+if ! [ -f $LOCAL_BIN/firebase ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
-  yarn global add firebase-tools
+  curl -Lo $LOCAL_BIN/firebase https://firebase.tools/bin/linux/latest
+  chmod +x $LOCAL_BIN/firebase
 
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi
