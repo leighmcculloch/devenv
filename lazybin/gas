@@ -10,7 +10,7 @@ if ! [ -f $LOCAL_BIN/gas ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
   curl -sSL https://github.com/leighmcculloch/gas/releases/download/v3.0.0/gas_3.0.0_linux_amd64.tar.gz | tar xz -C $LOCAL
-  ln -sf $LOCAL/gas_3.0.0_linux_amd64/gas $LOCAL_BIN/gitallstatus
+  ln -sf $LOCAL/gas_3.0.0_linux_amd64/gas $LOCAL_BIN/gas
 
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi
