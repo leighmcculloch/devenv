@@ -99,8 +99,8 @@ SHELL ["/bin/zsh", "--login", "-c"]
 # trigger small tool preinstalls
 COPY ./lazybin/githubclone $LAZYBIN
 RUN githubclone
-COPY ./lazybin/gitallstatus $LAZYBIN
-RUN gitallstatus --help
+COPY ./lazybin/gas $LAZYBIN
+RUN gas --help
 
 # trigger big preinstalls
 COPY ./lazybin/go $LAZYBIN
