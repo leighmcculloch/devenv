@@ -97,10 +97,10 @@ RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $DEVEL
 SHELL ["/bin/zsh", "--login", "-c"]
 
 # trigger small tool preinstalls
-COPY ./lazybin/githubclone $LAZYBIN
-RUN githubclone
+COPY ./lazybin/clone $LAZYBIN
+RUN clone -version
 COPY ./lazybin/gas $LAZYBIN
-RUN gas --help
+RUN gas -version
 
 # trigger big preinstalls
 COPY ./lazybin/go $LAZYBIN
