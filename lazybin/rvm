@@ -15,7 +15,8 @@ if ! [ -f $HOME/.rvm/bin/rvm ] ; then
   curl -sSL https://get.rvm.io | bash -s stable
 
   version=2.6.3
-  rvm mount -r "https://dl.bintray.com/leighmcculloch/devenv/ruby-${version}.tar.bz2" --verify-downloads 2
+  date=20191130
+  rvm mount -r "https://github.com/leighmcculloch/devenv_compile_ruby/releases/download/v${version}-${date}/ruby-${version}.tar.bz2" --verify-downloads 2
 
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi

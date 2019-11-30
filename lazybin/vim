@@ -9,12 +9,20 @@ me="$(basename "$0")"
 if ! [ -d $LOCAL_BIN/"$me" ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
-  version=20191129_68e9e5f_9f41373
-  curl -sSL "https://dl.bintray.com/leighmcculloch/devenv/vim_${version}.tar.gz" | tar xz -C $LOCAL
+  # Install VIM
+  vimcommit=9625d3d
+  date=20191130
+  curl -L "https://github.com/leighmcculloch/devenv_compile_vim/releases/download/v${vimcommit}-${date}/vim-${vimcommit}.tar.gz" | tar xz -C $LOCAL
 
+  # Install dependencies of VIM
   deps=$(apt-cache depends vim-nox | awk '/Depends: lib/{print$2}')
   sudo apt-get install -y $deps
 
+  # Install Go tools/binaries needed by vim-go VIM plugin
+  version=20191130
+  curl -L "https://github.com/leighmcculloch/devenv_compile_vimgobinaries/releases/download/v${version}/vimgobinaries.tar.gz" | tar xz -C $LOCAL_BIN
+
+  # Install VIM dotfiles/plugins
   git clone https://github.com/leighmcculloch/vim_dotfiles $DEVEL/.vim_dotfiles
   pushd $DEVEL/.vim_dotfiles
   git remote set-url --add --push origin github:leighmcculloch/vim_dotfiles
