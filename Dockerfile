@@ -109,9 +109,8 @@ COPY ./lazybin/vim $LAZYBIN
 RUN vim --version
 COPY ./lazybin/docker $LAZYBIN
 RUN docker --version
-#COPY ./lazybin/rvm $LAZYBIN
-#RUN rvm list
-#RUN rvm install ruby
+COPY ./lazybin/rvm $LAZYBIN
+RUN rvm list
 #COPY ./lazybin/node $LAZYBIN
 #RUN node --version
 #RUN npm --version
