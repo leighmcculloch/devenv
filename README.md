@@ -7,6 +7,8 @@ The environment is based on a single Dockerfile.
 
 For my previous development environment built on Vagrant, see the `v1` branch.
 
+The environment assumes you're running a GPG agent locally and that will be forwarded into the environment.
+
 ## Usage (Docker)
 
 ### Build or Pull
@@ -15,66 +17,34 @@ For my previous development environment built on Vagrant, see the `v1` branch.
 make build
 ```
 
+or
+
 ```
-docker pull leighmcculloch/devenv
+make pull
 ```
 
 ### Running
 
 ```
-make run
+make start join
 ```
 
-### Detach from a developement environment
+After joining an environment for the first time, run `setup` to set git config based on details available via the hosts GPG agent.
+
+### Detach from an instance
 
 Type `Ctrl-A D`.
 
-### Reattach to a development environment
+### Reattach to an instance
 
-Rerun the `make` command you ran to create it.
+Rerun `make join`.
 
 ### Create multiple of each type of development environment
 
-Append `ID=n` where `n` is a number.
+Prepend or append `ID=n` where `n` is a number to `make` commands to operate with different instances. The default instance is `0`.
+
+### Stop and teardown an instance
 
 ```
-make run
-make run ID=2
-make run ID=3
+make stop rm
 ```
-
-### Stop all development environments
-
-```
-make stop
-```
-
-### Delete all development environments
-
-```
-make clean
-```
-
-## Usage (Docker inside Vagrant)
-
-Create the vagrant virtual machine:
-
-```
-vagrant up
-```
-
-SSH in to the virtual machine:
-
-```
-vagrant ssh
-```
-
-To forward your local ssh-agent, make sure it's running, add your keys and append `-A`:
-
-```
-eval $(ssh-agent)
-ssh-add
-vagrant ssh -- -A
-```
-
-Use the commands listed under the Usage (Docker) section above to build and run the devenv docker containers.
