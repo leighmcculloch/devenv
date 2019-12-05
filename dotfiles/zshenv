@@ -1,5 +1,11 @@
+[ -z "$ORIGINAL_PATH" ] && export ORIGINAL_PATH=$PATH
+
+# path reset on new shells
+export PATH=$ORIGINAL_PATH
+
 # path for go if it's lazyily installed
-export PATH=$PATH:$LOCAL_BIN/go/1.13.4/bin
+goroot=$LOCAL_BIN/go
+export PATH=$PATH:$goroot/"$(ls -1r $goroot | head -n1)"/bin
 export GOBIN=$LOCAL_BIN
 
 # path for rust if it's lazily installed
