@@ -5,8 +5,10 @@ export PATH=$ORIGINAL_PATH
 
 # path for go if it's lazyily installed
 goroot=$LOCAL_BIN/go
-export PATH=$PATH:$goroot/"$(ls -1r $goroot | head -n1)"/bin
-export GOBIN=$LOCAL_BIN
+if [ -d "$goroot" ]; then
+  export PATH=$PATH:$goroot/"$(ls -1r $goroot | head -n1)"/bin
+  export GOBIN=$LOCAL_BIN
+fi
 
 # path for rust if it's lazily installed
 export PATH=$PATH:$HOME/.cargo/bin

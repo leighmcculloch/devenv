@@ -37,4 +37,4 @@ versions=(
   fi
 } 1>&2
 
-go "$@"
+zsh -c "go '$@'"
