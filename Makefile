@@ -39,7 +39,8 @@ join:
 		-R /home/$(USER)/.gnupg/S.gpg-agent:$(HOME)/.gnupg/S.gpg-agent.extra \
 		-R /home/$(USER)/.gnupg/S.gpg-agent.ssh:$(HOME)/.gnupg/S.gpg-agent.ssh \
 		-t '\
-		    gpg --import $$HOME/.publickeys.gpg ; \
+			gpg --import $$HOME/.publickeys.gpg ; \
+			[[ ! -f "$$HOME/.gitconfig.local" ]] && $$HOME/devel/.devenv/scripts/setup ; \
 			tmux -2 attach -t 0'
 	docker ps
 
