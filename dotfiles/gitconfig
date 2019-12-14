@@ -3,6 +3,8 @@
 	quotepath = false
 	editor = vim
 	commentChar = ";"
+[pager]
+	branch = 
 [commit]
 	template = ~/.gitmessage
 	gpgsign = true
