@@ -10,7 +10,7 @@ if ! [ -d $LOCAL_BIN/"$me" ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
   # Install VIM
-  vimcommit=vafc13bd
+  vimcommit=afc13bd
   date=20191217
   curl -L "https://github.com/leighmcculloch/devenv_compile_vim/releases/download/v${vimcommit}-${date}/vim-${vimcommit}.tar.gz" | tar xz -C $LOCAL
 
