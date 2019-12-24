@@ -1,6 +1,6 @@
 # oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="minimal"
+ZSH_THEME="enormous"
 plugins=(git docker tig golang)
 source $ZSH/oh-my-zsh.sh
 
