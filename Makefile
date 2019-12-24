@@ -4,10 +4,7 @@ HOST ?= $(shell hostname | tr '[:upper:]' '[:lower:]' | sed 's/\.local$$//')
 LOCAL_DIR = $(PWD)/.instance-$(ID)
 LABEL ?= latest
 
-start:
-	rm -rf $(LOCAL_DIR)
-	mkdir -p $(LOCAL_DIR)
-	ssh-keygen -t ed25519 -f $(LOCAL_DIR)/id_ed25519 -N ''
+start: $(LOCAL_DIR)/id_ed25519
 	docker network create devenv || true
 	docker run -d -i -t \
 		--network="devenv" \
@@ -25,6 +22,10 @@ start:
 		leighmcculloch/devenv:$(LABEL) \
 		|| docker start "devenv-$(ID)"
 	docker ps
+
+$(LOCAL_DIR)/id_ed25519:
+	mkdir -p $(LOCAL_DIR)
+	ssh-keygen -t ed25519 -f $(LOCAL_DIR)/id_ed25519 -N ''
 
 join:
 	gpg --armor --export > $(LOCAL_DIR)/publickeys.gpg
