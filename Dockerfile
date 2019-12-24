@@ -82,9 +82,9 @@ ENV ZSH="$HOME/.oh-my-zsh"
 RUN git clone https://github.com/robbyrussell/oh-my-zsh $ZSH
 
 # zsh theme
-RUN git clone https://github.com/leighmcculloch/zsh-theme-enormous $DEVEL/.zsh-theme-enormous \
-  && cd $DEVEL/.zsh-theme-enormous \
-  && git remote set-url --add --push origin github:leighmcculloch/zsh-theme-enormous \
+RUN git clone https://github.com/leighmcculloch/zsh-theme-minimal $DEVEL/.zsh-theme-minimal \
+  && cd $DEVEL/.zsh-theme-minimal \
+  && git remote set-url --add --push origin github:leighmcculloch/zsh-theme-minimal \
   && make install
 
 # tmux dot files
