@@ -12,7 +12,5 @@
 	default = simple
 [pull]
 	ff = only
-[log]
-	showSignature = true
 [include]
 	path = ~/.gitconfig.local
