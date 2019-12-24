@@ -109,6 +109,8 @@ COPY ./lazybin/vim $LAZYBIN
 RUN vim --version
 COPY ./lazybin/docker $LAZYBIN
 RUN docker --version
+COPY ./lazybin/gotestsum $LAZYBIN
+RUN gotestsum --version
 #COPY ./lazybin/rvm $LAZYBIN
 #RUN rvm list
 #RUN rvm install ruby
