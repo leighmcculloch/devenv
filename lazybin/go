@@ -7,14 +7,25 @@ set -o nounset
 me="$(basename "$0")"
 installdir="$LOCAL_BIN/go"
 
-versions=(
-  "1.13.5"
-  "1.12.14"
-)
+# Specify exact versions of Go to install.
+versions=()
 
+# Add last two releases of Go to list of versions automatically.
 {
-  versions_to_install=()
+  versions+=($(curl -s https://golang.org/dl/\?mode\=json | jq -r '.[].version'))
+} 1>&2
+
+# Install versions as needed.
+{
+  versions_without_go_prefix=()
   for v in "${versions[@]}"
+  do
+    v_without_go_prefix=${v#"go"}
+    versions_without_go_prefix+=($v_without_go_prefix)
+  done
+
+  versions_to_install=()
+  for v in "${versions_without_go_prefix[@]}"
   do
     if [ ! -f "$installdir/$v/bin/go" ] ; then
       echo -e "\e[1;32mChecking '$installdir/$v/bin/go' \e[0m"
