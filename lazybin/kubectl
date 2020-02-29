@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+me="$(basename "$0")"
+
+if ! [ -f $LOCAL_BIN/kubectl ] ; then
+  echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
+
+  version="$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)"
+  url="https://storage.googleapis.com/kubernetes-release/release/$version/bin/linux/amd64/kubectl"
+
+  echo -e "\e[1;32mInstalling '$me' version '$version'...\e[0m"
+
+  curl -L "$url" -o $LOCAL_BIN/kubectl
+  chmod +x $LOCAL_BIN/kubectl
+
+  echo -e "\e[1;32mFinished installing '$me'.\e[0m"
+fi
+
+"$me" "$@"
