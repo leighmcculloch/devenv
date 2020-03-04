@@ -37,3 +37,6 @@ export PGHOST=localhost
 
 # socket for ssh via gpg
 export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+
+# default editor should be vim
+export EDITOR=vim
