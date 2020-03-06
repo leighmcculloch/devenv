@@ -4,7 +4,7 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-docker run --rm -it --network=container:$(hostname) --name=postgres \
+docker run -d --rm -it --network=container:$(hostname) --name=postgres \
   -e POSTGRES_USER=$USER \
   -e POSTGRES_PASSWORD= \
   postgres
