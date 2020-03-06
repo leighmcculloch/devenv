@@ -7,4 +7,6 @@ set -o nounset
 docker run -d --rm -it --network=container:$(hostname) --name=postgres \
   -e POSTGRES_USER=$USER \
   -e POSTGRES_PASSWORD= \
+  -e POSTGRES_HOST_AUTH_METHOD=trust \
+  -e POSTGRES_DATABASE=postgres \
   postgres
