@@ -9,7 +9,14 @@ me="$(basename "$0")"
 if ! [ -f /usr/bin/psql ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
-  sudo apt-get -y install postgresql-client
+  version=$(cat "$(dirname "$(readlink -f "$0")")/../versions/postgres")
+  echo -e "\e[1;32mInstalling '$me' version $version...\e[0m"
+
+  codename=$(cat /etc/os-release | grep -Po 'VERSION_CODENAME=\K.*')
+  echo "deb http://apt.postgresql.org/pub/repos/apt/ $codename-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+  curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+  sudo apt-get update
+  sudo apt-get -y install postgresql-client-12
 
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi

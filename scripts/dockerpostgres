@@ -4,9 +4,11 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+version=$(cat "$(dirname "$(readlink -f "$0")")/../versions/postgres")
+
 docker run -d --rm -it --network=container:$(hostname) --name=postgres \
   -e POSTGRES_USER=$USER \
   -e POSTGRES_PASSWORD= \
   -e POSTGRES_HOST_AUTH_METHOD=trust \
   -e POSTGRES_DATABASE=postgres \
-  postgres
+  postgres:$version
