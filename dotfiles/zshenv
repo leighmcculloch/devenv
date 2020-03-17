@@ -32,8 +32,9 @@ export VIM=$LOCAL/share/vim
 # path for lazybin and scripts
 export PATH=$PATH:$LAZYBIN:$SCRIPTS
 
-# host for postgres running in docker
+# env for postgres running in docker
 export PGHOST=localhost
+export PGUSER=$USER
 
 # socket for ssh via gpg
 export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
