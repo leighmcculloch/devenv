@@ -30,9 +30,9 @@ $(LOCAL_DIR)/id_ed25519:
 join:
 	gpg --armor --export > $(LOCAL_DIR)/publickeys.gpg
 	docker ps
-	scp -i $(LOCAL_DIR)/id_ed25519 -P 222$(ID) \
+	scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i $(LOCAL_DIR)/id_ed25519 -P 222$(ID) \
 		$(LOCAL_DIR)/publickeys.gpg localhost:/home/$(USER)/.publickeys.gpg
-	ssh -i $(LOCAL_DIR)/id_ed25519 localhost -p 222$(ID) \
+	ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i $(LOCAL_DIR)/id_ed25519 localhost -p 222$(ID) \
 		-L 8$(ID)00:localhost:8000 \
 		-L 8$(ID)01:localhost:8001 \
 		-L 8$(ID)02:localhost:8002 \
