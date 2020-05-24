@@ -15,14 +15,14 @@ if ! [ -f $LOCAL_BIN/swift ] ; then
     libc6-dev \
     libcurl4 \
     libedit2 \
-    libgcc-5-dev \
     libpython2.7 \
     libsqlite3-0 \
-    libstdc++-5-dev \
     libxml2 \
     pkg-config \
     tzdata \
-    zlib1g-dev
+    zlib1g-dev \
+    libtinfo5 \
+    libncurses5
 
   curl -L https://swift.org/builds/swift-5.2.4-release/ubuntu1804/swift-5.2.4-RELEASE/swift-5.2.4-RELEASE-ubuntu18.04.tar.gz | tar xz -C $LOCAL
   ln -sf $LOCAL/swift-5.2.4-RELEASE-ubuntu18.04/usr/bin/swift $LOCAL_BIN/swift
