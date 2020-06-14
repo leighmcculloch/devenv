@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+me="$(basename "$0")"
+
+if ! [ -f $LOCAL_BIN/fzf ] ; then
+  echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
+
+  version=0.21.1
+  curl -sSL https://github.com/junegunn/fzf-bin/releases/download/${version}/fzf-${version}-linux_amd64.tgz | tar xz -C $LOCAL_BIN
+
+  echo -e "\e[1;32mFinished installing '$me'.\e[0m"
+fi
+
+"$me" "$@"
