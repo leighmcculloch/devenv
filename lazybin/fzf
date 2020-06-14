@@ -12,6 +12,8 @@ if ! [ -f $LOCAL_BIN/fzf ] ; then
   version=0.21.1
   curl -sSL https://github.com/junegunn/fzf-bin/releases/download/${version}/fzf-${version}-linux_amd64.tgz | tar xz -C $LOCAL_BIN
 
+  git clone --branch=${version} https://github.com/junegunn/fzf.git $LOCAL/fzf
+
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi
 

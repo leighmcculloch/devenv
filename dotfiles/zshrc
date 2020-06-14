@@ -26,7 +26,7 @@ do
 done
 
 # load fzf
-source /usr/share/doc/fzf/examples/key-bindings.zsh
+source $LOCAL/fzf/shell/key-bindings.zsh
 
 # make c-p/c-n work exactly like up/down arrows
 bindkey "^P" up-line-or-search
