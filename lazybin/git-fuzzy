@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+me="$(basename "$0")"
+
+if ! [ -f $LOCAL_BIN/git-fuzzy ] ; then
+  echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
+
+  version=de1c13b8a5664541254278b7a6982b558847f20c
+  curl -sSL -o /tmp/git-fuzzy.zip https://github.com/bigH/git-fuzzy/archive/${version}.zip
+  unzip /tmp/git-fuzzy.zip -d $LOCAL
+  rm /tmp/git-fuzzy.zip
+  ln -sf $LOCAL/git-fuzzy-${version}/bin/git-fuzzy $LOCAL_BIN/git-fuzzy
+
+  echo -e "\e[1;32mFinished installing '$me'.\e[0m"
+fi
+
+"$me" "$@"
