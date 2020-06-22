@@ -10,8 +10,8 @@ if ! [ -d $LOCAL_BIN/"$me" ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
   # Install VIM
-  vimcommit=df7df59
-  date=20200614
+  vimcommit=8c524f7
+  date=20200621
   curl -L "https://github.com/leighmcculloch/devenv_compile_vim/releases/download/v${vimcommit}-${date}/vim-${vimcommit}.tar.gz" | tar xz -C $LOCAL
 
   # Install dependencies of VIM
@@ -19,7 +19,7 @@ if ! [ -d $LOCAL_BIN/"$me" ] ; then
   sudo apt-get install -y $deps
 
   # Install Go tools/binaries needed by vim-go VIM plugin
-  version=20200614
+  version=20200621
   curl -L "https://github.com/leighmcculloch/devenv_compile_vimgobinaries/releases/download/v${version}/vimgobinaries.tar.gz" | tar xz -C $LOCAL_BIN
 
   # Install VIM dotfiles/plugins
