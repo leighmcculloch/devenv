@@ -18,6 +18,9 @@ function gfpr() {
   fi
 }
 
+# git aliases
+alias ga.="git add ."
+
 # go aliases
 for dir in $LOCAL_BIN/go/*;
 do
