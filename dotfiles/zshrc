@@ -7,6 +7,13 @@ source $ZSH/oh-my-zsh.sh
 # aliases
 alias renv="eval \$(tmux show-env -s | grep '^SSH_')"
 
+# alias for loading env files
+function e() {
+  local env_file="$1"
+  shift
+  env $(cat "$env_file" | xargs) $@
+}
+
 # pull pr alias
 function gfpr() {
   local prnum="$1"
