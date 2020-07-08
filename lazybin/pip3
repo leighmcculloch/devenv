@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+me="$(basename "$0")"
+
+if ! [ -f /usr/bin/pip3 ] ; then
+  echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
+
+  python -V
+  sudo apt-get -y install python3-pip
+
+  echo -e "\e[1;32mFinished installing '$me'.\e[0m"
+fi
+
+"$me" "$@"
