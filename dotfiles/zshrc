@@ -45,3 +45,6 @@ bindkey "^N" down-line-or-search
 
 # free up the c-q shortcut for use in vim
 stty start undef
+
+# setup homebrew
+test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
