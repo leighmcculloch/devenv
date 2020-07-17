@@ -9,6 +9,15 @@ me="$(basename "$0")"
 if ! [ -f $HOME/.cargo/bin/"$me" ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
+  # Rustup will detect the rustc and cargo symlinks that exist in lazybin and
+  # think they are an existing installation of rust. In response it will
+  # prevent a large warning and say it doesn't think it can install rust.  This
+  # environment variable will cause the check to be skipped. The code that uses
+  # it says it is only intended to be used for tests, so it might go away
+  # sometime, but for now this gets the job done.
+  # https://github.com/rust-lang/rustup/blob/22dc71adbd7e19de0090f991b3609e5f14910dcb/src/cli/self_update.rs#L415-L435
+  export RUSTUP_INIT_SKIP_PATH_CHECK=yes
+
   curl https://sh.rustup.rs -sSf | sh -s -- -y
 
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
