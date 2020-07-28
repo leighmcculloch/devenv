@@ -1,0 +1,11 @@
+[twtxt]
+nick = leighmcculloch
+twtfile = /home/leighmcculloch/devel/leighmcculloch.com/source/static/twtxt.txt
+twturl = https://leighmcculloch.com/twtxt.txt
+disclose_identity = True
+character_limit = 140
+character_warning = 140
+
+[following]
+antonio = https://twtxt.net/user/antonio/twtxt.txt
+

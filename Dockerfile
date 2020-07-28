@@ -77,6 +77,10 @@ RUN ln -s $DOTFILES/zshenv $HOME/.zshenv \
   && ln -s $DOTFILES/tigrc $HOME/.tigrc \
   && ln -s $DOTFILES/gnupg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
 
+# twtxt config
+RUN mkdir -p $HOME/.config/twtxt
+RUN ln -s $DOTFILES/twtxt/config $HOME/.config/twtxt/config
+
 # oh-my-zsh
 ENV ZSH="$HOME/.oh-my-zsh"
 RUN git clone https://github.com/robbyrussell/oh-my-zsh $ZSH
