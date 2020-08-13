@@ -9,7 +9,6 @@ installdir="$LOCAL_BIN/go"
 
 # Specify exact versions of Go to install.
 versions=(
-  "1.15rc2"
 )
 
 # Add last two releases of Go to list of versions automatically.
