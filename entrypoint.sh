@@ -2,6 +2,7 @@
 
 # Allow using the docker socket without root.
 sudo chgrp docker /var/run/docker.sock
+sudo chmod g+w /var/run/docker.sock
 
 # Start TMUX for all terminal access.
 function keep_tmux_up() {
