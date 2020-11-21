@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+me="$(basename "$0")"
+
+if ! [ -f /opt/cxoffice/bin/crossover ] ; then
+  echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
+
+  tmpdir=$(mktemp -d)
+
+  version=20.0.2-1
+  curl -sSL -o "$tmpdir/crossover.deb" "https://media.codeweavers.com/pub/crossover/cxlinux/demo/crossover_${version}.deb"
+  ls -lah $tmpdir/crossover.deb
+  sudo apt-get -y install -f "${tmpdir}/crossover.deb"
+
+  rm -fr "$tmpdir"
+
+  echo -e "\e[1;32mFinished installing '$me'.\e[0m"
+fi
+
+"$me" "$@"
