@@ -10,7 +10,7 @@ start: $(LOCAL_DIR)/id_ed25519
 		--network="devenv" \
 		--hostname="devenv-$(ID)" \
 		-e TZ=$(TZ) \
-		-e DISPLAY=docker.for.mac.localhost:0 \
+		-e DISPLAY=host.docker.internal:0 \
 		-e HOST="$(HOST)" \
 		-v="$(PWD):/home/$(USER)/devel/.devenv" \
 		-v="/var/run/docker.sock:/var/run/docker.sock" \
