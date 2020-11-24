@@ -26,9 +26,6 @@ export PATH=$PATH:$LOCAL/apache-maven-3.6.0/bin
 # path for rvm
 export PATH="$PATH:$HOME/.rvm/bin"
 
-# path for crossover if it's lazily installed
-export PATH="$PATH:/opt/cxoffice/bin"
-
 # path for vim runtime
 export VIM=$LOCAL/share/vim
 
