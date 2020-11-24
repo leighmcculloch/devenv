@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+me="$(basename "$0")"
+
+if ! [ -f /opt/cxoffice/bin/asdf ] ; then
+  echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
+
+  dir=/home/leighmcculloch/.cxoffice/sourceinsight/drive_c
+
+  curl -sSL -o "$dir/sourceinsight.exe" "https://s3-us-west-2.amazonaws.com/assets.sourceinsight.com/download/v4/release/sourceinsight40120-setup.exe"
+  /opt/cxoffice/bin/wine --bottle "sourceinsight" --cx-app "sourceinsight.exe"
+
+  echo -e "\e[1;32mFinished installing '$me'.\e[0m"
+fi
+
+"$me" "$@"
