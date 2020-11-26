@@ -2,45 +2,4 @@
 
 # path reset on new shells
 export PATH=$ORIGINAL_PATH
-
-# path for go if it's lazyily installed
-goroot=$LOCAL_BIN/go
-if [ -d "$goroot" ]; then
-  export PATH=$PATH:$goroot/"$(ls -1r $goroot | head -n1)"/bin
-  export GOBIN=$LOCAL_BIN
-fi
-
-# path for rust if it's lazily installed
-export PATH=$PATH:$HOME/.cargo/bin
-
-# path for python if it's lazily installed
-export PATH=$PATH:$HOME/.local/bin
-
-# path for yarn if it's lazily installed
-export PATH=$PATH:$HOME/.yarn/bin
-
-# path for java
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-export PATH=$PATH:$LOCAL/apache-maven-3.6.0/bin
-
-# path for rvm
-export PATH="$PATH:$HOME/.rvm/bin"
-
-# path for vim runtime
-export VIM=$LOCAL/share/vim
-
-# path for lazybin and scripts
-export PATH=$PATH:$LAZYBIN:$SCRIPTS
-
-# env for postgres running in docker
-export PGHOST=localhost
-export PGUSER=$USER
-
-# socket for ssh via gpg
-export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
-
-# default editor should be vim
-export EDITOR=vim
-
-# disable homebrew analytics
-export HOMEBREW_NO_ANALYTICS=1
+    

@@ -49,4 +49,9 @@ versions=(
   fi
 } 1>&2
 
-zsh -c "go '$@'"
+{
+  echo -e "\e[1;93mLinking ${versions_without_go_prefix[0]} as latest into PATH...\e[0m"
+  ln -sf "${versions_without_go_prefix[0]}" "$installdir/latest"
+} 1>&2
+
+"$me" "$@"

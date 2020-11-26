@@ -54,7 +54,6 @@ ENV LAZYBIN="$DEVENV/lazybin"
 ENV SCRIPTS="$DEVENV/scripts"
 ENV LOCAL="$HOME/local"
 ENV LOCAL_BIN="$LOCAL/bin"
-ENV PATH="$PATH:$LOCAL_BIN"
 RUN mkdir -p "$LOCAL_BIN" \
   && mkdir -p "$DEVEL" \
   && mkdir -p "$LAZYBIN"
@@ -96,6 +95,36 @@ RUN git clone --recursive https://github.com/leighmcculloch/tmux_dotfiles $DEVEL
   && cd $DEVEL/.tmux_dotfiles \
   && git remote set-url --add --push origin github:leighmcculloch/tmux_dotfiles \
   && make install
+
+# envs
+ENV PATH="$PATH:$LOCAL_BIN:$SCRIPTS"
+# for python
+ENV PATH="$PATH:$HOME/.local/bin"
+# for yarn
+ENV PATH="$PATH:$HOME/.yarn/bin"
+# for rust
+ENV PATH="$PATH:$HOME/.cargo/bin"
+# for rvm
+ENV PATH="$PATH:$HOME/.rvm/bin"
+# for java
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+ENV PATH=$PATH:$LOCAL/apache-maven-3.6.0/bin
+# for vim
+ENV EDITOR=vim
+# for postgres running in docker
+ENV PGHOST=localhost
+ENV PGUSER=$USER
+# for ssh via gpg
+ENV SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+# for homebrew to disable analytics
+ENV HOMEBREW_NO_ANALYTICS=1
+# for vim
+ENV VIM=$LOCAL/share/vim
+# for go
+ENV PATH="$PATH:$LOCAL_BIN/go/latest/bin"
+ENV GOBIN=$LOCAL_BIN
+# for lazybin
+ENV PATH="$PATH:$LAZYBIN"
 
 # shell
 SHELL ["/bin/zsh", "--login", "-c"]
