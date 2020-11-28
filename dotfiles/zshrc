@@ -37,7 +37,9 @@ do
 done
 
 # load fzf
-[[ -a $LOCAL/fzf/shell/key-bindings.zsh ]] && source $LOCAL/fzf/shell/key-bindings.zsh
+if [[ -a $LOCAL/fzf/shell/key-bindings.zsh ]]; then
+  source $LOCAL/fzf/shell/key-bindings.zsh
+fi
 
 # make c-p/c-n work exactly like up/down arrows
 bindkey "^P" up-line-or-search
@@ -47,4 +49,6 @@ bindkey "^N" down-line-or-search
 stty start undef
 
 # setup homebrew
-test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+if [[ -d /home/linuxbrew/.linuxbrew ]]; then
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
