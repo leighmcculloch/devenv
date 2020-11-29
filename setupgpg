@@ -52,6 +52,9 @@ echo
 title "Enabling sshcontrol for $keyid / $keygrip3"
 echo "$keygrip3 7200" >> "$HOME/.gnupg/sshcontrol"
 echo
+title 'Making GPG Agent the SSH_AUTH_SOCK locally'
+echo 'export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)' >> "$HOME/.zshrc"
+echo
 
 # Reload
 title 'Reloading gpg-agent...'
