@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -120,7 +120,7 @@ ENV SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 # for homebrew to disable analytics
 ENV HOMEBREW_NO_ANALYTICS=1
 # for vim
-ENV VIM=$LOCAL/share/vim
+# ENV VIM=$LOCAL/share/vim
 # for go
 ENV PATH="$PATH:$LOCAL_BIN/go/latest/bin"
 ENV GOBIN=$LOCAL_BIN
@@ -139,8 +139,8 @@ RUN gas -version
 # trigger big preinstalls
 COPY ./lazybin/go $LAZYBIN
 RUN go version
-COPY ./lazybin/vim $LAZYBIN
-RUN vim --version
+COPY ./lazybin/vim.nox $LAZYBIN
+RUN vim.nox --version
 COPY ./lazybin/docker $LAZYBIN
 RUN docker --version
 COPY ./lazybin/gotestsum $LAZYBIN
