@@ -6,13 +6,13 @@ set -o nounset
 
 me="$(basename "$0")"
 
-if ! [ -f $LOCAL_BIN/forego ] ; then
+if ! [ -f $LOCAL_BIN/goreman ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
   dir=$(mktemp -d)
   pushd $dir
   go mod init tool
-  go get -u github.com/ddollar/forego
+  go get -u github.com/mattn/goreman
   popd
   rm -fr $dir
 
