@@ -9,16 +9,19 @@ me="$(basename "$0")"
 if ! [ -f /usr/bin/docker ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
+  os=$(awk -F= '/^ID=/{print $2}' /etc/os-release)
+  echo -e "\e[1;32mInstalling '$me' for '$os'...\e[0m"
+
   sudo apt-get -y install \
     apt-transport-https \
     ca-certificates \
     curl \
-    gnupg2 \
+    gnupg-agent \
     software-properties-common
-  curl -fsSL https://download.docker.com/linux/debian/gpg \
+  curl -fsSL https://download.docker.com/linux/${os}/gpg \
     | sudo apt-key add -
   sudo add-apt-repository \
-    "deb [arch=amd64] https://download.docker.com/linux/debian \
+    "deb [arch=amd64] https://download.docker.com/linux/${os} \
     $(lsb_release -cs) \
     stable"
   sudo apt-get update
