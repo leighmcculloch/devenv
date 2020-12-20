@@ -51,8 +51,8 @@ versions=(
 } 1>&2
 
 {
-  echo -e "\e[1;93mLinking ${versions_without_go_prefix[0]} as latest into PATH...\e[0m"
-  ln -sf "${versions_without_go_prefix[0]}" "$installdir/latest"
+  echo -e "\e[1;93mLinking ${versions[0]} as latest into PATH...\e[0m"
+  ln -sfn "${versions_without_go_prefix[0]}" "$installdir/latest"
 } 1>&2
 
 "$me" "$@"
