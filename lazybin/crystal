@@ -18,7 +18,6 @@ if ! [ -f /usr/bin/crystal ] ; then
     libxml2-dev \
     libyaml-dev \
     libgmp-dev \
-    libreadline-dev \
     libz-dev
 
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
