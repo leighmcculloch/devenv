@@ -28,6 +28,7 @@ function gfpr() {
 
 # git aliases
 alias ga.="git add ."
+alias gde="git diff --exit-code"
 
 # go aliases
 for dir in $LOCAL_BIN/go/*;
