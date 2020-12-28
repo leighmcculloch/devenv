@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+me="$(basename "$0")"
+
+if ! [ -f $LOCAL_BIN/rbenv ] ; then
+  echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
+
+  # install rbenv
+  version=1.1.2
+  curl -sSL https://github.com/rbenv/rbenv/archive/v${version}.tar.gz | tar xz -C $LOCAL
+  installedat=$LOCAL/rbenv-${version}
+
+  # install the ruby-build rbenv plugin
+  rubybuild_version=20201225
+  curl -sSL https://github.com/rbenv/ruby-build/archive/v${rubybuild_version}.tar.gz | tar xz -C $installedat/plugins/
+
+  # install dependencies required for compiling ruby
+  sudo apt-get update
+  sudo apt-get install -y libssl-dev zlib1g-dev
+
+  # link rbenv so it is in the path
+  ln -sf $installedat/bin/rbenv $LOCAL_BIN/rbenv
+
+  echo -e "\e[1;32mFinished installing '$me'.\e[0m"
+fi
+
+"$me" "$@"

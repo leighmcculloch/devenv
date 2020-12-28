@@ -105,8 +105,6 @@ ENV PATH="$PATH:$HOME/.local/bin"
 ENV PATH="$PATH:$HOME/.yarn/bin"
 # for rust
 ENV PATH="$PATH:$HOME/.cargo/bin"
-# for rvm
-ENV PATH="$PATH:$HOME/.rvm/bin"
 # for java
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ENV PATH=$PATH:$LOCAL/apache-maven-3.6.0/bin
@@ -145,14 +143,6 @@ COPY ./lazybin/docker $LAZYBIN
 RUN docker --version
 COPY ./lazybin/gotestsum $LAZYBIN
 RUN gotestsum --version
-#COPY ./lazybin/rvm $LAZYBIN
-#RUN rvm list
-#RUN rvm install ruby
-#COPY ./lazybin/node $LAZYBIN
-#RUN node --version
-#RUN npm --version
-#COPY ./lazybin/yarn $LAZYBIN
-#RUN yarn --version
 
 # add current version of the devenv
 ADD . $DEVENV
