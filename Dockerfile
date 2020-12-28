@@ -143,6 +143,9 @@ COPY ./lazybin/docker $LAZYBIN
 RUN docker --version
 COPY ./lazybin/gotestsum $LAZYBIN
 RUN gotestsum --version
+COPY ./lazybin/rbenv $LAZYBIN
+RUN rbenv -v
+RUN rbenv install 3.0.0
 
 # add current version of the devenv
 ADD . $DEVENV

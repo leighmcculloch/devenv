@@ -14,6 +14,9 @@ if ! [ -f $LOCAL_BIN/rbenv ] ; then
   curl -sSL https://github.com/rbenv/rbenv/archive/v${version}.tar.gz | tar xz -C $LOCAL
   installedat=$LOCAL/rbenv-${version}
 
+  # prepare the plugins dir
+  mkdir -p $installedat/plugins
+
   # install the ruby-build rbenv plugin
   rubybuild_version=20201225
   curl -sSL https://github.com/rbenv/ruby-build/archive/v${rubybuild_version}.tar.gz | tar xz -C $installedat/plugins/

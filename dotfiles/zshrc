@@ -52,10 +52,3 @@ stty start undef
 if [[ -d /home/linuxbrew/.linuxbrew ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
-
-# add rbenv
-if [[ -f $LOCAL_BIN/rbenv ]]; then
-  local rbenv_root=$(dirname $(dirname $(readlink -n $(which rbenv))))
-  export RBENV_ROOT=$rbenv_root
-  eval "$(rbenv init -)"
-fi
