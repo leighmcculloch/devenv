@@ -108,6 +108,10 @@ ENV PATH="$PATH:$HOME/.cargo/bin"
 # for java
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ENV PATH=$PATH:$LOCAL/apache-maven-3.6.0/bin
+# for dotnet
+ENV PATH="$PATH:$HOME/.dotnet"
+ENV PATH="$PATH:$HOME/.dotnet/tools"
+ENV DOTNET_ROOT="$PATH:$HOME/.dotnet"
 # for vim
 ENV EDITOR=vim
 # for postgres running in docker

@@ -6,12 +6,23 @@ set -o nounset
 
 me="$(basename "$0")"
 
-if ! [ -d "$LOCAL/dotnet" ] ; then
+if ! [ -d "$HOME/.dotnet" ] ; then
   echo -e "\e[1;32mInstalling '$me' on first use...\e[0m"
 
-  mkdir -p $LOCAL/dotnet
-  curl -sSL https://download.visualstudio.microsoft.com/download/pr/820db713-c9a5-466e-b72a-16f2f5ed00e2/628aa2a75f6aa270e77f4a83b3742fb8/dotnet-sdk-5.0.100-linux-x64.tar.gz | tar xz -C $LOCAL/dotnet
-  ln -sf $LOCAL/dotnet/dotnet $LOCAL_BIN/dotnet
+  ## install sdks for common versions
+  dir=$(mktemp -d)
+  pushd $dir
+  curl -sSLO https://dot.net/v1/dotnet-install.sh
+  chmod +x dotnet-install.sh
+  ./dotnet-install.sh -c Current
+  ./dotnet-install.sh -c 5.0
+  ./dotnet-install.sh -c 3.1
+  ./dotnet-install.sh -c 2.1
+  popd
+  rm -fr $dir
+
+  # install official tool for formatting
+  dotnet tool install -g dotnet-format
 
   echo -e "\e[1;32mFinished installing '$me'.\e[0m"
 fi
