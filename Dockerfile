@@ -61,7 +61,7 @@ RUN git clone --recursive https://github.com/leighmcculloch/dotfiles $DEVEL/.dot
   && ./install.sh
 
 # add current version of the devenv
-ADD . $DEVENV
+ADD . $DEVEL/.devenv
 
 # shell
 SHELL ["/bin/zsh", "--login", "-c"]
