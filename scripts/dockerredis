@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-set -o errexit
-set -o pipefail
-set -o nounset
-
-docker run -d --rm -it --network=container:$(hostname) --name=redis redis
