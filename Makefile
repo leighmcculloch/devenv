@@ -3,6 +3,7 @@ TZ ?= $(shell readlink /etc/localtime | sed -E 's/.*\/([A-Za-z_]+\/[A-Za-z_]+)/\
 HOST ?= $(shell hostname | tr '[:upper:]' '[:lower:]' | sed 's/\.local$$//')
 LOCAL_DIR = $(PWD)/.instance-$(ID)
 LABEL ?= latest
+DOTFILES ?= $(shell git ls-remote --exit-code git@github.com:leighmcculloch/dotfiles HEAD | cut -f1)
 
 start: $(LOCAL_DIR)/id_ed25519
 	docker network create devenv || true
@@ -62,7 +63,7 @@ rm:
 	docker rm $$(docker ps -aq --filter 'name=devenv-$(ID)') || true
 
 build:
-	docker build --build-arg USER=$(USER) -t leighmcculloch/devenv:$(LABEL) .
+	docker build --build-arg USER=$(USER) --build-arg DOTFILES=$(DOTFILES) -t leighmcculloch/devenv:$(LABEL) .
 
 buildnc:
 	docker build --build-arg USER=$(USER) --no-cache -t leighmcculloch/devenv:$(LABEL) .
