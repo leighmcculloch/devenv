@@ -17,11 +17,12 @@ RUN apt-get update \
     jq \
     gcc \
     sudo \
-    man \
+    man man-db \
     gpg \
     pinentry-tty \
     openssh-server \
     openssh-client \
+  && (yes | unminimize) \
   && apt-get -y autoremove \
   && apt-get -y clean
 
