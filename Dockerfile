@@ -64,10 +64,10 @@ RUN git clone --recursive https://github.com/leighmcculloch/dotfiles $HOME/dotfi
   && ./install.sh
 
 # add current version of the devenv
-ADD . $DEVEL/.devenv
+ADD . $HOME/devenv
 
 # shell
 SHELL ["/bin/zsh", "--login", "-c"]
 
 # tmux
-ENTRYPOINT ./.devenv/entrypoint.sh
+ENTRYPOINT $HOME/devenv/entrypoint.sh

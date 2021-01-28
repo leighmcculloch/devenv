@@ -13,7 +13,7 @@ start: $(LOCAL_DIR)/id_ed25519
 		-e TZ=$(TZ) \
 		-e DISPLAY=host.docker.internal:0 \
 		-e HOST="$(HOST)" \
-		-v="$(PWD):/home/$(USER)/devel/.devenv" \
+		-v="$(PWD):/home/$(USER)/devenv" \
 		-v="/var/run/docker.sock:/var/run/docker.sock" \
 		-v="$(LOCAL_DIR)/id_ed25519.pub:/home/$(USER)/.ssh/authorized_keys" \
 		--security-opt="apparmor=unconfined" \
@@ -42,7 +42,7 @@ join:
 		-R /home/$(USER)/.gnupg/S.gpg-agent.ssh:$(HOME)/.gnupg/S.gpg-agent.ssh \
 		-t '\
 			gpg --import $$HOME/.publickeys.gpg ; \
-			[[ ! -f "$$HOME/.gitconfig.local" ]] && $$HOME/devel/.devenv/scripts/setup ; \
+			[[ ! -f "$$HOME/.gitconfig.local" ]] && $$HOME/devenv/scripts/setup ; \
 			tmux -2 attach -t 0'
 	docker ps
 
