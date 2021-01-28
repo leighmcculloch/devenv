@@ -66,7 +66,7 @@ build:
 	docker build --build-arg USER=$(USER) --build-arg DOTFILES=$(DOTFILES) -t leighmcculloch/devenv:$(LABEL) .
 
 buildnc:
-	docker build --build-arg USER=$(USER) --no-cache -t leighmcculloch/devenv:$(LABEL) .
+	docker build --build-arg USER=$(USER) --pull --no-cache -t leighmcculloch/devenv:$(LABEL) .
 
 pull:
 	docker pull leighmcculloch/devenv:$(LABEL)
