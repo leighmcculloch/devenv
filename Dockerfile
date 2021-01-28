@@ -55,6 +55,9 @@ RUN mkdir -p $DEVEL
 # working directory
 WORKDIR $DEVEL
 
+# add current version of the devenv
+ADD . $HOME/devenv
+
 # dotfiles
 ARG DOTFILES
 RUN git clone --recursive https://github.com/leighmcculloch/dotfiles $HOME/dotfiles \
@@ -62,9 +65,6 @@ RUN git clone --recursive https://github.com/leighmcculloch/dotfiles $HOME/dotfi
   && git remote set-url --add --push origin github:leighmcculloch/dotfiles \
   && git checkout $(git name-rev --name-only $DOTFILES) \
   && ./install.sh
-
-# add current version of the devenv
-ADD . $HOME/devenv
 
 # shell
 SHELL ["/bin/zsh", "--login", "-c"]
