@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v1
+      with:
+        submodules: true
     - name: Environment Variables
       run: |
         echo "LABEL=$(date +%Y%m%d)-${GITHUB_SHA::8}" >> $GITHUB_ENV
