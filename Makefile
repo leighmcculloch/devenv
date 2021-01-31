@@ -63,7 +63,7 @@ rm:
 	docker rm $$(docker ps -aq --filter 'name=devenv-$(ID)') || true
 
 build:
-	docker build --build-arg USER=$(USER) --build-arg DOTFILES=$(DOTFILES) -t leighmcculloch/devenv:$(LABEL) .
+	docker build --build-arg USER=$(USER) -t leighmcculloch/devenv:$(LABEL) .
 
 buildnc:
 	docker build --build-arg USER=$(USER) --pull --no-cache -t leighmcculloch/devenv:$(LABEL) .
