@@ -59,7 +59,7 @@ WORKDIR $DEVEL
 ADD . $HOME/devenv
 
 # install dotfiles
-RUN cd $HOME/devenv/dotfiles && ./install.sh
+RUN cd $HOME/devenv/dotfiles && ./install-remote.sh
 
 # shell
 SHELL ["/bin/zsh", "--login", "-c"]
