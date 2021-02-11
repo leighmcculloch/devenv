@@ -7,19 +7,11 @@ RUN apt-get update \
   && apt-get -y install \
     procps \
     locales \
-    curl \
     zsh \
-    tmux \
-    git \
-    make \
-    tig \
-    tree \
-    jq \
     gcc \
     sudo \
     man man-db \
     gpg \
-    pinentry-tty \
     openssh-server \
     openssh-client \
   && (yes | unminimize) \
